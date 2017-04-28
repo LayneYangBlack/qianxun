@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+	<style>
+		body{background: #f4f4f4;}
+		html{background: #f4f4f4;}
+		body{font-family:"黑体";}
+		.myin-top{width:100%;height:46px;border-bottom:1px solid #EDEDED;background: #fff;}
+		.myin-top-center{width:90%;height:100%;margin:0 auto;}
+		.myin-top-left{color:#5B5B5B;font-size: 13px;float:left;line-height:46px;}
+		.myin-top-right{color:#FC4E50;font-size: 13px;float:right;line-height:46px;}
+		.lose-text{width:51%;float:right;overflow: hidden;margin-right:4%;}
+		.myin-top-margin{margin-top: 10px;}
+		.lose-text p {margin-bottom:0;overflow: hidden;}
+		.lose-text-1{width:100%;height:20px;margin-top:5px;font-size: 16px;color:#2B2B33;overflow: hidden;}
+		.lose-text-2{margin-top:10px;color:#909090;font-size:12px;overflow: hidden;}
+		.lose-text-3{margin-top:5px;color:#F54343;font-size: 12px;overflow: hidden;}
+		.oked{color:#999999;}
+		.oked-div{width:100%;height:158px;background:#fff;overflow: hidden;position: relative;}
+		.oked-div-center{width:90%;height:124px;margin:14px  auto 0 auto;}
+		.oked-div-img{width:40%;height:110px;/*background:url(../icon/images1.png) no-repeat;background-size:100%;*/float:left;position: relative;overflow: hidden;}
+		.oked-div-img img {width:100%;}
+		.xs{width:50%;height:10px;font-size: 8px;position: absolute;left:-10px;top:7px;background: #F44343;color:#fff;transform: rotate(-45deg);text-align: center;line-height:100%;-webkit-transform: rotate(-45deg)}
+		.oked-div-text{margin-top: 0;height:96px;}
+		.remove-introduced,.afas{width:20%;height:30px;position: absolute;bottom:20px;
+			text-align: center;line-height: 30px;border-radius:6px;font-size: 12px;margin:0;background:#FCBF28;color:#fff;}
+		.remove-introduced{right:30%;}
+		.afas{right:5%;}
+		.getmoney{background: #FCBF28;color:#fff;}
+		.heading{width:100%;height:60px;border-top:2px solid #ebebeb;line-height: 22px;}
+		.headingcenter{width:90%;height:100%;margin:0 auto;border-bottom: 1px solid #ebebeb;}
+		.headingcenter img{height:44px;display: block;float:left;border-radius:50%;overflow: hidden;margin-top: 8px;}
+		.headingcenter div{font-size: 14px;color:#999;padding-top: 5px;}
+		ul li:last-child{margin-bottom: 46px;}
+		.mid{
+			float: left;
+			padding-left: 6px;
+		}
+		.sure{
+			float: right;
+			width: 100px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			font-size: 14px;margin-top: 13px;
+			border-radius: 5px;
+			background: #FFC629;color:#fff;
+		}
+	</style>
+</head>
+<body id="body">
+	<div id="mainOne">
+
+	</div>
+	<!-- <div class="oked-div">
+		<div class="oked-div-center" onclick="clickList(<%=list[i].id%>)">
+			<div class="oked-div-img ">
+				<img style="<%=list[i].style%>" id="img" src="../icon/listpng.png"  data-echo="<%=list[i].picList%>" >
+			</div>
+			<div class="lose-text oked-div-text">
+				<p class="lose-text-1">
+					<%=list[i].name%>
+				</p>
+				<p class="lose-text-2">
+					类型：<%=list[i].categoyName%>
+				</p>
+				<p class="lose-text-3">
+					<span>￥<%=list[i].payNum%></span><span>元/酬谢金</span>
+				</p>
+			</div>
+		</div>
+		<p class="remove-introduced" onclick="applications(<%=list[i].id%>)">我要申诉</p>
+		<p class="afas getmoney" onclick="abandon(<%=list[i].id%>)">放弃申诉</p>
+	</div> -->
+</body>
+<script id="scriptDiv2" type="text/html">
+	<% for (var i = 0; i < list.length; i ++) { %>
+	<div class="myin-top myin-top-margin">
+		<div class="myin-top-center">
+			<p class="myin-top-left"><%=list[i].creater.name%></p>
+			<%if(list[i].status == 1||list[i].status == 0||list[i].status == 2){%>
+				<p class="myin-top-right oked">进行中</p>
+			<%}else if (list[i].status == 7){%>
+				<p class="myin-top-right oked">已取消</p>
+			<%}else if (list[i].status == 3||list[i].status == 4){%>
+				<p class="myin-top-right oked">已结束</p>
+			<%}else if (list[i].status == 5||list[i].status == 6){%>
+				<p class="myin-top-right oked">正在申诉</p>
+			<%}else if (list[i].status == 8){%>
+				<p class="myin-top-right oked">退款中</p>
+			<%}else if (list[i].status == 9){%>
+				<p class="myin-top-right oked">申诉失败</p>
+			<%}else if (list[i].status == 10){%>
+				<p class="myin-top-right oked">申诉成功</p>
+			<%}%>
+		</div>
+	</div>
+	<div class="oked-div">
+		<div class="oked-div-center" onclick="clickList(<%=list[i].id%>)">
+			<div class="oked-div-img ">
+				<img style="<%=list[i].style%>" id="img" src="../icon/listpng.png"  data-echo="<%=list[i].picList%>" >
+			</div>
+			<div class="lose-text oked-div-text">
+				<p class="lose-text-1">
+					<%=list[i].name%>
+				</p>
+				<p class="lose-text-2">
+					类型：<%=list[i].categoyName%>
+				</p>
+				<p class="lose-text-3">
+					<span>￥<%=list[i].payNum%></span><span>元/酬谢金</span>
+				</p>
+			</div>
+		</div>
+		<%if (list[i].status == 5){%>
+		<p class="remove-introduced" onclick="applications(<%=list[i].id%>)">我要申诉</p>
+		<p class="afas getmoney" onclick="abandon(<%=list[i].id%>)">放弃申诉</p>
+		<% }else if (list[i].status == 3||list[i].status == 4){%>
+		<p class="afas getmoney" style="background: #ccc;">已结束</p>
+		<%}else if (list[i].status == 6){%>
+		<p class="afas getmoney" style="background: #ccc;">正在申诉</p>
+		<%}else if (list[i].status == 0||list[i].status == 1||list[i].status == 2){%>
+		<p class="afas getmoney">进行中</p>
+		<%}else if (list[i].status == 7){%>
+		<p class="afas getmoney" style="background: #ccc;">已取消</p>
+		<%}else if (list[i].status == 8){%>
+		<p class="afas getmoney" style="background: #ccc;">退款中</p>
+		<%}else if (list[i].status == 9){%>
+		<p class="afas getmoney" style="background: #ccc;">申诉失败</p>
+		<%}else if (list[i].status == 10){%>
+		<p class="afas getmoney" style="background: #ccc;">申诉成功</p>
+		<%}%>
+	</div>
+	<%if (list[i].status == 2){%>
+        <ul class="heading" style="background: #fff;">
+			<li class="headingcenter">
+				<img src="<%=list[i].helper.icon%>" alt="">
+				<div class="mid">
+					<div><%=list[i].helper.name%></div>
+				    <span><%=list[i].helper.phone%></span>
+				</div>
+				<%if (list[i].status == 2){%>
+				<span class="sure">尚未酬谢</span>
+				<%}%>
+			</li>
+		</ul>
+		<%}%>
+	<% } %>
+</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+	apiready = function () {
+		new datalistModel(addDataToHtml,followPagerUrl,10,5,100,true);
+	};
+	
+	function reloadHtml(){
+        apiready();
+    };
+    
+	var allResult = [];
+	function addDataToHtml(results, append) {
+		//alert(JSON.stringify(results));
+		var idName = $api.getStorage("categoryList");
+		for(var i=0;i<results.length;i++){
+			allResult[results[i].id]=results[i];
+			results[i].ctime = formatTimeToDate(results[i].ctime);
+			results[i].categoyName = idName[results[i].categoyId].name;
+			if(isNotBlack(results[i].picList)){
+                var picList = results[i].picList;
+                var picIcon =  picList[0];
+                var width = api.winWidth*0.9*0.25;
+                var height =width*0.618;
+                var obj = getImgSizeBySize(picIcon,width,height);
+                results[i].style = obj.style;
+                results[i].picList = picIcon;
+            };
+		}
+		var data = {list: results};
+		var html = template('scriptDiv2', data);
+		 if (append) {
+                var div = document.createElement("div");
+                div.innerHTML = html;
+                document.getElementById('mainOne').appendChild(div);
+            } else {
+                document.getElementById('mainOne').innerHTML = html;
+            }
+
+		echoExt.init();
+	}
+
+	/**************点击查看详情*********************/
+	function clickList(id){
+        openNewWindow('viewseeList','./viewseeList.html',allResult[id],{reload:true});
+   };
+	
+	/*****************************申请售后************************/
+	function applications (id){
+		showDialog("","温馨提示","失主提出申诉，点击确认将提交反申诉申请，我们将在24小时内为您审核！","取消","确定",function(){
+ 	 	ajaxGetWithProgress(agreeFailUrl,{id:id},function(ret,err){
+	            if(ret) {
+	                reloadHtml();
+	                //alert(JSON.stringify(ret));
+	                //alert(JSON.stringify(err));
+	            }else{
+	            	toast("取消失败,请检查网络。");
+	            }
+	        })
+       });
+	};
+	
+	/*****************点击放弃申诉**************************/
+	function abandon(id){
+		showDialog("","温馨提示","失主提出申诉，点击确认将放弃申诉，我们将在24小时内为您审核！","取消","确定",function(){
+ 	 	ajaxGetWithProgress(disagreeFailUrl,{id:id},function(ret,err){
+	            if(ret) {
+	                reloadHtml();
+	                //alert(JSON.stringify(ret));
+	                //alert(JSON.stringify(err));
+	            }else{
+	            	toast("取消失败,请检查网络。");
+	            }
+	        })
+       });
+	};
+</script>
+</html>

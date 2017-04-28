@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello MUI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <style>
+		.message-list{width:100%;height:65px;border-bottom:1px solid #EDEDED;}
+		.message-list>div{width:90%;height:100%;margin:0 auto;overflow: hidden;}
+		        /*.r_icon{display: block;float:right;width:10%;height:100%;background:url(./icon/);}*/
+		.list{width: 55%;height: 55px;float: left;font-size: 12px;margin:10px 0 0 5%;}
+		.list-div1{width: 100%;height:35%;float: left;}
+		.list-div2{width: 100%;height:65%;float: left;margin-top:3px;color:#909090;}
+		.but-help{width:25%;height:30px;border-radius: 6px;background: #F88125;text-align: center;line-height: 30px;float:right;color:#fff;font-size: 12px;margin-top: 16px;} 
+		.but-help{width:25%;height:30px;border-radius: 6px;background: #F88125;text-align: center;line-height: 30px;float:right;color:#fff;font-size: 12px;margin-top: 16px;}.list div a{display: block;width: 80px;height: 22px;line-height: 22px; border-radius: 10px;background: #ff7a4d;float: left;margin-left:10px;text-align: center;color: #fff;}
+		.list div span{display: block;float: left;color:#696969;}        
+		.message-head{width:15%;height:85%;background:url("../icon/Bitmap.png") no-repeat; background-size:100%;border-radius: 50%;overflow: hidden;margin-top:7px;float:left;}
+    </style>
+</head>
+<body>
+	<div class="message-list">
+		<div>
+			<div class="message-head"></div>0
+			<div class="list">
+				<div class="list-div1">
+					<span>郝女士</span>
+				</div>
+				<div class="list-div2">2016-06-02</div>
+			</div>
+			<div class="but-help">确认帮助</div>
+		</div>
+	</div>
+	<div class="message-list">
+		<div>
+			<div class="message-head"></div>
+			<div class="list">
+				<div class="list-div1">
+					<span>郝女士</span>
+				</div>
+				<div class="list-div2">2016-06-02</div>
+			</div>
+			<div class="but-help" >确认帮助</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script>
+	var tWith = screen.width*0.8;
+	var btnWith = tWith*0.5;
+
+	var helpBtn = document.querySelectorAll('.but-help')
+	for(var i = 0; i < helpBtn.length;i++){
+		helpBtn[i].onclick = function(){
+			tRaffle("","提示","确定帮助吗？","取消","确定")
+		}
+	}
+	function tRaffle(dialogBox,title,cotent,leftBtnTitle,rightBtnTitle,rightAction,leftAction){
+	    dialogBox = api.require('dialogBox');
+	    dialogBox.alert ({
+	        texts: {
+	            title: title,
+	            content:cotent,
+	            leftBtnTitle: leftBtnTitle,
+	            rightBtnTitle: rightBtnTitle
+	        },
+	        tapClose:true,
+	        styles:{
+	            bg: '#fff',
+	            w: api.winWidth *0.8,
+	            corner: 20,
+
+	            title:{
+	                marginT : 20,
+	                titleSize : 18,
+	                titleColor : '#06C1AE'
+	            },
+	            content:{
+	                color: '#000',
+	                size: 14
+	            },
+	            left:{
+	                marginB: 0,
+	                marginL: 0,
+	                w: api.winWidth *0.8*0.5,
+	                h: 43,
+	                color:'#000000',
+	                corner: 0,
+	                bg: '#E8E8E8',
+	                size: 16
+	            },
+	            right:{
+	                marginB: 0,
+	                marginL: 0,
+	                w: api.winWidth *0.8*0.5,
+	                h: 43,
+	                corner: 0,
+	                bg: '#06C1AE',
+	                size: 16,
+	                color:'#ffffff'
+	            }
+	        }
+	    },function(ret){
+	        if (ret.eventType == 'left') {
+	            dialogBox.close ({
+	                dialogName: 'alert'
+	            });
+	        }else if(ret.eventType == 'right'){
+	            rightAction();
+	            dialogBox.close ({
+	                dialogName: 'alert'
+	            });
+	        }
+	    });
+	}
+	// function(ret, err) {
+	// 	    if (ret) {
+	// 	        var dialogBox = api.require('dialogBox');
+	// 		    dialogBox.close({
+	// 		        dialogName: 'raffle'
+	// 		    });
+	// 	    } else {
+	// 	        var dialogBox = api.require('dialogBox');
+	// 		    dialogBox.close({
+	// 		        dialogName: 'raffle'
+	// 		    });
+	// 	    }
+</script>
+</html>

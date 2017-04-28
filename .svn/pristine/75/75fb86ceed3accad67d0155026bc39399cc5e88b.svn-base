@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/commonWindow.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <!--<link rel="stylesheet" href="../../css/mui.min.css">-->
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style type="text/css">
+        .awards_num{
+            background-color: #020202;
+        html{height: auto;width: 100%;background: #fff;}
+        body{font-family:"黑体";}
+        input{outline: none;}
+        .xian{width: 100%;height:1px;background: #f4f4f4;float: left;margin-top: 10px; }
+        .login{width: 90%;margin: 0 5%;height: 35px;border-bottom: 1px solid #f4f4f4;}
+        .login a{display: block;width: 49.5%;float: left;height: 100%;line-height:35px;text-align: center;}
+        .login a:first-child{border-right: 1px solid #f4f4f4;}
+        .border{width: 90%;margin:0 5%;border-bottom: 1px solid #f4f4f4;display: flex;align-items: center;justify-content: space-between;
+            height:55px;}
+        .l_icon_1{background: url("../../icon/3.png")no-repeat;background-size:cover;}
+        .size{width: 24px;height: 24px;float: left;margin-bottom: 3px;}
+        .border input {width:60%;margin-right: auto;height: 30px;float: left;margin-left: 3%;}
+       .check{height: 20px;width: 20px;float: left;}
+        #check{width: 90%;margin: 0 5%;float: left;height: 40px;display: flex;align-items: center;justify-content: flex-start; }
+        #submit1{display: block;width: 90%;margin: 15px  5% 0 5%;float: left;height: 45px;background: #06c1ae
+        ;border-radius: 20px;  line-height: 45px;text-align: center;color: #fff;  }
+        #submit2{display: block;width: 90%;margin: 15px  5% 0 5%;float: left;height: 45px; border: 1px solid #06c1ae;
+        ;border-radius: 20px;  line-height: 45px;text-align: center;color: #06c1ae;  }
+        .font{text-align: center;float: left;width: 100%;height: auto;color: #9296a3;margin-top: 40px;margin-bottom: 20px;}
+        .icon{display: block;width: 120px;;height: 24px;;margin:20px  auto  0 auto;}
+        .icon i{margin-left: 12px;}
+        .l_icon_8{background: url("../../icon/weibo.png")no-repeat;background-size:cover;}
+        .l_icon_9{background: url("../../icon/weixin.png")no-repeat;background-size:cover;}
+        .l_icon_10{background: url("../../icon/qq.png")no-repeat;background-size:cover;}
+        #phone-input,#password2{display: none;}
+    </style>
+</head>
+<body>
+<div id="topbar" class="topbar_info">
+    <div id="leftButton" onclick="closeWin()">
+        <img src="../../icon/arrow_m.png" >
+    </div>
+    <div>登录/注册</div>
+</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script>
+    apiready = function () {
+        initFrameInWin(api.pageParam);
+    };
+</script>
+</html>

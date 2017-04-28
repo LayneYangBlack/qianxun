@@ -1,0 +1,180 @@
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+ input{
+        outline: none;
+    }
+#topbar {
+	color: #333;
+    /*background : #343339;*/
+    background: #fff;
+    height : 47px;
+    line-height : 47px;
+    font-size: 18px;
+    position: relative;
+    text-align: center;
+    border-bottom:1px solid #ebebeb;
+}
+#leftButton{
+    position: absolute;
+    /*top:0;
+    left: 0;
+    padding: 13px 10px 7px 5px ;
+    line-height: 0;*/
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    z-index: 10;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+
+}
+/*#leftButton:active{background-color: #cc3333}*/
+#leftButton img{
+    margin-left: 10px;
+    width: 45px;
+    height: 45px;
+    justify-content: center;
+   display: flex;
+}
+
+
+#title{
+    /*width: 100%;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin:0 60px;
+    text-align: center;
+    height: 43px;
+}
+
+
+
+#rightButton{
+    position: absolute;top: 15px;  right: 20px;
+    line-height: 14px;
+    font-size: 14px;
+    color: #5B5B5B;
+}
+#rightButton1{
+    height:20px;padding:5px;position: absolute;top: 6px;  right: 10px;
+    line-height: 20px;
+    font-size: 14px;
+    background-color: #6BBDFA;
+
+    color: #FFF;
+    /*box-shadow: 0 0 2px 2px #DADDE0;*/
+    border-radius: 5px;
+    /*color: #6BBDFA;*/
+    max-width: 50px;
+    overflow: hidden;
+}
+#rightButton2{
+    height:20px;padding:5px;position: absolute;top: 6px;  right: 65px;
+    line-height: 20px;
+    font-size: 14px;
+    background-color: #6BBDFA;
+
+    color: #FFF;
+    /*box-shadow: 0 0 2px 2px #DADDE0;*/
+    border-radius: 5px;
+    /*color: #6BBDFA;*/
+}
+
+#rightImgButton{
+    position: absolute;top: 13px;  right: 13px;
+    width: 17px;
+    height: 17px;
+}
+
+#rightImgButton2{
+    position: absolute;top: 13px;  right: 50px;
+    width: 19px;
+    height: 17px;
+}
+
+
+
+#rightButton3{
+    position: absolute;
+    /*top:0;
+    left: 0;
+    padding: 13px 10px 7px 5px ;
+    line-height: 0;*/
+    margin-top: 8px;
+    right: 0;
+    top: 0;
+    width: 45px;
+    height: 33px;
+    z-index: 10;
+}
+#rightButton3 img{
+    width: 25px;
+    height: 25px;
+}
+
+
+.tap {background: #DADDE0;}
+
+/*这里为显示发布的活动*/
+
+.fbtext{
+    width: 90%;
+    font-size: 0.55rem;
+    margin: 0.7rem 5% 0 5%;
+    border: none;
+
+    padding-bottom: 0.3rem;
+    line-height: 1rem;;
+}
+
+
+.fbcon7{
+    width: 100%;
+}
+.fbcon7 img{
+    width: 90%;
+    margin: 0.35rem 5% 0 5%;
+}
+.rightInfo{
+    height: 48px!important;
+    position: absolute!important;
+    top:0!important;
+    right: 0!important;
+    margin: 0!important;
+    font-size: 14px;
+    line-height: 48px!important;
+    color: #ffe2b1!important;
+    padding: 0 12px;
+    background: #d84e43!important;
+
+}
+.rightInfo:active{background-color: #cc3333!important;}
+.heading{width:100%;height:60px;border-top:2px solid #ebebeb;line-height: 22px;}
+		.headingcenter{width:90%;height:100%;margin:0 auto;border-bottom: 1px solid #ebebeb;}
+		.headingcenter img{height:44px;display: block;float:left;border-radius:50%;overflow: hidden;margin-top: 8px;}
+		.headingcenter div{font-size: 14px;color:#999;padding-top: 5px;}
+		ul li:last-child{margin-bottom: 46px;}
+		.mid{
+			float: left;
+			padding-left: 6px;
+		}
+		.sure{
+			float: right;
+			width: 100px;
+			height: 35px;
+			text-align: center;
+			line-height: 35px;
+			font-size: 16px;margin-top: 10px;
+			border-radius: 5px;
+			background: #FFC629;color:#74510B;
+		}

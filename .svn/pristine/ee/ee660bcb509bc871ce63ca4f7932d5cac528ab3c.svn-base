@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提现验证码</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <style>
+        html{height: auto;width: 100%;background: #fff;}
+        input{outline: none;}
+        .xian{width: 100%;height:1px;background: #f4f4f4;float: left;margin-top: 10px; }
+        .login{width: 90%;margin: 0 5%;height: 35px;border-bottom: 1px solid #f4f4f4;}
+        .login a{display: block;width: 100%;float: left;height: 100%;line-height:35px;text-align: center;}
+        .border{width: 90%;margin:0 5%;border-bottom: 1px solid #f4f4f4;display: flex;align-items: center;justify-content: space-between;
+            height:55px;}
+        .l_icon_1{background: url("../icon/phone.png")no-repeat;background-size:cover;}
+        .l_icon_2{background: url("../icon/4.png")no-repeat;background-size:cover;}
+        .size{width: 24px;height: 24px;float: left;margin-bottom: 3px;}
+        .border input {width:60%;margin-right: auto;height: 30px;float: left;margin-left: 3%;}
+        .check{height: 20px;width: 20px;float: left;}
+        #check{width: 90%;margin: 0 5%;float: left;height: 40px;display: flex;align-items: center;justify-content: flex-start; }
+        .submit1{display: block;width: 90%;margin: 15px  5% 0 5%;float: left;height: 45px;background: #06c1ae
+        ;border-radius: 20px;  line-height: 45px;text-align: center;color: #fff;  }
+        .submit2{display: block;width: 90%;margin: 15px  5% 0 5%;float: left;height: 45px; border: 1px solid #06c1ae;
+        ;border-radius: 20px;  line-height: 45px;text-align: center;color: #06c1ae;  }
+        .font{text-align: center;float: left;width: 100%;height: auto;color: #9296a3;margin-top: 40px;margin-bottom: 20px;}
+        .icon{display: block;width: 120px;;height: 24px;;margin:20px  auto  0 auto;}
+        .icon i{margin-left: 12px;}
+        .l_icon_8{background: url("../icon/weibo.png")no-repeat;background-size:cover;}
+        .l_icon_9{background: url("../icon/weixin.png")no-repeat;background-size:cover;}
+        .l_icon_10{background: url("../icon/qq.png")no-repeat;background-size:cover;}
+        .border a{width: 80px;height: 26px;border-radius: 15px;border: 1px solid #06c1ae;line-height: 26px;text-align: center;color:#06c1ae;  font-size: 14px;background: #fff; }
+         #code,#phoneNum{color:#333;}
+         #question{
+            position: fixed;
+            height: 50px;
+            text-align: center;
+            background-color: #06C1AE;
+            margin: 10px 0 0 0 ;
+            line-height: 50px;
+            font-size: 18px;
+            width: 100%;
+            color: #ffffff;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div style="height: 10px;background: #f4f4f4;width: 100%;float: left"></div>
+<div class="li_50" id="memeda">
+    <div class="border">
+        <i class="l_icon_1 size"></i>
+        <input type="text" id="phoneNum" readonly="ture">
+    </div>
+</div>
+<div class="li_50">
+    <div class="border">
+        <i class="l_icon_2 size"></i>
+        <input type="text" id="code" placeholder="请输入验证码" value="" >
+        <a id="sms" onclick="sms()">获取验证码</a>
+    </div>
+</div>
+<div  id="question" tapmode="itemOn" >
+        立即提现
+</div>  
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript">
+    var payparms={};
+    var notice;
+	var code;
+    apiready = function(){
+    	dialogBox = api.require('dialogBox');
+        var userPhone = document.getElementById('phoneNum');
+    	payparms = api.pageParam;
+    	code = payparms.code;
+    	if(code == "wallet"){
+    		document.getElementById("question").innerHTML = "确认支付";
+    	}
+    	else{
+    		document.getElementById("question").innerHTML = "立即提现";
+    	}
+        ajaxGetWithProgress(userinfoUrl,{},function(ret,err){
+            if(ret.phone) {
+               userPhone.value = ret.phone
+            }else { 
+                name.innerHTML = ret.name
+            }
+        })
+    };
+    
+    //发送验证码
+    var sendFlag = true;
+	function sms(){
+		if(!sendFlag){
+			return;
+		}
+		sendFlag = false;
+		var tel = $api.byId('phoneNum').value;
+		if(!checkMobileNum(tel)){
+			sendFlag = true;
+			toast("手机号码不正确");
+			return;
+		}
+//		var url = loginUserCreateAuthCodeUrl;
+//		if(selectType === "mall"){
+//			url = loginShopCreateAuthCodeUrl;
+//		}
+		ajaxGetWithProgress(eventCreateAuthCodeUrl,{
+			phone : tel
+		},function(ret){
+			if(ret && ret.success){
+				setTimeToCode();
+//				$api.setStorage(Storage_Sms_Time,new Date().getTime());
+			} else {
+				sendFlag = true;
+				var errorMsg = "出错了，请稍后。";
+				if(ret&&ret.errorMessage){
+					errorMsg = ret.msg;
+				}
+				api.toast({
+					msg : errorMsg
+				});
+			}
+		});
+	}
+    
+    
+    /********************点击立即提现和点击钱包支付****************************************/
+    document.getElementById("question").onclick = function (){
+    	if (code == "wallet") {/*****判断是钱包支付*/
+    		    payparms.code = document.getElementById("code").value;
+    		    ajaxGetWithProgress(payEventOrderUrl,payparms,function(ret,err){
+				if(ret){					
+		            showDialog1();						
+				}else{
+					var errorMsg = "出错了，请稍后。";
+					if(ret&&ret.msg){
+						errorMsg = ret.msg;
+					}
+					api.toast({
+						msg : errorMsg
+					});
+				}
+			})
+    	} else if(code == "Alipay"){/**********判断是支付宝提现**********/
+    		if(isBlack(document.getElementById("code").value)){
+	        	toast("请输入验证码");
+	        	return;
+   			}
+	    	payparms.code = document.getElementById("code").value;
+	    	ajaxGetWithProgress(createTransItemUrl,payparms,function(ret,err){
+				
+				if(ret){
+					showDialog1();
+				}else{
+					var errorMsg = "出错了，请稍后。";
+					if(ret&&ret.msg){
+						errorMsg = ret.msg;
+					}
+					api.toast({
+						msg : errorMsg
+					});
+				}
+			})
+    	}	
+	}
+    
+    /*******************这是提现和钱包支付的弹出框提示信息***********************/
+     function showDialog1(){
+		var content = '提交成功！我们将在24小时内审核完胜，请耐心等待';
+		if(code == "wallet"){
+			content = "支付成功";
+		}
+        dialogBox.alert ({
+            texts: {
+                title: '温馨提示',
+                content:content,
+                rightBtnTitle: '确定'
+            },
+            styles:{
+                bg: '#fff',
+                w: 300,
+                title:{
+                    marginT : 20,
+                    titleSize : 18,
+                    corner: 1,
+                    titleColor : '#06C1AE'
+                },
+                content:{
+                    color: '#000',
+                    size: 16
+                },
+                right:{
+                    w: 300,
+                    h: 40,
+                    marginL: 0,
+                    marginB: 0,
+                    corner: 1,
+                    bg: '#06C1AE',
+                    size: 18,
+                    color:'#ffffff'
+                }
+            }
+        },function(ret){
+        	if (ret.eventType == 'right') {
+                var dialogBox = api.require('dialogBox');
+				dialogBox.close ({
+					dialogName: 'alert'
+				});
+				api.execScript({
+		                name: rootWindowName,
+		                frameName:'home',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'introduceddatail',
+		                frameName:'introduceddatail_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'myintroduced',
+		                frameName:'myintroduced_body',
+		                script: 'reloadHtml()'
+		            });
+	                api.execScript({
+	                    name:'MyMoney',
+	                    script: 'reloadHtml()'
+	              	});
+	                api.closeWin({
+	                    name: 'payPages'
+	               });
+	                api.closeWin({
+	                    name: 'publishhelp'
+	               });
+	                api.closeWin({
+	                    name: 'introduceddatail'
+	               });
+	                api.closeWin({
+	                    name: 'cash'
+	              });
+	           		closeWin();
+            	}
+        	
+        	});
+   	 	}
+    
+/***************点击验证码倒计时***************************/
+
+	function setTimeToCode(time){
+	    var code = document.getElementById('sms');
+	    time=time||120;
+	    code.innerHTML ="剩余"+ time+"s";
+	    var codeInterval =  setInterval(function(){
+	        if(time > 0){
+	            time--;
+	            code.innerHTML ="剩余"+time+"s";
+	        }else{
+	            code.style.backgroundColor = "#FA8302";
+	            code.innerHTML = "获取验证码";
+	            sendFlag = true;
+	            clearInterval(codeInterval);
+	        }
+	    },1000)
+	
+	}
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>参与帮助的</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+    <style type="text/css">
+        body{font-family:"黑体";}
+        .awards_num{
+            background-color: #020202;
+
+        }
+        .rightInfo{
+            height: 31px;
+
+            position: absolute;
+            top:6px;
+            right: 5px;
+            margin-right: 5px;
+            font-size: 12px;
+            line-height: 31px;
+            background-color: #020202;
+            color: #ffffff;
+            padding: 0 5px;
+        }
+		#topbar span{
+			position: absolute;
+			top: 0;
+			right: 15px;
+			font-size: 14px;
+			color:#06C1AE;
+		}
+    </style>
+</head>
+<body>
+<div id="topbar" class="topbar_info">
+    <div id="leftButton" onclick="closeWin()">
+        <img src="../icon/arrow_m.png" >
+    </div>
+    <div>参与帮助的</div>
+	<span onclick="commits()">提交</span>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script>
+
+    apiready = function () {
+        initFrameInWin(api.pageParam);
+    };
+	
+	/************点击头部提交选中的人*********************/
+	function commits(){
+		api.execScript({
+            frameName:'joinhelplist_body',
+            script: 'commit()'
+        });
+	}
+</script>
+</html>

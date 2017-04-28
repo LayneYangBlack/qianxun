@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>参与帮助的</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+	<style type="text/css">
+		body{font-family:"黑体";}
+		.heading{width:100%;height:60px;border-top:2px solid #ebebeb;line-height: 22px;}
+		.headingcenter{width:90%;height:100%;margin:0 auto;border-bottom: 1px solid #ebebeb;background: none;}
+		.headingcenter_01{width:90%;height:100%;margin:0 auto;border-bottom: 1px solid #ebebeb;background: url("../icon/selected.png") 96% center no-repeat;background-size:25px;}
+		.headingcenter_01 img,.headingcenter img{height:44px;display: block;float:left;border-radius:50%;overflow: hidden;margin-top: 8px;}
+		.headingcenter_01 div,.headingcenter div{font-size: 14px;color:#999;padding-top: 5px;}
+		ul li:last-child{margin-bottom: 46px;}
+		.mid{
+			float: left;
+			padding-left: 6px;
+		}
+	</style>
+</head>
+<body id="body">
+	
+</body>
+<script id="scriptDiv1" type="text/html">
+
+<div style="background:#fff">
+	<ul class="heading">
+		<% for (var i = 0; i < list.length; i++) { %>
+		<li class="headingcenter">
+			<img src="<%=list[i].icon%>" alt="">
+			<div class="mid">
+				<div><%=list[i].name%></div>
+			    <span><%=list[i].phone%></span>	
+			</div>
+			
+		</li>
+		<%}%>
+	</ul>
+</div>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script>
+	var notice;
+	apiready = function(){
+		dialogBox = api.require('dialogBox');
+		var results = api.pageParam;
+		notice = results.notice;
+		//alert(notice);
+		//alert(JSON.stringify(results));
+		addDataToHtml(results);
+	}
+	
+	var types;
+	var typea;
+	function addDataToHtml(results, append) {
+		var data = {list: results.helpUsers};
+		var html = template('scriptDiv1', data);
+		document.getElementById('body').innerHTML = html;
+		var lis = document.getElementsByTagName("li");
+		for (var i = 0;i < lis.length;i++) {
+			lis[i].onclick=function(){
+				for (var i = 0;i < lis.length;i++) {
+					if(lis[i] == this){
+						types = results.helpUsers[i].id;
+						typea = results.id;
+						//alert(types);
+						//alert(typea);
+						lis[i].className = "headingcenter_01";
+					}else{
+						lis[i].className = "headingcenter";
+					}
+				}
+			}	
+		}
+		
+	}
+	
+	
+	function commit(){
+		showDialog("","提示","点击确认自己选择帮助的人，确认之后将不可更改！","取消","确定",function(){
+     	 	var parms = {};
+			parms.id = typea;
+			parms.uid = types;
+			if(notice == "help"){
+				var urls = selectHelperUrl;
+			}else if(notice == "loser"){
+				var urls = selectUserUrl;
+			}
+			//alert(JSON.stringify(parms));
+    		ajaxGetWithProgress(urls,parms,function(ret,err){
+            if(isNotBlack(ret)){
+                      //alert(JSON.stringify(ret));
+                      //alert(JSON.stringify(err));
+                    api.execScript({
+		                name: 'myintroduced',
+		                frameName:'myintroduced_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'myin',
+		                frameName:'myin_body',
+		                script: 'reloadHtml()'
+		            });
+		            api.execScript({
+		                name: 'introduceddatail',
+		                frameName:'introduceddatail_body',
+		                script: 'reloadHtml()'
+		            });
+	           		closeWin();
+                }
+                else{
+                }
+            });  
+        });
+	}	
+</script>
+</html>

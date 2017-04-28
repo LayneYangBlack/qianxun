@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="format-detection" content="telephone=no" />
+    	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>商品详情</title>
+		<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/api_1.css"/>		
+		<style>
+			html,body {
+				width: 100%;
+				background: rgb(237,237,237);
+				margin: 0px;
+				padding: 0px;
+			}
+			.iconImg{
+				vertical-align:middle;
+				width: 15px;
+				height: 15px;
+			}			
+		</style>
+	</head>
+	<body>
+		<div id="info" style="background-color: #FFFFFF;" onclick="cancelReComment();">
+			<!--<div style="margin-top: 10px;padding: 0px 5%;border-bottom: 1px solid #F0F0F0;">
+				<div style="color: #666666;font-size: 12px;padding: 20px 0px;height: 15px;">
+					<div style="float: left;">
+						匿名发布：***
+					</div>
+					<div style="float: right;">
+						1天内
+					</div>
+				</div>
+				<div style="font-size: 15px;padding-bottom: 20px;">
+					约炮是对情人的尊重，吃肉是对蔬菜的放生，感冒是对天气的问候，我喜欢你是对世界的损失。
+				</div>
+				<div style="padding-bottom: 20px;">
+					<img src="http://s.cn.bing.net/az/hprichbg/rb/MountHuaSnow_ZH-CN10489400024_1920x1080.jpg" width="28%" height="96"/>
+					<img src="http://s.cn.bing.net/az/hprichbg/rb/MountHuaSnow_ZH-CN10489400024_1920x1080.jpg" width="28%" height="96"/>
+					<img src="http://s.cn.bing.net/az/hprichbg/rb/MountHuaSnow_ZH-CN10489400024_1920x1080.jpg" width="28%" height="96"/>
+				</div>
+			</div>
+			<div style="height: 40px;line-height: 40px;">
+				<div style="float: left;color: #666666;font-size: 12px;margin-left: 5%;">
+					举报
+				</div>
+				<div style="float: right;color: #666666;font-size: 12px;margin-right: 8%;">
+					100
+				</div>
+				<div style="float: right;margin-right: 10px;line-height: 45px;">
+					<img width="15" height="15" src="../../icon/tucao/comment@2x.png"/>
+				</div>
+				<div style="float: right;color: #666666;font-size: 12px;margin-right: 8%;">
+					100
+				</div>
+				<div style="float: right;margin-right: 10px;line-height: 45px;">
+					<img width="15" height="15" src="../../icon/tucao/like@2x.png"/>
+				</div>
+			</div>-->
+		</div>
+		<div id="commentList" style="margin-top: 10px;background-color: #FFFFFF;">
+			<!-- 评论 -->
+			<!--<div style="padding: 15px 5%;border-bottom: 1px solid #F0F0F0;">
+				<div style="width: 36px;height: 36px;border-radius: 15px;position: absolute;">
+					<img src="../../icon/userDefault@2x.png" width="100%" height="100%" />
+				</div>
+				<div style="margin-left: 50px;">
+					<div style="color: #666666;font-size: 14px;">
+						灵儿
+					</div>
+					<div style="font-size: 15px;">
+						很对很对很对很对很对很对很对很对很对很对很对很对很对很对很对很对
+						很对很对很对很对很对很对很对很对很对很对很对很对很对很对很对很对
+						很对很对很对很对很对很对很对很对很对很对很对很对很对很对很对很对
+						很对很对很对很对很对很对很对很对很对很对很对很对很对很对很对很对
+					</div>
+				</div>
+			</div>-->
+			<!-- 评论 -->
+		</div>
+		<div style="height: 45px"></div>
+	</body>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/chatBoxHelp.js"></script>
+<script type="text/javascript" src="../script/emoji.js"></script>
+<script>
+		var imageBrowser;
+		var user;
+		//楼主Id
+		var itemUid;
+		var daid;
+		var isSupport = false;
+		var supportLock = false;		
+		var chatBox;
+		var toUid = 0;
+		var toUserName = "";
+		var type = 1;		
+		//分享信息
+		var shareTitle;
+		var shareDescription;
+		var shareThumbUrl;
+		var shareContentUrl;		
+		var imgsHeight = 100;		
+		template.helper('getImgsHeight',function(type){
+	        return imgsHeight;
+	    });
+	    
+		template.helper('formatContentWithImage',function(value){
+			if(value){
+				return formatContentWithImage(value);
+			}else{
+				return '';
+			}
+		});
+	
+		apiready = function () {
+		
+			initCheckBox();
+		};				
+		
+		function initCheckBox(){
+			chatBox = api.require('UIChatBox');
+			chatBox.open({
+				placeholder: '评论',
+				maxRows: 4,
+				emotionPath: 'widget://image/emotion',
+				styles: {
+					inputBar: {
+						borderColor: '#F0F0F0',
+						bgColor: '#FFFFFF'
+					},
+					inputBox: {
+						borderColor: '#F5F6FA',
+						bgColor: '#F5F6FA'
+					},
+					emotionBtn: {
+						normalImg: 'widget://image/chatBox_face1.png'
+					},
+					keyboardBtn: {
+						normalImg: 'widget://image/chatBox_key1.png'
+					},
+					indicator: {
+						target: 'both',
+						color: '#c4c4c4',
+						activeColor: '#9e9e9e'
+					},
+					sendBtn: {                         //（可选项）JSON对象；发送按钮样式，本参数对 IOS 平台上的键盘内发送按钮无效
+						bg: '#ffffff',                 //（可选项）字符串类型；发送按钮背景颜色，支持rgb、rgba、#、img；默认：#4cc518
+						titleColor: '#F88125',          //（可选项）字符串类型；发送按钮标题颜色；默认：#ffffff
+						activeBg: '#ffffff',            //（可选项）字符串类型；发送按钮背景颜色，支持rgb、rgba、#、img；默认：无
+						titleSize: 14                    //（可选项）数字类型；发送按钮标题字体大小；默认：13
+					}
+				}
+			}, function (ret, err) {
+				//点击发送按钮
+				if (ret.eventType == 'send') {
+					if ($api.trimAll(ret.msg).length != 0) {
+						sendComment(ret.msg);
+						chatBox.closeKeyboard();
+					} else {
+						api.toast({
+							msg: '消息不能为空',
+							duration: 2000,
+							location: "top"
+						});
+					}
+				}
+			});
+			
+			//监听弹出事件
+			chatBox.addEventListener({
+				target: 'inputBar',
+				name: 'move'
+			}, function (ret, err) {
+				if(!checkUserLogin()){
+					chatBox.closeKeyboard();
+				}
+			});
+			
+			chatBox.addEventListener({
+				target: 'inputBar',
+				name: 'showEmotion'
+			}, function (ret, err) {
+				if(!checkUserLogin()){
+					chatBox.closeBoard();
+				}
+			});
+			
+		}
+		
+		function sendComment(text){
+			if(isBlack(text)){
+				api.toast({msg:"亲，还没输入内容。"});
+				return;
+			}
+			
+//			alert(utf16toEntities(text));
+			
+			var result = {
+				uid : user.id,
+				toUid : toUid,
+				userName : user.anonymName,
+				userIcon : user.anonymIcon,
+				toUserName : toUserName,
+				type : type,
+				content : text,
+				landlord : itemUid == user.id
+			};
+			
+			var data = {list: [result]};
+			var html = template('commentTemplet', data);			
+			var commentUrl = tucaoCommentUrl;
+			var params = {
+				daid : daid,
+				content : text
+			};
+			
+			if(toUid > 0){
+				commentUrl = tucaoReplyUrl;
+				params.toUid = toUid;
+				params.toUserName = toUserName;
+			}
+			
+			ajaxGet(commentUrl,params,function(ret){
+				if(ret){
+					$api.byId('commentList').style.display = 'block';
+					$api.byId('commentList').innerHTML = html + $api.byId('commentList').innerHTML;
+				}else{
+					api.toast({msg:"失败,请稍后重试"});
+				}
+			});
+			
+			chatBox.setPlaceholder({placeholder:"评论"});
+			toUid = 0;
+			toUserName = "";
+		}
+		
+		function setReply(replyUid,replyName){
+			if(user.id == replyUid){
+				return;
+			}
+			
+			toUid = replyUid;
+			toUserName = replyName;
+			type = 2;
+			
+			chatBox.setPlaceholder({placeholder:"回复"+replyName+":"});
+			chatBox.popupKeyboard();
+		}
+		
+		function cancelReComment(){
+			if(toUid>0){
+				chatBox.setPlaceholder({placeholder:"评论"});
+				toUid = 0;
+				toUserName = "";
+				type = 1;
+			}
+		}
+		
+	</script>
+</html>

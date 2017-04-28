@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>其他人看拾到详情</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" href="../css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/list.css"/>
+	<style>
+		body{font-family: "黑体";}
+		li{list-style: none;text-decoration: none;}
+		.page-num{position:absolute;right:20px;bottom:20px;width:55px;height:30px;background-color: rgba(0,0,0,.6);border-radius: 6px;}
+		.page-num p {text-align: center;}
+		.page-num-p{font-size: 16px;line-height: 30px;color:#FFFFFF;}
+		.datail-title{width:100%;height:80px;background-color: #fff;overflow: hidden;}
+		.datail-title-c{width:90%;height:100%;margin:0 auto;overflow: hidden;}
+		.title-t{width:100%;height:31px;color:#000;margin-top:25px;}
+		.title-t span{display: block;}
+		.title-t-left{font-size: 16px;float:left;}
+		.title-t-right{font-size: 12px;float:left;width:60px;height:20px;border:1px solid #06C1AE;border-radius: 4px;text-align: center;margin: 0 0 0 10px;color:#06C1AE;line-height: 20px}
+		.title-paid{width:100%;height:31px;margin:0 auto;}
+		.title-paid-m{color:#F44343;font-size: 16px;font-weight: bold;}
+		.title-paid-f{color:#C2C2C2;font-size: 14px;}
+		.title-time{width:100%;height:33px;margin:0 auto;color:#c2c2c2;font-size: 12px}
+		.lose{width:100%;height:120px;background-color: #fff;margin-top:10px;}
+		.lose-center{width:90%;height:100%;margin:0 auto;font-size: 13px;}
+		.lose-time{width:100%;height:57px;border-bottom:1px solid #EBEBEB;line-height: 57px;}
+		.lose-address{width:100%;height:62px;line-height: 62px;}
+		.lose-text{color:#909090;display: block;float:left;font-size: 14px;}
+		.lose-text2{display: block;float:left;margin-left:8%;color:#2a2a31;font-size: 16px}
+		.description{width:100%;height:auto;margin-top:10px;background-color: #fff;}
+		.description-center{width:90%;height:100%;margin:0 auto;}
+		.description-p {width:100%;height:40px;display: flex; align-items: flex-end;margin-bottom: 0;}
+		.description-icon{display: block;float:left;width:4px;height:20px;background-color: #06C1AE;}
+		.description-text{color:#969696;font-size: 14px;display: block;float:left;margin-left: 5%;}
+		.description-p2{width:100%;height:auto;font-size: 14px;color:#2A2A31;margin-top: 20px;font-weight: 500;}
+		.message{width:100%;height:auto;background-color: #fff;margin-top: 10px;}
+		.message-one{width:100%;height:35.5px;border-bottom:1px solid #EDEDED;}
+		.message-one-center{width:90%;height:100%;margin:0 auto;display: flex;align-items: center;justify-content: space-between;}
+		.message-one-center p {height:100%;width:25%;line-height:35px;margin:0;font-size: 12px;}
+		.message-list{width:100%;height:65px;border-bottom:1px solid #EDEDED;}
+		.message-list>div{width:90%;height:100%;margin:0 auto;overflow: hidden;}
+		/*.r_icon{display: block;float:right;width:10%;height:100%;background:url(./icon/);}*/
+		.message-head{width:15%;height:70%;background:url("../icon/head.png") no-repeat; background-size:100%;border-radius: 50%;overflow: hidden;margin-top:10px;float:left;}
+		.message-personal{width:65%;height:100%;float:left;margin-left:5%;font-size:12px;color:#666666;}
+		.message-name{width:100%;height:50%;}
+		.message-content{width:100%;height:50%;line-height: 50%}
+		.list{width: 55%;height: 55px;float: left;font-size: 12px;margin:10px 0 0 5%;}
+		.list-div1{width: 100%;height:35%;float: left;}
+		.list-div2{width: 100%;height:65%;float: left;}
+		.list div a{display: block;width: 80px;height: 22px;line-height: 22px; border-radius: 10px;background: #ff7a4d;float: left;
+			margin-left:10px;text-align: center;color: #fff;}
+		.list div span{display: block;float: left;color:#696969;}
+		.message-time{width:25%;height:100%;float:left;text-align: right}
+		.message-time span{color:#909090;font-size: 12px;padding-top: 17px;}
+		.r_icon{background: url(../icon/r_arrow1.png);background-size: 150%;margin-right: 0}
+
+		.god{width:100%;height:48px;margin-top: 10px;background:#fff;overflow: hidden;}
+		.god-center{width:90%;height:65%;margin:10px auto 0 auto;}
+		.god-left{width:60%;height:100%;float:left;}
+		.god-head{width:15%;height:100%;float:left;background: url(../icon/Fill109.png) no-repeat;background-size: 100%}
+		.god-left p {height:100%;float:left;color:#909090;font-size: 12px;line-height: 30px;margin-left:10%;}
+		.god-right{width:40%;height:100%;float:right;border-left:1px solid #EBEBEB;}
+		.god-phone{width:30%;height:100%;float:left;background: url(../icon/phonea.png) no-repeat 14px 4px;background-size: 60%;}
+		.god-loster{width:55%;height:100%;line-height: 30px;float:left;font-size: 12px;color:#909090;text-align: center;}
+		.bottom-two{width:100%;height:75px;margin-top: 10px;background: #fff;overflow: hidden;position: fixed;bottom:0;left:0;padding-bottom: 10px;}
+		.bottom-two-center{width:90%;height:100%;margin:0 auto;}
+		.joinhelp,.joinmessage{width:46%;height:46px;margin-top:15px;border-radius: 6px;text-align: center;line-height: 46px;}
+		.joinhelp{float:left;background: #FFC629;color:#74510B;}
+		.joinmessage{float:right;background: #F88125;color:#fff;}
+		.desc-pic>img{width:100%;}
+		
+	</style>
+</head>
+
+<body style="background-color:#EDEDED" id="body">
+	<div id="main2">
+
+	</div>
+<!-- <div class="datail-title">
+			<div class="datail-title-c">
+				<div class="title-t">
+					<span class="title-t-left"><%=list.name%></span>
+					<span class="title-t-right"><%=list.categoyName%></span>
+				</div>
+				
+				<div class="title-time">
+					<span>发布：<%=list.ctime%></span>
+				</div>
+			</div>
+		</div>
+		<div class="lose">
+			<div class="lose-center">
+				<div class="lose-time">
+					<span class="lose-text">拾到时间</span>
+					<span class="lose-text2"><%=list.time%></span>
+				</div>
+				<div class="lose-address">
+					<span class="lose-text">拾到地址</span>
+					<span class="lose-text2"><%=list.address%></span>
+				</div>
+			</div>
+		</div>
+		<div class="description">
+			<div class="description-center">
+				<p class="description-p">
+					<span class="description-icon"></span>
+					<span class="description-text">物品描述</span>
+				</p>
+				<p class="description-p2">
+					<%=list.desc%>
+					<div class="desc-pic">
+						<%var picList = list.picList %>
+						<%for(var i=0;i < picList.length;i++){%>
+						<img src="<%=picList[i]%>" alt="">
+						<%}%>
+					</div>
+				</p>
+			</div>
+		</div>
+		<div class="message">
+			<div class="message-one">
+				<div class="message-one-center">
+					<p>留言</p>
+					<span class="r_icon"></span>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-two">
+			<div class="bottom-two-center">
+				<div class="joinhelp">取消发布</div>
+				<div class="joinmessage">失主认领</div>
+			</div>
+		</div> -->
+	<script id="scriptDiv2" type="text/html">
+		<div class="datail-title">
+			<div class="datail-title-c">
+				<div class="title-t">
+					<span class="title-t-left"><%=list.name%></span>
+					<span class="title-t-right"><%=list.categoyName%></span>
+				</div>
+				
+				<div class="title-time">
+					<span>发布：<%=list.ctime%></span>
+				</div>
+			</div>
+		</div>
+		<div class="lose">
+			<div class="lose-center">
+				<div class="lose-time">
+					<span class="lose-text">拾到时间</span>
+					<span class="lose-text2"><%=list.time%></span>
+				</div>
+				<div class="lose-address">
+					<span class="lose-text">拾到地址</span>
+					<span class="lose-text2"><%=list.address%></span>
+				</div>
+			</div>
+		</div>
+		<div class="description">
+			<div class="description-center">
+				<p class="description-p">
+					<span class="description-icon"></span>
+					<span class="description-text">物品描述</span>
+				</p>
+				<p class="description-p2">
+					<%=list.desc%>
+					<div class="desc-pic">
+						<%var picList = list.picList %>
+						<%for(var i=0;i < picList.length;i++){%>
+						<img src="<%=picList[i]%>" alt="">
+						<%}%>
+					</div>
+				</p>
+			</div>
+		</div>
+		<div class="message">
+			<div class="message-one">
+				<div class="message-one-center">
+					<p>留言</p>
+					<span class="r_icon"></span>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-two">
+			<div class="bottom-two-center">
+				<div class="joinhelp">取消发布</div>
+				<div class="joinmessage" onclick="showDialog()">失主认领</div>
+			</div>
+		</div>
+	</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" charset="utf-8">
+	apiready = function(){
+		dialogBox = api.require('dialogBox');
+		jobj = api.pageParam;
+		ajaxGet(eventInfoUrl,{id:jobj.id}, function(ret,err){
+			if(isNotBlack(ret)){
+				addDataToHtml(ret);
+				document.getElementById('body').style.display = 'block'
+			}else{
+				toast("暂无数据");
+			}
+			api.refreshHeaderLoadDone();
+		});
+	};
+	function showDialog(){
+     	var user = getUserInfo();
+    	var ids = user.id;
+    	if(ids == jobj.creater.id){
+    		toast('亲，自己不能认领自己发布的物品哦！');
+    		return;
+    	}
+        dialogBox.alert ({
+            texts: {
+                title: '温馨提示',
+                content:'亲，点击确认按钮即可确认失主认领~',
+                rightBtnTitle: '确定'
+            },
+            styles:{
+                bg: '#fff',
+                w: 300,
+                title:{
+                    marginT : 20,
+                    titleSize : 18,
+                    corner: 1,
+                    titleColor : '#06C1AE'
+                },
+                content:{
+                    color: '#000',
+                    size: 16
+                },
+                right:{
+                    w: 300,
+                    h: 40,
+                    marginL: 0,
+                    marginB: 0,
+                    corner: 1,
+                    bg: '#06C1AE',
+                    size: 18,
+                    color:'#ffffff'
+                }
+            }
+        },function(ret){
+        	if (ret.eventType == 'right') {
+                var dialogBox = api.require('dialogBox');
+	                dialogBox.close ({
+	                    dialogName: 'alert'
+	                });
+	             	myHelp();
+            	}
+        	});
+   	}
+	function reloadHtml(){
+        apiready();
+    };
+    
+	function addDataToHtml(results) {
+		var idName = $api.getStorage("categoryList")		
+		results.ctime = formatTimeToDay(results.ctime)
+		results.time = formatTimeToDay(results.time)
+		results.categoyName = idName[results.categoyId].name
+		var data = {list: results};
+		var html = template('scriptDiv2',data);
+		document.getElementById('main2').innerHTML = html;
+	}
+</script>
+</body>
+</html>

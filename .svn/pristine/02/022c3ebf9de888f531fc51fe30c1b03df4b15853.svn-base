@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>HTML</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+
+    <style>
+
+
+
+    </style>
+</head>
+
+<body >
+<div id="system" style="display:none;height: 20px;background-color: white;width: 100%"></div>
+<div id="topbar" >
+    <div id="leftButton"  tapmode="tap" onclick="goback()">
+        <img src="../icon/arrow_m.png" >
+    </div>
+    <div id="title"></div>
+</div>
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+
+<script type="text/javascript">
+
+    apiready = function () {
+        var titlePading=getTitlePadingHeight();
+        if(titlePading>0){
+            document.getElementById("system").style.display="block";
+        }
+        document.getElementById("title").innerHTML=api.pageParam.thirdNick;
+    };
+
+    function goback(){
+        api.execScript({
+            script: 'closeChatWin()'
+        });
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>提现</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background: #ebebeb;
+            width: 100%; /*height: 100%;*/
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        .count{
+            background-color: #ffffff;
+            float: left;
+            width: 100%;
+        }
+        
+        .item{
+            height: 3.5rem;
+            line-height:3.5rem;
+            padding-left: 20px;
+            background-color: #fff;
+            border-bottom: 1px #eaeaea solid;
+            color: #333;
+        }
+        .item1{
+            height: 3.5rem;
+            line-height:3.5rem;
+            padding-left: 20px;
+            background-color: #fff;
+            border-bottom: 1px #eaeaea solid;
+            color: #333;
+        }
+        .item1 .icon_right1{
+            background: url("../icon/selected.png");
+            width:1.5rem;
+            float:right;
+            margin-right: 2rem;
+            margin-top: 1rem;
+            background-size: 1.5rem 1.5rem;
+        }
+
+
+
+
+        #question{
+            position: fixed;
+            height: 50px;
+            text-align: center;
+            background-color: #06C1AE;
+            margin: 10px 0 0 0 ;
+            line-height: 50px;
+            font-size: 18px;
+            width: 100%;
+            color: #ffffff;
+            bottom: 0;
+        }
+
+        
+        .icon_right1{
+            width:1.5rem;
+            float:right;
+            margin-right: 2rem;
+            margin-top: 1rem;
+            background-size: 1.5rem 1.5rem;;
+            height: 1.5rem;
+
+        }
+
+        .icon{
+            float:right;
+            width: 3rem;
+        }
+        #main{width: 100%;height: auto;
+            float: left;;
+            overflow: hidden;
+        }
+		#count{margin-top:20px;}
+		.cashAll{width:100%;height:130px;background-color: #fff}
+        .cashcenter{width:90%;height:100%;margin:0 auto;}
+        .cash-p{width:100%;height:35px;;line-height: 35px;font-size: 16px;color:#999;}
+        .cash-num{height:59px;width:100%;border-bottom:1px solid #ebebeb;font-weight: bold;}
+        .cash-num span{font-size: 26px;line-height: 60px;}
+        .cash-num input{outline: none;line-height: 60px;font-size:30px;width:90%;font-weight: bold;}
+
+        .cash-balance{width:100%;height:35px;line-height: 35px;}
+        .balance-left{font-size:14px;float:left;}
+        .balance-right{font-size: 12px;float:right;color:#06C1AE;}
+        #ul li{
+        	width: 100%;
+        	height: 50px;
+        	line-height: 50px;
+        	font-size: 14px;
+        	border-bottom: 1px solid #ebebeb;
+        }
+        #ul li:first-child{
+        	border-top: 1px solid #ebebeb;
+        }
+       
+        #ul li span,.#ul ul li input{
+        	display: inline-block;
+        	line-height: normal;
+        }
+        
+         #ul li span{
+        	width: 100px;
+        	/*text-align: center;*/	
+        }
+        input{
+        	outline: none;
+        }
+        #ul{
+        	display: block;
+        	width: 100%;
+        	background: #fff;
+        	text-indent: 20px;
+        	z-index: 1000000;
+        }
+    </style>
+</head>
+
+<body id="body">
+
+<div id="main">
+    <div class="cashAll">
+        <div class="cashcenter">
+            <div class="cash-p">
+                提现金额
+            </div>
+            <div class="cash-num">
+                <span>￥</span><input id="inputNum" type="number">
+            </div>
+            <div class="cash-balance">
+                <p class="balance-left"><span>可用余额 </span><span id="balance"></span>元</p>
+                <p class="balance-right" id="cashAll">全部提现</p>
+            </div>
+        </div>
+    </div>
+    <div  id="count" class="count" style="max-resolution: res;gin-top: 10px;">
+        <!--<div class="item1"  onclick="selectCount(this,0)"><span >微信</span> <i ></i> </div>-->
+        <div class="item1" onclick = "clicked(this,0)" >
+        	<span>支付宝</span>
+        	<i class="icon_right1"></i>
+        </div>
+        <ul id="ul">
+    		<li><span>支付宝账号</span><input id="accout" type="text" placeholder="请输入支付宝账号"/></li>
+    		<li><span>姓名</span><input id="accoutName" type="text" placeholder="请输入姓名" /></li>
+    	</ul>
+        <div class="item1" onclick = "clicked(this,1)" >
+        	<span >微信</span>
+        	<i></i>
+        	
+        </div>
+       
+        <!--<div class="item1"  id="999" onclick="selectCount(this,2)"><span>银联账号</span><i  ></i></div>-->
+        <!--<div class="item"><span>1684616876165768</span><img class="icon_right" src="../icon/icon_right_normal.png" ></div>-->
+    </div>
+    <div  id="question" tapmode="itemOn" >
+        下一步
+    </div>   
+</div>
+
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<!-- <script type="text/javascript" src="../script/pay.js"></script> -->
+<script type="text/javascript">
+    var money;
+    //进页面获取钱包里的余额
+    var inputval = document.getElementById("inputNum");
+    var balance = document.getElementById("balance");
+    apiready = function(){
+        ajaxGetWithProgress(userinfoUrl,{},function(ret,err){
+            if(isNotBlack(ret)){
+                money = ret.money;
+                balance.innerHTML = money
+            }
+            else{
+               //alert(err)
+            }
+        });
+//      inputval.onkeyup = function(){
+//          ajaxGetWithProgress(userinfoUrl,{},function(ret,err){
+//              if(isNotBlack(ret)){
+//                  money = ret.money;
+//                  if(inputval.value > money){
+//                      toast("钱不够")
+//                      inputval.disable = true;
+//                  }
+//              }
+//              else{
+//                 //alert(err);
+//              }
+//          });
+//      }
+    }
+       
+    //选择支付方式
+    var item = document.querySelectorAll('.item1');
+    item[0].style.color = "#06C1AE";
+    function clicked(self,type){
+        num = type;
+        if (num == 0) {
+        	document.getElementById("ul").style.display = "block";
+        }else{
+        	document.getElementById("ul").style.display = "none";
+        }
+        for(var n = 0;n < item.length;n++){
+            item[n].style.color = "#333";
+            item[n].querySelector('i').className = "";
+        }
+        self.style.color = "#06C1AE";
+        self.querySelector('i').className = "icon_right1";
+    }
+    //点击提现按钮
+//  var question = document.getElementById("question")
+//  question.onclick = function(){
+//      if(inputval.value == ""){
+//          toast("请输入要提现的金额")
+//      }else if(inputval.value <= balance.innerHTML){
+//          openNewWindow("cashcode","./cashcode.html")
+//      }
+//      else{
+//          alert(balance.innerHTML)
+//          toast("钱不够啊")
+//      }
+//  }
+    //全部体现按钮
+    var cashAll = document.getElementById("cashAll")
+    cashAll.onclick = function (){
+        inputval.value = balance.innerHTML
+    }
+    </script>
+    <script>
+   		var payparms = {};
+		document.getElementById("question").onclick = function (){
+			if(isBlack(document.getElementById("inputNum").value)){
+	            	toast("请输入提现金额");
+	            	return;
+       	}
+			if(document.getElementById("inputNum").value > money){
+				toast("提现金额有误！请重新输入！");
+				return;
+			}
+			payparms.fee = document.getElementById("inputNum").value;
+			
+			if(isBlack(document.getElementById("accout").value)){
+	            	toast("请输入支付宝账号");
+	            	return;
+       		}
+			payparms.accout = document.getElementById("accout").value;
+			
+			if(isBlack(document.getElementById("accoutName").value)){
+	            	toast("请输入姓名");
+	            	return;
+       		}
+			payparms.accoutName = document.getElementById("accoutName").value;
+			payparms.code = "Alipay";
+			openNewWindow("cashcode","./cashcode.html",payparms);			
+		}
+   </script>
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>搜索地址</title>
+    <link rel="stylesheet" href="../css/commonWindow.css">
+    <link rel="stylesheet" href="../css/api.css">
+    <style>
+        #topbar span {
+            color: #FA8302;
+            padding-left: 3px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+   
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+    apiready = function () {
+        openFrame('searchmap_body','./searchmap_body.html',api.pageParam,-4,0);
+    };
+</script>
+</html>

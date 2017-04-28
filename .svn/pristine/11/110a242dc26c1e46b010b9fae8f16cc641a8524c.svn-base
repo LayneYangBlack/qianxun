@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>热词搜索头</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+    <style type="text/css">
+        body{font-family:"黑体";}
+        .awards_num{
+            background-color: #020202;
+
+        }
+        .rightInfo{
+            height:31px;
+            position:absolute;
+            top:6px;
+            right:5px;
+            margin-right:5px;
+            font-size:12px;
+            line-height:31px;
+            background-color:#020202;
+            color:#ffffff;
+            padding:0 5px;
+        }
+        .search{width:100%;height:auto;padding-top: 8px;}
+        .search-center{width:90%;margin:0 auto;margin-top: 10px;padding-bottom: 10px}
+        .search-center>p {font-size: 12px;color:#9E9E9E;}
+        .newli{padding:0 3% 0 3%;height:35px;width:15%;border:1px solid #DADADA;border-radius: 20px;float:left;margin-left:3%;margin-top: 10px;font-size: 14px;color:#5B5B5B;text-align: center;line-height: 35px;display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+        .hot>p{width:100%;height:40px;font-size: 14px;color:#9e9e9e;line-height: 40px;text-align: center;border-top:1px solid #F2F2F2;margin-top: 10px}
+        #history{background:url(../icon/delete@2x.png)no-repeat right 0px;background-size: 4%}
+        #historyDiv{display: block;}
+        #searchBar{border-bottom:none !important;}
+        ul li:last-child{margin-bottom: 0 !important;}
+    </style>
+</head> 
+<body>
+<div id="topbar" class="topbar_info">
+    
+    <div id="searchBar" style="width:100%;position: fixed;background-color: #fff;height: 43px;border-bottom: 1px solid #F2F2F2;z-index: 10;left: 0;right: 0;bottom: auto;top: 0;">
+			<div style="margin-left:5%;margin-top:15px;float:left;background-size: 8px 13.8px;width: 8px;height: 13.8px;background-image: url('../icon/back@2x.png');" onclick = "closeWin()"></div>
+			<div style="float:left;margin-left: 25px;line-height: 45px;width: 70%;">
+	    			<input id="keyWord" type="text" placeholder="请输入关键字" value="" style="width: 100%;outline: 0px;font-size:14px;"/>
+			</div>
+			<div style="width: 20px;height: 90%;float: right;margin-right: 5%;margin-top: 5px;" onclick = "danji()">
+				<img width="20" height="20" src="../icon/seach.png"/>
+			</div>
+		</div>
+</div>
+<div class="search">
+        <div class="search-center" id="hotwords">
+            <p>热门搜索</p>
+            <div class="hot">
+                <ul id="ul">
+                    <!-- <li class="newli">123</li>
+                    <li class="newli">123</li>
+                    <li class="newli">123</li>
+                    <li class="newli">123</li> -->
+                    
+                </ul>
+                <div style="clear:both"></div>
+                <p id="hasHistory">暂无历史记录~</p>
+            </div>
+        </div>
+        <div class="search-center" id="historyDiv" >
+            <p id="history" onclick="clearLocal()">历史记录</p>
+            <div class="hot">
+                <ul id="historyUl">
+                    <!-- <li class="newli">啊色打撒打撒的</li> -->
+                    <!-- <li class="newli">阿斯顿阿斯顿阿斯顿阿三</li>
+                    <li class="newli">阿斯顿阿斯顿阿斯顿</li>
+                    <li class="newli">啊啊拾到阿斯顿</li>
+                    <li class="newli">阿斯顿阿斯顿</li>
+                    <li class="newli">阿斯顿阿斯顿</li>
+                    <li class="newli">阿斯顿阿斯顿</li>
+                    <li class="newli">阿斯顿阿斯顿</li> -->
+                </ul>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script>
+    
+    var leftButton = document.getElementById('leftButton')
+    var keyWord = document.getElementById("keyWord")
+    keyWord.onfocus  = function(){
+        api.closeFrame({
+            name: 'search_body'
+        });
+        displayB();
+    }
+    function displayB(){
+        document.getElementById('hotwords').style.display = "block";
+        document.getElementById('historyDiv').style.display = "block";
+    }
+    function displayN(){
+        document.getElementById('hotwords').style.display = "none";
+        document.getElementById('historyDiv').style.display = "none";
+    }
+    //缓存用户搜索词
+    function localWord (){
+        var searchList = [];
+        var keyWord = document.getElementById("keyWord");
+        if(keyWord.value != ""){
+            if(isBlack($api.getStorage("search"))){
+                searchList.push(keyWord.value);
+                $api.setStorage("search",searchList)
+            }
+            else{   
+                var searchArr = $api.getStorage("search");
+                for(var i=0;i<searchArr.length;i++){
+                    if(keyWord.value != searchArr[i]){
+                        searchList.push(searchArr[i])
+                    }
+                    else{
+                    }
+                }
+                searchList.push(keyWord.value);
+                if(searchList.length>8){
+                    searchList.shift()
+                }
+            }
+            $api.setStorage("search",searchList);
+        }
+    }
+    function danji(){
+        displayN();
+        localWord();
+        //initFrameInWin({key:keyWord.value});
+        openFrameInWin("search_body","./search_body.html",{key:keyWord.value},{});
+        // alert( $api.getStorage("search"))
+    }
+
+    //获取后台的热词
+    apiready = function(){
+        ajaxGet(hotKeywordUrl,{},function(ret,err) {
+            if(isNotBlack(ret)){
+                var ul = document.getElementById("ul");
+                for(var i = 0; i < ret.length;i++){
+                    //添加 li
+                    var li = document.createElement("li");
+                    //设置 li 属性，如 id
+                    li.setAttribute("class", "newli");
+                    li.innerHTML = ret[i];
+                    ul.appendChild(li);
+                    li.onclick=function(){
+                        
+                        keyWord.value = this.innerHTML;
+                        localWord();
+                        openFrameInWin("search_body","./search_body.html",{key:this.innerHTML},{});
+                        //initFrameInWin({key:this.innerHTML});
+                        displayN();
+                    }
+                }
+            }else{
+                toast("暂无数据");
+            }
+        });
+       
+        var hotKey = $api.getStorage("search");
+        var historyDiv = document.getElementById("historyDiv");
+
+        if(isNotBlack(hotKey)){
+            hasHistory.style.display = "none";
+            historyDiv.style.display = "block";
+            hotKeyHistory();
+        }else{
+            hasHistory.style.display = "block";
+            historyDiv.style.display = "none";
+        }
+    }
+    function hotKeyHistory(){
+        var hasHistory = document.getElementById('hasHistory');
+        var hotKey = $api.getStorage("search");
+        var ul = document.getElementById("historyUl");
+        //设置 li 属性，如 id
+        for(var i=hotKey.length-1;i>=0;i--){
+            var li = document.createElement("li");
+            li.setAttribute("class", "newli");
+            li.innerHTML = hotKey[i]
+            ul.appendChild(li);
+            li.onclick=function(){
+                keyWord.value = this.innerHTML;
+                localWord();
+                openFrameInWin("search_body","./search_body.html",{key:this.innerHTML},{});
+                //initFrameInWin({key:this.innerHTML});
+                displayN();
+            }
+        }
+    }
+    var hasHistory = document.getElementById('hasHistory');
+    //删除本地搜索历史缓存
+    function clearLocal (){
+        dialogBox = api.require('dialogBox');
+        dialogBox.alert ({
+            texts: {
+                title: "删除历史记录",
+                content:"确定删除历史记录吗",
+                leftBtnTitle: "返回",
+                rightBtnTitle:"确定"
+            },
+            tapClose:true,
+            styles:{
+                bg: '#fff',
+                w: api.winWidth *0.8,
+                corner: 0,
+
+                title:{
+                    marginT : 20,
+                    titleSize : 18,
+                    titleColor : '#06C1AE'
+                },
+                content:{
+                    color: '#000',
+                    size: 14
+                },
+                left:{
+                    marginB: 0,
+                    marginL: 0,
+                    w: api.winWidth *0.8*0.5,
+                    h: 43,
+                    color:'#000000',
+                    corner: 0,
+                    bg: '#E8E8E8',
+                    size: 16
+                },
+                right:{
+                    marginB: 0,
+                    marginL: 0,
+                    w: api.winWidth *0.8*0.5,
+                    h: 43,
+                    corner: 0,
+                    bg: '#06C1AE',
+                    size: 16,
+                    color:'#ffffff'
+                }
+            }
+        },function(ret){
+            if (ret.eventType == 'left') {
+                dialogBox.close ({
+                    dialogName: 'alert'
+                });
+            }else if(ret.eventType == 'right'){
+                $api.setStorage("search","");
+                // historyDiv.style.display = "none";
+                // hasHistory.style.display = "block"
+                dialogBox.close ({
+                    dialogName: 'alert'
+                });
+            }
+        });
+    }
+</script> 
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>留言列表</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+
+	<style>
+		body{font-family: "黑体"}
+		li{list-style: none;text-decoration: none;}
+		.message{width:100%;height:auto;background-color: #fff;margin-top: 10px;}
+		.message-one{width:100%;height:auto;border-bottom:1px solid #EDEDED;}
+		.message-one-center{width:90%;height:auto;margin:0 auto;display: flex;align-items: center;justify-content: space-between;}
+		.message-one-center p {height:auto;width:25%;line-height:35px;margin:0;font-size: 12px;}
+		.message-list{width:100%;height:auto;}
+		.message-list>div{width:90%;height:auto;margin:0 auto;}
+		/*.r_icon{display: block;float:right;width:10%;height:100%;background:url(./icon/);}*/
+		.message-head{width:14%;border-radius: 50%;overflow: hidden;margin-top:10px;float:left;}
+		.message-head>img{width:100%;}
+		.message-personal{width:65%;height:auto;float:left;margin-left:5%;font-size:12px;color:#666666;}
+		.message-name{width:100%;height:50%;}
+		.message-content{width:100%;height:50%;line-height: 50%}
+		.list{width: 55%;height: auto;float: left;font-size: 12px;margin:10px 0 0 5%;}
+		.list-div1{width: 100%;height:auto;float: left;margin-bottom:10px;margin-top:2px;}
+		.list-div1 span{display : block;padding-top:3px;font-size:14px;}
+		.list-div2{width: 80%;height:auto;float: right;padding-bottom: 10px;border-bottom:1px solid #EDEDED;font-size: 14px;}
+		.list div a{display: block;width: 80px;height: 22px;line-height: 22px; border-radius: 10px;background: #ff7a4d;float: left;
+			margin-left:10px;text-align: center;color: #fff;}
+		.list div span{display: block;color:#696969;}
+		.message-time{width:25%;height:100%;float:left;text-align: right}
+		.message-time span{color:#909090;font-size: 12px;padding-top: 30px;}
+		.r_icon{background: url(../icon/r_arrow1.png);background-size: 150%;margin-right: 0}
+
+		
+	</style>
+</head>
+
+<body style="background-color:#EDEDED;"  >
+	<div class="message"  id="main">
+	
+
+	</div>
+		<!-- <div class="message-list" >
+			<div>
+				<div class="message-head">
+					<img src="../icon/head.png" onerror="this.src='../icon/me.png'" alt="">
+				</div>
+				<div class="list">
+					<div class="list-div1">
+						<span>郝女士</span>
+						<span>2016-06-02</span>
+					</div>
+					
+					<div style="clear:both"></div>
+
+				</div>
+				<div class="list-div2">可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！</div>
+				
+				<div style="clear:both"></div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<div style="clear:both"></div>
+
+		<div class="message-list" >
+			<div>
+				<div class="message-head">
+					<img src="../icon/head.png" alt="">
+				</div>
+				<div class="list">
+					<div class="list-div1">
+						<span>郝女士</span>
+						<span>2016-06-02</span>
+					</div>
+
+					<div style="clear:both"></div>
+
+				</div>
+				<div class="list-div2">可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！可惜了！</div>
+				
+				<div style="clear:both"></div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<div style="clear:both"></div> -->
+<script id="scriptDiv" type="text/html">
+	<div class="message-list" >
+		<div>
+			<div class="message-head" style="height:<%=height%>px">
+				<img src="<%=list.icon%>" onerror="this.src='../icon/me.png'" alt="">
+			</div>
+			<div class="list">
+				<div class="list-div1">
+					<span><%=list.name%></span>
+					<span><%=list.time%></span>
+				</div>
+
+				<div style="clear:both"></div>
+
+			</div>
+			<div class="list-div2"><%=list.comment%></div>
+			<div style="clear:both"></div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	<div style="clear:both"></div>
+</script>
+
+
+	<script id="scriptList" type="text/html">
+
+		<%for(var i= 0; i < list.length;i++){%>
+
+
+		<div class="message-list" >
+			<div>
+				<div class="message-head" style="height:<%=height%>px">
+					<img src="<%=list[i].creater.icon%>" onerror="this.src='../icon/me.png'"   alt="">
+				</div>
+				<div class="list">
+					<div class="list-div1">
+						<span><%=list[i].creater.name%></span>
+						<span><%=list[i].time%></span>
+					</div>
+
+					<div style="clear:both"></div>
+
+				</div>
+				<div class="list-div2"><%=list[i].comment%></div>
+				<div style="clear:both"></div>
+			</div>
+			<div style="clear:both"></div>
+		</div>
+		<div style="clear:both"></div>
+		<%}%>
+	</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" charset="utf-8">	
+	var parms = {};
+	var objId;
+	apiready = function(){
+		var params = {type:2};
+		var obj = api.pageParam;
+		objId = obj.id;
+		params.thirdId = obj.id;
+		new datalistModel(addDataToHtml,commentPageUrl,params,10,5,100,true);
+		initCheckBox();
+		//alert(JSON.stringify($api.getStorage('user')))
+
+	};
+
+	function addDataToHtml(results,append) {
+		//alert(JSON.stringify(results));
+		for(var i = 0;i<results.length;i++){
+			results[i].time = formatTimeToAll(results[i].ctime);
+			if(isBlack(results[i].creater.name)){
+                results[i].creater.name = JSON.stringify(results[i].creater.phone).substring(0,3)+"****" + JSON.stringify(results[i].creater.phone).substring(8,11)
+            };
+
+		}
+
+		var height = api.frameWidth*0.9*0.14;
+		if(results&&results.length>0){
+			var data = {list: results,height:height};
+			var html = template('scriptList',data);
+
+			if (append) {
+				document.getElementById('main').innerHTML =document.getElementById('main').innerHTML + html;
+			} else {
+				document.getElementById('main').innerHTML = html;
+			}
+		}
+
+		var info = document.getElementById('loadMoreDiv');
+		if(isNotBlack(info)&&info.innerHTML == "已显示全部信息"){
+			document.getElementById('loadMoreDiv').style.display = "none";
+		}
+
+	} 
+
+
+	//*************************评论*********************************************
+	function initCheckBox(){
+		chatBox = api.require('UIChatBox');
+		chatBox.open({
+			placeholder: '评论',
+			maxRows: 4,
+			styles: {
+				inputBar: {
+					borderColor: '#F0F0F0',
+					bgColor: '#FFFFFF'
+				},
+				inputBox: {
+					borderColor: '#F5F6FA',
+					bgColor: '#F5F6FA'
+				},
+				emotionBtn: {
+					normalImg: 'widget://image/chatBox_key1.png'
+				},
+				keyboardBtn: {
+					normalImg: 'widget://image/chatBox_key1.png'
+				},
+				indicator: {
+					target: 'both',
+					color: '#c4c4c4',
+					activeColor: '#9e9e9e'
+				},
+				sendBtn: {                         //（可选项）JSON对象；发送按钮样式，本参数对 IOS 平台上的键盘内发送按钮无效
+					bg:'#ffffff',                 //（可选项）字符串类型；发送按钮背景颜色，支持rgb、rgba、#、img；默认：#4cc518
+					titleColor: '#F88125',          //（可选项）字符串类型；发送按钮标题颜色；默认：#ffffff
+					activeBg: '#ffffff',            //（可选项）字符串类型；发送按钮背景颜色，支持rgb、rgba、#、img；默认：无
+					titleSize: 14                    //（可选项）数字类型；发送按钮标题字体大小；默认：13
+				}
+			}
+		}, function (ret, err) {
+			//点击发送按钮
+			if (ret.eventType == 'send') {
+				if ($api.trimAll(ret.msg).length != 0) {
+
+					sendComment(ret.msg);
+					chatBox.closeKeyboard();
+				} else {
+					api.toast({
+						msg: '消息不能为空',
+						duration: 2000,
+						location: "top"
+					});
+				}
+			}
+		});
+
+		//监听弹出事件
+		chatBox.addEventListener({
+			target: 'inputBar',
+			name: 'move'
+		}, function (ret, err) {
+			if(!checkUserLogin()){
+				chatBox.closeKeyboard();
+			}
+		});
+
+		chatBox.addEventListener({
+			target: 'inputBar',
+			name: 'showEmotion'
+		}, function (ret, err) {
+			if(!checkUserLogin()){
+				chatBox.closeBoard();
+			}
+		});
+
+	}
+
+	function sendComment(text){
+		if(isBlack(text)){
+			api.toast({msg:"亲，还没输入内容。"});
+			return;
+		}
+
+		var user = $api.getStorage("user");
+		//alert(JSON.stringify(user));
+		if(isBlack(user.name)){
+			user.name = JSON.stringify(user.phone).substring(0,3)+"****" + JSON.stringify(user.phone).substring(8,11)
+		}
+		var result = {
+			uid : user.id,
+			name : user.name,
+			icon : user.icon,
+			comment : text,
+			time:new Date().format("yyyy-MM-dd hh:mm:ss")
+		};
+		var height = api.frameWidth*0.9*0.14;
+		var data = {list: result,height:height};
+		var html = template('scriptDiv', data);
+		var params = {
+			type : 2,
+			thirdId:objId,
+			comment : text
+
+		};
+
+		ajaxGet(commentPublishUrl,params,function(ret){
+			//alert(JSON.stringify(ret))
+			if(ret && ret.success){
+				$api.byId('main').style.display = 'block';
+				$api.byId('main').innerHTML =html+ $api.byId('main').innerHTML ;
+				//滚动顶部
+				returnTop();
+			}else{
+				api.toast({msg:"失败,请稍后重试"});
+			}
+		});
+
+		chatBox.setPlaceholder({placeholder:"评论"});
+	}
+
+</script>
+</body>
+
+</html>
+

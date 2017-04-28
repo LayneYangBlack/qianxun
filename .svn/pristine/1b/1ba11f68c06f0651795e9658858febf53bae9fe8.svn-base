@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hello MUI</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" href="../css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/list.css"/>
+	<style>
+		body{font-family: "黑体"}
+		li{list-style: none;text-decoration: none;}
+		.page-num{position:absolute;right:20px;bottom:20px;width:55px;height:30px;background-color: rgba(0,0,0,.6);border-radius: 6px;}
+		.page-num p {text-align: center;}
+		.page-num-p{font-size: 16px;line-height: 30px;color:#FFFFFF;}
+		.datail-title{width:100%;height:auto;background-color: #fff;overflow: hidden;}
+		.datail-title-c{width:90%;height:100%;margin:0 auto;overflow: hidden;}
+		.title-t{width:100%;height:auto;color:#000;margin-top:25px;}
+		.title-t span{display: block;}
+		.title-t-left{font-size: 16px;float:left;}
+		.title-t-right{font-size: 12px;float:left;width:60px;height:20px;border:1px solid #06C1AE;border-radius: 4px;text-align: center;margin: 0 0 0 10px;color:#06C1AE;line-height: 20px}
+		.title-paid{width:100%;height:31px;margin:0 auto;line-height: 31px;}
+		.title-paid-m{color:#F44343;font-size: 16px;font-weight: bold;}
+		.title-paid-f{color:#C2C2C2;font-size: 14px;}
+		.title-time{width:100%;height:33px;margin:0 auto;color:#c2c2c2;font-size: 12px}
+		.lose{width:100%;height:120px;background-color: #fff;margin-top:10px;}
+		.lose-center{width:90%;height:100%;margin:0 auto;font-size: 13px;}
+		.lose-time{width:100%;height:57px;border-bottom:1px solid #EBEBEB;line-height: 57px;}
+		.lose-address{width:100%;height:62px;line-height: 62px;display: flex;align-items: center;}
+		.lose-text{color:#909090;display: block;float:left;font-size: 14px;}
+		.lose-text2{display:block;float:left;margin-left:8%;color:#2a2a31;font-size: 14px;max-height: 62px;line-height: 20px;max-width: 70%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;word-break: break-all;overflow: hidden;}
+		#lose-text3{line-height:55px}
+		.description{width:100%;height:auto;margin-top:10px;background-color: #fff;}
+		.description-center{width:90%;height:100%;margin:0 auto;}
+		.description-p {width:100%;height:40px;display: flex; align-items: flex-end;margin-bottom: 0;}
+		.description-icon{display: block;float:left;width:4px;height:20px;background-color: #06C1AE;}
+		.description-text{color:#969696;font-size: 14px;display: block;float:left;margin-left: 5%;}
+		.description-p2{width:100%;height:auto;font-size: 14px;color:#2A2A31;margin-top: 20px;font-weight: 500;}
+		.list{width: 55%;height: 55px;float: left;font-size: 12px;margin:10px 0 0 5%;}
+		.list-div1{width: 100%;height:35%;float: left;}
+		.list-div2{width: 100%;height:65%;float: left;}
+		.list div a{display: block;width: 80px;height: 22px;line-height: 22px; border-radius: 10px;background: #ff7a4d;float: left;
+			margin-left:10px;text-align: center;color: #fff;}
+		.list div span{display: block;float: left;color:#696969;}
+		.r_icon{background: url(../icon/r_arrow1.png);background-size: 150%;margin-right: 0}
+
+		.god{width:100%;height:48px;margin-top: 10px;background:#fff;overflow: hidden;}
+		.god-center{width:90%;height:65%;margin:10px auto 0 auto;}
+		.god-left{width:60%;height:100%;float:left;}
+		.god-head{width:31px;height:31px;float:left;border-radius: 50%;overflow: hidden;}
+		.god-head img{width:100%;height:100%;}
+		.god-left p {height:100%;float:left;color:#909090;font-size: 12px;line-height: 30px;margin-left:5%;}
+		.god-right{width:40%;height:100%;float:right;border-left:1px solid #EBEBEB;}
+		.god-phone{width:30%;height:100%;float:left;background: url(../icon/phonea.png) no-repeat 14px 4px;background-size: 60%;}
+		.god-loster{width:55%;height:100%;line-height: 30px;float:left;font-size: 12px;color:#909090;text-align: center;}
+		.bottom-two{width:100%;height:75px;margin-top: 20px;background: #fff;overflow: hidden;position: fixed;bottom:0;left:0;}
+		.bottom-two-center{width:90%;height:100%;margin:0 auto;}
+		.joinhelp,.joinmessage{width:46%;height:46px;margin-top:15px;border-radius: 6px;text-align: center;line-height: 46px;}
+		.joinhelp{float:left;background: #FFC629;color:#74510B;}
+		.joinmessage{float:right;background: #F88125;color:#fff;}
+		.desc-pic>img{width:100%;}
+		.heading{width:100%;height:60px;border-top:2px solid #ebebeb;line-height: 22px;}
+		.headingcenter{width:90%;height:100%;margin:0 auto;border-bottom: 1px solid #ebebeb;}
+		.headingcenter img{height:44px;display: block;float:left;border-radius:50%;overflow: hidden;margin-top: 8px;}
+		.headingcenter div{font-size: 14px;color:#999;padding-top: 5px;}
+		ul li:last-child{margin-bottom: 46px;}
+		.message{background-color: #fff}
+		.message-one{width:100%;height:35.5px;border-bottom:1px solid #EDEDED;border-top:1px solid #EDEDED;}
+		.message-one-center{width:90%;height:100%;margin:0 auto;display: flex;align-items: center;justify-content: space-between;}
+		.message-one-center p {height:100%;width:25%;line-height:35px;margin:0;font-size: 12px;}
+		.r_icon{background: url(../icon/r_arrow1.png);background-size: 150%;margin-right: 0}
+		.mid{
+			float: left;
+			padding-left: 6px;
+		}
+		.sure{
+			float: right;
+			width: 100px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			font-size: 14px;margin-top: 13px;
+			border-radius: 5px;
+			background: #FFC629;color:#fff;
+		}
+	</style>
+</head>
+<body style="background-color:#EDEDED" id="body" >
+
+	
+	<div id="main2" style="margin-bottom: 75px">
+
+	</div>
+	<!-- <div class="datail-title">
+			<div class="datail-title-c">
+				<div class="title-t">
+					<span class="title-t-left" style="max-width:70%"> 名字</span>
+					<span class="title-t-right">文件</span>
+				</div>
+				<div style="clear:both"></div>
+				<div class="title-paid">
+					<span class="title-paid-m">￥500 </span>
+					<span class="title-paid-f">元 / 酬谢金</span>
+				</div>
+				<div class="title-time">
+
+					<span>发布：<%=list.ctime%></span>
+				</div>
+			</div>
+		</div>
+		<div class="lose">
+			<div class="lose-center">
+				<div class="lose-time">
+					<span class="lose-text">丢失时间</span>
+					<span class="lose-text2" id="lose-text3"><%=list.time%></span>
+				</div>
+				<div class="lose-address">
+					<span class="lose-text">丢失地址</span>
+					<span class="lose-text2"><%=list.address%><%=list.address%><%=list.address%><%=list.address%></span>
+				</div>
+			</div>
+		</div>
+	<div class="description">
+			<div class="description-center">
+				<p class="description-p">
+					<span class="description-icon"></span>
+					<span class="description-text">物品描述</span>
+				</p>
+				<p class="description-p2">
+					<div class="desc-pic">
+							我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味我伟强恶趣味请问请问请问恶趣味
+							<img src="../image/banner1.png" alt="">
+							<img src="../image/banner1.png" alt="">
+							<img src="../image/banner1.png" alt="">
+							<img src="../image/banner1.png" alt="">
+					</div>
+				</p>
+			</div>
+		</div>
+		<div class="message">
+			<div class="message-one">
+				<div class="message-one-center">
+					<p>留言</p>
+					<span class="r_icon"></span>
+				</div>
+			</div>
+			<div class="message-list">
+				<div>
+					<div class="message-head"></div>
+					<div class="list">
+						<div class="list-div1"><span>郝女士</span></div>
+						<div class="list-div2">可惜了！</div>
+					</div>
+					<div class="message-time">
+						<span>2016-06-02</span>
+					</div>
+				</div>
+			</div>
+			<div class="message-list">
+				<div>
+					<div class="message-head"></div>
+					<div class="list">
+						<div class="list-div1"><span>甜甜</span></div>
+						<div class="list-div2">应该很快就能找到了！</div>
+					</div>
+					<div class="message-time">
+						<span>2016-06-02</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="god">
+			<div class="god-center">
+				<div class="god-left">
+					<div class="god-head">
+						<img src="<%=list.creater.icon%>" alt="">
+					</div>
+					<p><%=list.creater.name%></p>
+				</div>
+				<div class="god-right">
+					<div class="god-phone"></div>
+					<div class="god-loster">
+						联系失主
+					</div>
+				</div>
+			</div>
+		</div>				
+		<div class="bottom-two">
+            <div class="bottom-two-center">
+				<div class="joinhelp">取消发布</div>
+				<div class="joinmessage" onclick="payment()">去支付</div>
+			</div>
+		</div>
+		<%}
+		<div class="bottom-two">
+			<div class="bottom-two-center">
+				<div class="joinhelp">取消发布</div>
+				<div class="joinmessage">失主认领</div>
+			</div>
+		</div> -->
+	<script id="scriptDiv2" type="text/html">
+		<div class="datail-title">
+			<div class="datail-title-c">
+				<div class="title-t">
+					<span class="title-t-left" style="max-width:70%"><%=list.name%></span>
+					<span class="title-t-right"><%=list.categoyName%></span>
+				</div>
+				<div style="clear:both"></div>
+				<div class="title-paid">
+					<span class="title-paid-m">￥<%=list.payNum%> </span>
+					<span class="title-paid-f">元 / 酬谢金</span>
+				</div>
+				<div class="title-time">
+
+					<span>发布：<%=list.ctime%></span>
+				</div>
+			</div>
+		</div>
+		<div class="lose">
+			<div class="lose-center">
+				<div class="lose-time">
+					<span class="lose-text">丢失时间</span>
+					<span class="lose-text2" id="lose-text3"><%=list.time%></span>
+				</div>
+				<div class="lose-address">
+					<span class="lose-text">丢失地址</span>
+					<span class="lose-text2"><%=list.address%></span>
+				</div>
+			</div>
+		</div>
+		<div class="description">
+			<div class="description-center">
+				<p class="description-p">
+					<span class="description-icon"></span>
+					<span class="description-text">物品描述</span>
+				</p>
+				<p class="description-p2">
+					<%=list.desc%>
+					<div class="desc-pic">
+					<%var picList = list.picList %>
+					<%for(var i=0;i < picList.length;i++){%>
+					<img src="<%=picList[i]%>" alt="">
+					<%}%>
+					</div>
+				</p>
+			</div>
+		</div>
+		<%if (list.status == 2){%>
+		<ul class="heading" style="background: #fff;">
+			<li class="headingcenter">
+				<img src="<%=list.helper.icon%>" onerror="this.src='../icon/me.png '"  alt="">
+				<div class="mid">
+					<div><%=list.helper.name%></div>
+				    <span><%=list.helper.phone%></span>
+				</div>	
+				<span class="sure" onclick="sure()">确认酬谢</span>
+			</li>
+		</ul>
+		<%}else if (list.status == 3){%>
+		<ul class="heading" style="background: #fff;">
+			<li class="headingcenter">
+				<img src="<%=list.helper.icon%>" alt="">
+				<div class="mid">
+					<div><%=list.helper.name%></div>
+				    <span><%=list.helper.phone%></span>
+				</div>	
+				<span class="sure">已酬谢</span>
+			</li>
+		</ul>
+		<%}else if (list.status == 5||list.status == 6){%>
+		<ul class="heading" style="background: #fff;">
+			<li class="headingcenter">
+				<img src="<%=list.helper.icon%>" alt="">
+				<div class="mid">
+					<div><%=list.helper.name%></div>
+				    <span><%=list.helper.phone%></span>
+				</div>	
+				<span class="sure">正在申诉</span>
+			</li>
+		</ul>
+		<%}%>	
+		<%if (list.status == 0){%>
+		<div class="bottom-two">
+            <div class="bottom-two-center">
+				<div class="joinhelp" onclick="awayFn('<%=list.id%>')">取消发布</div>
+				<div class="joinmessage" onclick="payment()">去支付</div>
+			</div>
+		</div>
+		<%}else if (list.status == 1){%>
+		<div class="bottom-two">
+			<div class="bottom-two-center">
+				<div class="joinhelp" onclick="awayFn('<%=list.id%>')">取消发布</div>
+				<div class="joinmessage" onclick="joinhelp(<%=list.id%>)">确认帮助</div>
+			</div>
+		</div>
+		<%}else if (list.status == 2){%>
+		<div class="bottom-two">
+			<div class="bottom-two-center">
+				<div class="joinhelp" onclick="applications(<%=list.id%>)">申请售后</div>
+				<div class="joinmessage" onclick="words()" >查看留言</div>
+			</div>
+		</div>
+		<%}else{%>
+		<%}%>
+		<div class="message">
+			<div class="message-one">
+				<div class="message-one-center" onclick="words()">
+					<p>查看留言</p>
+					<span class="r_icon"></span>
+				</div>
+			</div>
+		</div>
+	</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" charset="utf-8">	
+	var parms = {};
+	var allResult = [];
+	var helpUsers = [];
+	var eventInfo;
+	apiready = function(){
+		var jobj = api.pageParam;
+		ajaxGet(eventInfoUrl,{id:jobj.id}, function(ret,err){
+			if(isNotBlack(ret)){
+				//alert(JSON.stringify(ret));
+				parms = ret;
+				eventInfo =  ret;
+				parms.notice = "again";
+				addDataToHtml(ret);
+				document.getElementById('body').style.display = 'block'
+			}else{
+				toast("暂无数据");
+			}
+		});
+	}
+	function openComent(){
+		openNewWindow('comentList','./comentList.html')
+	}
+	
+	 function reloadHtml(){
+        apiready();
+    };
+    
+    
+    /***************点击确认帮助*************************/
+    function joinhelp(id){
+    	//alert(parms.helpUsers.length);
+    	allResult[id].notice = "help";
+    	if(parms.helpUsers.length == 0){
+    		toast("亲，请耐心等待，现在还没有人参与帮助额~")
+    		return;
+    	}
+		openNewWindow("joinhelplist","./joinhelplist.html",allResult[id])
+	}
+    var flag = [];
+	function addDataToHtml(results) {
+		allResult[results.id] = results;
+		flag = results;
+		results.ctime = formatTimeToDay(results.ctime);
+		results.time = formatTimeToDay(results.time);
+		var idName = $api.getStorage("categoryList");
+		results.categoyName = idName[results.categoyId].name;
+		if(isNotBlack(results.pics)){
+			var picList = JSON.parse(results.pics);
+			results.picList = picList;
+		}
+		var data = {list: results};
+		var html = template('scriptDiv2',data);
+		document.getElementById('main2').innerHTML = html;
+
+	}
+	
+	function payment(){
+        openNewWindow('payPages','./payPages.html',parms);
+	}
+	
+	/********************确定自己选择的帮助的人，进行酬谢********************/
+	function sure(){
+		showDialog("","温馨提示","点击确认自己将要酬谢的人，确认之后酬谢金将支付到对方账户！","取消","确定",function(){
+     	 	var parms = {};
+				parms.id = flag.id;
+				//alert(JSON.stringify(parms));
+        		ajaxGetWithProgress(confirmSuccessUrl,parms,function(ret,err){
+                if(isNotBlack(ret)){
+	                    //alert(JSON.stringify(ret));
+	                    //alert(JSON.stringify(err));
+	                    reloadHtml();
+	                }
+	                else{
+	                }
+	            });  
+	        });
+		}
+	
+	//取消发布点击事件
+	function awayFn (id){
+		dialogBox = api.require('dialogBox');
+    	dialogBox.alert ({
+	        texts: {
+	            title: "温馨提示",
+	            content:"确定取消发布吗",
+	            leftBtnTitle: "返回",
+	            rightBtnTitle:"确定"
+	        },
+	        tapClose:true,
+	        styles:{
+	            bg: '#fff',
+	            w: api.winWidth *0.8,
+	            corner: 0,
+
+	            title:{
+	                marginT : 20,
+	                titleSize : 18,
+	                titleColor : '#06C1AE'
+	            },
+	            content:{
+	                color: '#000',
+	                size: 14
+	            },
+	            left:{
+	                marginB: 0,
+	                marginL: 0,
+	                w: api.winWidth *0.8*0.5,
+	                h: 43,
+	                color:'#000000',
+	                corner: 0,
+	                bg: '#E8E8E8',
+	                size: 16
+	            },
+	            right:{
+	                marginB: 0,
+	                marginL: 0,
+	                w: api.winWidth *0.8*0.5,
+	                h: 43,
+	                corner: 0,
+	                bg: '#06C1AE',
+	                size: 16,
+	                color:'#ffffff'
+	            }
+	        }
+	    },function(ret){
+	        if (ret.eventType == 'left') {
+	            dialogBox.close ({
+	                dialogName: 'alert'
+	            });
+	        }else if(ret.eventType == 'right'){
+				ajaxGetWithProgress(createRefundOrderUrl,{eid:id},function(ret,err){
+		            if(ret) {
+		               	setTimeout(function(){
+		               		reloadHtml();
+		               	},1000)		               	
+		            }else{
+		            	toast("取消失败,请检查网络。")
+		            }
+		        })
+	        	dialogBox.close ({
+	                dialogName: 'alert'
+	            });
+	        }
+	    });
+	};
+	function words(){
+		openNewWindow("comentList","./comentList.html",eventInfo);
+	};
+	/**********失主点击申请售后**************/
+	function applications(id){
+		showDialog("","温馨提示","点击确认将要提交申诉申请，我们将在24小时内为您审核！","取消","确定",function(){
+     	 	ajaxGetWithProgress(confirmFailUrl,{id:id},function(ret,err){
+	            if(ret) {
+	            	reloadHtml();
+	            }else{
+	            	toast("取消失败,请检查网络。")
+	            }
+	        })
+        });
+	}
+</script>
+</body>
+</html>

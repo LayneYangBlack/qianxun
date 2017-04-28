@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+    <style>
+        body{
+            height: 100%;
+        }
+    </style>
+    </head>
+<body>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript">
+    var FNImageClip = null;
+    var destHtml = null;
+    apiready =function(){
+        api.showProgress({title: '努力加载中...',text: '先喝杯茶...'});
+        var width = api.pageParam.width;
+        var height = api.pageParam.height;
+        FNImageClip = api.require('FNImageClip');
+        destHtml = api.pageParam.destHtml;
+        FNImageClip.open({
+            rect: {
+                x: 0,
+                y: 0,
+                w: api.winWidth,
+                h:api.winHeight-44
+            },
+            mode:'image',
+            srcPath: api.pageParam.data,
+            style: {
+                mask: "rgba(15,15,15,0.5)",
+                clip: {
+                    w: width,
+                    h: height,
+                    x: (api.winWidth-width)/2,
+                    y: (api.winHeight-44-height)/2,
+                    borderWidth: 0,
+                    appearance: 'rectangle'
+                }
+            },
+            fixedOn: api.frameName
+        }, function(ret, err){
+            if( isNotBlack(ret)&&ret.status){
+                api.hideProgress();
+            }else{
+                toast("打开截图失败");
+                api.hideProgress();
+            }
+        })
+
+    };
+    function cancel(){
+        FNImageClip.close();
+        api.closeWin({
+            name: 'imgClip'
+        });
+    }
+
+    function confirm(){
+        FNImageClip.save({
+            destPath: 'fs://imageClip/result.png',
+            copyToAlbum: false,
+            quality: 1
+        },function(ret, err){
+            if(isNotBlack(ret)&&isNotBlack(ret.destPath)) {
+                //上传
+                api.showProgress({title: '努力加载中...',text: '先喝杯茶...'});
+                uploadImg(ret.destPath);
+            } else{
+                //保存失败
+                api.hideProgress();
+                toast('上传失败！')
+            }
+        });
+    }
+
+    function uploadImg(ret) {
+        api.showProgress({title: '努力加载中...',text: '先喝杯茶...'});
+        api.ajax({
+            url: uploadImageUrl,
+            method: 'post',
+            timeout: 120,
+            report: true,
+            dataType: 'json',
+            returnAll: false,
+            data: {
+                files: {file:ret}
+            }
+        }, function (ret, err) {
+            if(ret.status == 1){
+                //异步调用
+                api.execScript({
+                    name:destHtml,
+                    frameName: destHtml+'_body',
+                    script: 'setImgUrl('+JSON.stringify(ret.body.ok)+')'
+                });
+                api.closeWin({
+                    name: 'imgClip'
+                });
+
+               // FNImageClip.close();
+                api.hideProgress();
+                api.closeWin({
+                    name: 'imgClip'
+                });
+            }
+
+        });
+    }
+
+
+
+
+
+</script>
+</html>

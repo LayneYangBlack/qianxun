@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <!--<link rel="stylesheet" href="../../css/mui.min.css">-->
+    <link rel="stylesheet" type="text/css" href="../../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/list.css"/>
+    <style>
+        html{height: auto;width: 100%;background: #fff;}
+        input{outline: none;}
+        .xian{width: 100%;height:1px;background: #f4f4f4;float: left;margin-top: 10px; }
+        .login{width: 90%;margin: 0 5%;height: 35px;border-bottom: 1px solid #f4f4f4;}
+        .login a{display: block;width: 100%;float: left;height: 100%;line-height:35px;text-align: center;}
+
+        .border{width: 90%;margin:0 5%;border-bottom: 1px solid #f4f4f4;display: flex;align-items: center;justify-content: space-between;
+            height:55px;}
+        .l_icon_1{background: url("../../icon/3.png")no-repeat;background-size:cover;}
+        .l_icon_2{background: url("../../icon/4.png")no-repeat;background-size:cover;}
+        .size{width: 24px;height: 24px;float: left;margin-bottom: 3px;}
+        .border input {width:60%;margin-right: auto;height: 30px;float: left;margin-left: 3%;}
+        .check{height: 20px;width: 20px;float: left;}
+        #check{width: 90%;margin: 0 5%;float: left;height: 40px;display: flex;align-items: center;justify-content: flex-start; }
+        .submit1{display: block;width: 90%;margin: 15px  5% 0 5%;float: left;height: 45px;background: #06c1ae
+        ;border-radius: 20px;  line-height: 45px;text-align: center;color: #fff;  }
+        .submit2{display: block;width: 90%;margin: 15px  5% 0 5%;float: left;height: 45px; border: 1px solid #06c1ae;
+        ;border-radius: 20px;  line-height: 45px;text-align: center;color: #06c1ae;  }
+        .font{text-align: center;float: left;width: 100%;height: auto;color: #9296a3;margin-top: 40px;margin-bottom: 20px;}
+        .icon{display: block;width: 120px;;height: 24px;;margin:20px  auto  0 auto;}
+        .icon i{margin-left: 12px;}
+        .l_icon_8{background: url("../../icon/weibo.png")no-repeat;background-size:cover;}
+        .l_icon_9{background: url("../../icon/weixin.png")no-repeat;background-size:cover;}
+        .l_icon_10{background: url("../../icon/qq.png")no-repeat;background-size:cover;}
+        #phone,#phone_pass{}
+        .border a{width: 80px;height: 26px;border-radius: 15px;border: 1px solid #06c1ae;line-height: 26px;
+            text-align: center;color:#06c1ae;  font-size: 14px;background: #fff; }
+    </style>
+</head>
+<body>
+
+<div class="xian"></div>
+
+<!--　 <div class="login">-->
+    <!--&lt;!&ndash;<a id="userL" style="background-color: #06c1ae;color:#fff;">用户名登录</a>&ndash;&gt;-->
+    <!--<a id="phoneL" >手机号登录</a>-->
+<!--</div>-->
+
+<div class="li_50">
+    <div class="border">
+        <i class="l_icon_1 size"></i>
+        <!--<input type="text" id="username" placeholder="请输入用户名">-->
+        <input type="text" id="phone" placeholder="请输入手机号">
+    </div>
+</div>
+
+<div class="li_50">
+    <div class="border">
+        <i class="l_icon_2 size"></i>
+        <!--<input type="password" placeholder="请输入密码" id="user_pass">-->
+        <input type="text" placeholder="请输入验证码" id="phone_pass">
+        <a id="sms">获取验证码</a>
+    </div>
+</div>
+
+<!--<div id="check"><input class="check"  type="checkbox">　记住密码</div>-->
+
+<a class="submit1" >登录</a>
+
+<!--<a class="submit2" >注册</a>-->
+
+<!--<div class="font">第三方登录</div>-->
+
+<!--<div class="icon">-->
+    <!--<i class="l_icon_8 size"></i>-->
+    <!--<i class="l_icon_9 size"></i>-->
+    <!--<i class="l_icon_10 size"></i>-->
+<!--</div>-->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/apiCloud.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/kv.js"></script>
+<script type="text/javascript" src="../../script/user.js"></script>
+<script type="text/javascript" src="../../script/data.js"></script>
+<script type="text/javascript" src="../../script/util.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+
+
+<script type="text/javascript">
+
+
+//    var userL = document.getElementById('userL');
+//    var phoneL = document.getElementById('phoneL');
+//    var userInput = document.getElementById('username');
+//    var phoneInput = document.getElementById('phone');
+//    var user_pass = document.getElementById('user_pass');
+//    var phone_pass = document.getElementById('phone_pass');
+//    function ann (seft,buttonId,userinput,phoneinput,pass1,pass2){
+//        seft.style.color = "#fff";
+//        seft.style.backgroundColor = "#06c1ae";
+//        buttonId.style.color = "";
+//        buttonId.style.backgroundColor = "";
+//        userinput.style.display = "none";
+//        phoneinput.style.display = "block";
+//        pass1.style.display = "none";
+//        pass2.style.display = "block";
+//       return  ss
+//    }
+//    phoneL.onclick = function (seft){
+//        ann(this,userL,userInput,phoneInput,user_pass,phone_pass);
+//        // this.style.color = "#fff"
+
+//        // this.style.backgroundColor = "#06c1ae"
+//        // userL.style.color = ""
+//        // userL.style.backgroundColor = ""
+//        // userInput.style.display = "none"
+//        // phoneInput.style.display = "block"
+//        // user_pass.style.display = "none"
+//        // phone_pass.style.display = "block"
+//        ss=0
+//
+//    };
+//    userL.onclick = function (){
+//        ann(this,phoneL,phoneInput,userInput,phone_pass,user_pass);
+//        ss=1
+//
+//    };
+//    var sss =  ss;
+    /***********************点击登录**********************************/
+    document.getElementsByClassName("submit1")[0].onclick= function (){
+        var tel = document.getElementById('phone').value;
+        var code = document.getElementById('phone_pass').value;
+        if(!checkMobileNum(tel)){
+            toast("手机号码不正确");
+            return;
+        }
+
+        if(isBlack(code)){
+            toast("验证码不正确");
+            return;
+        }
+
+        api.showProgress();
+        var params = {
+            phone : tel,
+            authCode : code,
+            type:1
+        };
+
+        ajaxGet(loginAuthCodeLoginUrl,params,function(ret,err) {
+            api.hideProgress();
+            if (ret && ret.id) {
+                var user = ret;
+                setUserInfo(user);
+                cleanDb(function (ret, err) {
+                    $api.setStorage("user",user);
+                    setUserInfo(user);
+                    api.execScript({
+                        name: rootWindowName,
+                        script: 'reloadHtml();'
+                    });
+
+                    api.execScript({
+                        name: rootWindowName,
+                        frameName: "user",
+                        script: 'reloadHtml();'
+                    });
+                    bindPush();
+                });
+                api.execScript({
+                    name: rootWindowName,
+                    script: 'systemInit();'
+                });
+                closeWin();
+            } else {
+                var msg = "出错了，请稍后。";
+                if (ret && ret.msg) {
+                    msg = ret.msg;
+                }
+                api.toast({
+                    msg: msg
+                }); 
+            }
+        })
+    };
+    /***********************点击登录**********************************/
+        //点击跳转注册
+//    document.getElementsByClassName("submit2")[0].onclick=function(){
+//        alert(66);
+//        openNewWindow("register","./register.html")
+//    };
+
+    /********************获取验证码*******************/
+    var flag=true;
+    document.getElementById("sms").onclick=
+        function register(){
+        if(!flag){
+            return;
+        }
+
+        var tel = $api.byId('phone').value;
+        if(!checkMobileNum(tel)){
+            toast("手机号码不正确");
+            return;
+        }
+             flag = false;
+        ajaxGet(loginUserCreateAuthCodeUrl,{
+            phone : tel
+        },function(ret){
+            if(ret){
+                setTime();
+                $api.setStorage(Storage_Sms_Time,new Date().getTime());
+            } else {
+                flag = false;
+                var msg="出错了，请稍后。";
+                if(ret&&ret.msg){
+                    msg=ret.msg;
+                }
+                api.toast({
+                    msg :msg
+                });
+            }
+        });
+    }
+    /********************获取验证码*******************/
+
+    /*******************倒计时****************************/
+    function setTime(){
+        var time;
+        var sms = document.getElementById('sms');
+        sms.style.backgroundColor = '#fff';
+        time=time||60;
+        sms.innerHTML = time+"s";
+        var codeInterval =  setInterval(function(){
+            if(time > 0){
+                time--;
+                sms.innerHTML =time+"s";
+            }else{
+                sms.style.backgroundColor = "#fff";
+                sms.innerHTML = "获取";
+                clearInterval(codeInterval);
+                flag = true;
+            }
+        },1000)
+    }
+    /*******************倒计时****************************/
+
+
+
+</script>
+</html>

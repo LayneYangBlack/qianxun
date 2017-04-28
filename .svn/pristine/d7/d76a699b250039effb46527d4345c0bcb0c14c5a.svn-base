@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>HTML</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css"/>
+
+</head>
+
+<body>
+
+
+<div id="topbar">
+    <div id="leftButton" tapmode="tap" onclick="closeWin()">
+        <img src="../icon/topbar_back.png">
+    </div>
+    <div id="title"></div>
+</div>
+
+
+</body>
+
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script>
+
+
+    apiready = function () {
+        var title = document.getElementById("title");
+        title.innerHTML = api.pageParam.thirdNick;
+        initFrameInWin(api.pageParam);
+    }
+</script>
+</html>

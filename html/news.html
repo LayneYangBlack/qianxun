@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>消息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <style>
+        body{font-family:"黑体";}
+
+        .l_icon_b{background: url("../icon/l_icon_b.png")no-repeat;background-size:cover;}
+        .l_icon_b2{background: url("../icon/l_icon_b2.png")no-repeat;background-size:cover;}
+        .l_icon_b3{background: url("../icon/l_icon_b3.png")no-repeat;background-size:cover;}
+        .l_icon_b4{background: url("../icon/activity.png")no-repeat;background-size:cover;}
+        .l_icon_b5{background: url("../icon/Group5.png")no-repeat;background-size:cover;}
+        .r_icon_b{background: url("../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .border{width: 95%;margin-left: 5%;border-bottom: 1px solid #f4f4f4;display: flex;align-items: center;justify-content: space-between;}
+        .mage{line-height:60px;margin-right:auto;text-align: left;margin-left: 5%;}
+        .size{width: 43px;height: 43px;float: left;}
+        .circlepoint{width:8px;
+            display: none;height:8px;background-color: red;position: absolute;bottom:45%;left:90%;border-radius: 50%;}
+        .li_60{position: relative;}
+    </style>
+</head>
+<body>
+<div style="height: 10px;background: #f4f4f4;width: 100%;float: left;"></div>
+  <div class="li_60" id="system">
+        <div class="border">
+            <i class="l_icon_b size"></i>
+            <span class="mage">系统消息</span>
+            <i class="r_icon_b"></i>
+        </div>
+        <span class="circlepoint" id="systemMessage"></span>
+  </div>
+
+  <div class="li_60" id="prosen">
+      <div class="border">
+          <i class="l_icon_b2 size"></i>
+          <span class="mage">个人消息</span>
+          <i class="r_icon_b"></i>
+      </div>
+      <span class="circlepoint" id="userMessage"></span>
+  </div>
+
+
+
+  <!--<div class="li_60">-->
+      <!--<div class="border">-->
+          <!--<i class="l_icon_b4 size"></i>-->
+          <!--<span class="mage">活动信息</span>-->
+          <!--<i class="r_icon_b"></i>-->
+      <!--</div>-->
+  <!--</div>-->
+
+  <!--<div class="li_60">-->
+      <!--<div class="border">-->
+          <!--<i class="l_icon_b5 size"></i>-->
+          <!--<span class="mage">私信留言</span>-->
+          <!--<i class="r_icon_b"></i>-->
+      <!--</div>-->
+  <!--</div>-->
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript">
+    document.getElementById("system").onclick=function(){
+        openNewWindow("system","./system.html");
+        document.getElementById("systemMessage").style.display = "none";
+        $api.setStorage("systemMessage",0);
+        var userRed = $api.getStorage("userMessage");
+        if(userRed != 1){
+            api.execScript({
+                name:rootWindowName,
+                script: "removeRedPoint()"
+            });
+        }
+    };
+    document.getElementById("prosen").onclick=function(){
+        openNewWindow("chatList","./chatList.html");
+        //去掉自己的红点
+        document.getElementById("userMessage").style.display = "none";
+        $api.setStorage("userMessage",0);
+        //判断是否去掉首页的
+        var systemRed = $api.getStorage("systemMessage");
+        if(systemRed != 1){
+            api.execScript({
+                name:rootWindowName,
+                script: "removeRedPoint()"
+            });
+        }
+    };
+
+    function addUserMessageRed(){
+        document.getElementById("userMessage").style.display = "block";
+    }
+
+    function addSystemMessageRed(){
+        document.getElementById("systemMessage").style.display = "block";
+    }
+
+    apiready =function(){
+        var userMessage = $api.getStorage("userMessage");
+        var systemMessage = $api.getStorage("systemMessage");
+        if(userMessage && userMessage == 1){
+            addUserMessageRed();
+        }
+        if(systemMessage && systemMessage == 1){
+            addSystemMessageRed();
+        }
+    }
+</script>
+
+
+</html>

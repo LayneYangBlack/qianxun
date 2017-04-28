@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no" />
+    <title>我的钱包</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+    <style type="text/css">
+        body{font-family:"黑体";}
+        .awards_num{
+            background-color: #020202;
+
+        }
+        .rightInfo{
+            height: 31px;
+
+            position: absolute;
+            top:6px;
+            right: 5px;
+            margin-right: 5px;
+            font-size: 12px;
+            line-height: 31px;
+            background-color: #020202;
+            color: #ffffff;
+            padding: 0 5px;
+        }
+        .moneyall{width:100%;height:167px;background: #07C0AE;overflow: hidden;}
+        .money-top{width:100%;margin-top: 40px;}
+        .money-top-center{width:60%;height:100%;margin:0 auto;overflow: hidden;}
+        .money-content{width:90%;height:60%;text-align: center;margin:0 auto;}
+
+        .money-num{color:#FFF;font-size: 22px;font-weight: bold;}
+        .money-text{color:#fff;line-height: 30px;margin-left:5%;}
+
+        .monet-button{width:43%;height:38px;margin:0 auto;border-radius: 20px;border:1px solid #fff;color:#fff;text-align:center;line-height: 38px;font-size: 16px;background:  #07C0AE}
+        .monet-button-right{float:right;}
+        .monet-button-left{float:left;}
+        .buttonAll{width:60%;height:38px;margin:0 auto;margin-top: 30px;}
+    </style>
+</head>
+<body>
+<div id="topbar" class="topbar_info">
+    <div id="leftButton" onclick="closeWin()">
+        <img src="../icon/arrow_m.png" >
+    </div>
+    <div>我的钱包</div>
+</div>
+
+<div class="moneyall">
+    <div class="money-top">
+        <div class="money-top-center">
+            <div class="money-content">
+                <span class="money-num" id="moneyNum"></span>
+                <span class="money-text">元</span>
+            </div>
+        </div>
+    </div>
+    <div class="buttonAll">
+        <div class="monet-button monet-button-left" id="recharg">充值</div>
+        <div class="monet-button monet-button-right" id="cash">提现</div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script>
+
+    apiready = function () {
+        var moneyNum = document.getElementById('moneyNum')
+        openFrame("MyMoney_body","./MyMoney_body.html",api.pageParam,215,0)
+        ajaxGet(userinfoUrl,{},function(ret,err) {
+            moneyNum.innerHTML = ret.money;
+        });
+    };
+    
+    function reloadHtml(){
+        apiready();
+    };
+    
+    
+    document.getElementById("recharg").onclick = function(){
+        openNewWindow('recharge','./recharge.html');
+    }
+    document.getElementById("cash").onclick = function(){
+        openNewWindow('cash','./cash.html');
+    }
+//     function openFrame(name,url,pageParam,headHeight,bottomHeight,overload) {
+//     var params = {
+//         name : name,
+//         url : url,
+//         pageParam : pageParam,
+//         rect : {
+//             x : 0,
+//             y : headHeight+4,
+//             w : api.frameWidth,
+//             h : api.frameHeight - headHeight - bottomHeight
+//             },
+//         bounces : false,
+//         opaque : false,
+//         //bgColor:'#EDEDED',
+//         bgColor : 'rgba(70 , 70, 70, 0)',
+//         allowEdit : true,
+//         vScrollBarEnabled : true,
+//         showProgress : false,
+//         hScrollBarEnabled : false,
+//         reload : false
+//     };
+    
+//     if(overload) {
+//             for (var m in overload) {
+//             //if (params[m]) {
+//                 params[m] = overload[m];
+//             //}
+//         }
+//     }
+    
+//     api.openFrame(params);
+// }
+</script>
+</html>

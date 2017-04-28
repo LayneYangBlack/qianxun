@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>帮助</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <link rel="stylesheet" href="../css/mui.picker.all.css" />
+    <link rel="stylesheet" href="../css/mui.poppicker.css" />   
+    <style>
+        body{font-family:"黑体";}
+        html{height: auto;width: 100%;background: #f4f4f4;}
+        input{outline: none;line-height: normal;}
+        .r_icon_b{background: url("../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .border{width: 95%;margin-left: 5%;height: 55px; border-bottom: 1px solid #ebebeb;display: flex;align-items: center;justify-content: space-between;}
+        .mage{line-height:55px;text-align: left;display: block;width: 22%;height: 100%;outline: none !important;border:none  !important;}
+        .size{width: 43px;height: 43px;float: left;}
+        .border input {width:60%;margin-right: auto;height: 40px;float: left;}
+        .text{height: 100px;width: 100%;background: #fff;float: left;}
+        .text textarea{width: 83%;margin:0 5%;background: #fff;height: 70%;outline: none;resize: none;line-height: normal;font-size: 14px;letter-spacing: 0.5px; border:1px solid #ebebeb;padding: 3%;-webkit-appearance: none;border-radius: 5px;}
+        .rewarded_bj{width: 100%;height: 55px;float: left;background: #f6f6f6;}
+        .rewarded{width: 90%;margin: 0 5%;height: 100%;display: flex;align-items: center;justify-content: space-between}
+        .left{float: left;width: 25%;}
+        .right{float: right;display: block;line-height: 55px;}
+        .right input{width: 60px;float: left;height: 25px;;border: 1px solid #ccc;background: #fff;margin-top: 12.5px; border-radius:8px;line-height: normal;padding-left: 5px;}
+        .right span:first-child{float: left;}
+        .add_bj{width: 100%;float: left;background: #fff;padding-bottom: 30px;}
+        .add{width: 100%;height: 90%;margin-top: 10px;}
+        #camre{float:left;width:20%;height:4rem;margin-left:4%;margin-top:10px;}
+        .imgc{width:100%;height:auto;}
+        .imgc>div{width:20%;height:4rem;margin-left: 4%}
+        .imgc>div>img{width:100%;height:100%;}
+        .image{float: left;margin-top:10px;}
+        .add>div>img{width:100%;height:100%;}
+        .mui-picker{background: #fff}
+        .mui-poppicker-title{color:#06c1ae;}
+        .mui-poppicker-bottom-right{background: #06c1ae;}
+        li{list-style: none;text-decoration: none;}
+        .r_icon_b{background: url("../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .border{width: 95%;margin-left: 5%;height: 55px; border-bottom: 1px solid #ebebeb;display: flex;align-items: center;justify-content: space-between;font-size: 16px;}
+        .mage{line-height:55px;text-align: left;display: block;width:50px;height: 100%;}
+        .size{width: 43px;height: 43px;float: left;}
+        .border input {width:60%;
+            margin-right: auto;height: 40px;}
+        .none{border-bottom:none; }
+        .tab_bj{width: 100%;height: 95px;float: left;background: #fff;}
+        .tab{width: 90%;height: 95px;margin:0 5%;}
+        .tab li:first-child{line-height: 3rem;color: #909090;font-size: 15px;}
+        .tab li{height: 40%;}
+        .choice{margin-top: 10px;}
+        .waysspan{font-size: 14px;}
+        .ways{display: block;width: 18px;height: 18px; float: left;margin-right: 5px;margin-top: -1px }
+        .mui-pciker-rul{width:38%;}
+        .mui-dtpicker-title{width:100%;}
+        input{outline:none}
+        .mui-poppicker-bottom-right{background: #06c1ae;}
+        #money-text{width:65px;}
+         #money-text{width:65px;}
+        #year-style{width:33.7% ;}
+        
+        .year-style{width:33.7% !important;}
+        .other-style{width:22% !important;}
+    </style>
+</head>
+<body>
+        <div class="li_50 mp_10">
+            <div class="border">
+                <span class="mage namehtml" id="heading" >标题：</span>
+                <input type="text" placeholder="拾到的物品是什么" id="losething">
+            </div>
+        </div>
+
+        <div class="li_50" id="father">
+            <div class="border">
+                <span class="mage namehtml" id="typelei" >类型：</span>
+                <input type="text"  id="xing" placeholder="拾到的物品类型" readonly="readonly">
+                <i class="r_icon_b"></i>
+            </div>
+        </div>
+        <!-- <div class="li_50" id="showCityPicker3">
+            <div class="border">
+                <span class="mage">有效期：</span>
+                <input type="text" id="cityResult3">
+                <i class="r_icon_b"></i>
+            </div>
+        </div> -->
+        <div class="li_50" id="showCityPicker3">
+            <div class="border">
+                <span class="mage namehtml" id="time" >时间：</span>
+                <input type="text"  readonly placeholder="拾到物品的大致时间" id="losetime">
+                <i class="r_icon_b"></i>
+            </div>
+        </div>
+
+        <div class="li_50">
+            <div class="border">
+                <span class="mage namehtml" id="address">地址：</span>
+                <input onclick="openA()" type="text" id="losearrdess"  placeholder="拾到物品的具体位置">
+                <i class="r_icon_b"></i>
+            </div>
+        </div>
+
+        <div class="tab_bj">
+            <div class="tab">
+                <li>防止打扰是否选择隐藏联系方式</li>
+                <li class="choice">
+                    <span class="waysspan">
+                        <i class="ways" style="background:url('../icon/Shape-1.png');background-size: 18px;" ></i>
+                        公开
+                    </span>
+                    <span class="waysspan">
+                        <i class="ways" style="background:url('../icon/Shape.png');background-size: 18px;"></i>
+                        隐藏
+                    </span>
+                </li>
+            </div>
+        </div>
+
+         <div class="text">
+             <textarea typeof="text" placeholder="请输入详细的信息描述" id="desc"></textarea>
+         </div>
+
+         <div class="rewarded_bj">
+             <div class="rewarded">
+                 <span class="left">上传图片</span>
+                 <!-- <span class="right">
+                    <span namehtml" >悬赏金额：</span>
+                    <input type="text" placeholder="0.00" id="money" onkeyup="if(event.keyCode !=37 && event.keyCode != 39){if (!/^[\d]+$/ig.test(this.value)){this.value='';}}"/>元
+                 </span> -->
+             </div>
+         </div>
+
+        <div class="add_bj">
+             <div class="add" >
+                <!-- 放图片的大div -->
+                <div class="imgc" id="addImg">
+
+                </div>
+                <!-- 添加照片按钮 -->
+                <div id="camre" onclick="selectImgUpload()" >
+                    <img src="../icon/ioc.png" alt="">
+                </div>
+                <span id="selectNum"></span>
+             </div>
+        </div>
+    <script type="text/javascript"  src="../script/mui.min.js"></script>
+    <script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+    <script type="text/javascript"  src="../script/api.js"></script>
+    <script type="text/javascript"  src="../script/template-native.js"></script>
+    <script type="text/javascript"  src="../script/kv.js"></script>
+    <script type="text/javascript"  src="../script/user.js"></script>
+    <script type="text/javascript"  src="../script/data.js"></script>
+    <script type="text/javascript"  src="../script/apiCloud.js"></script>
+    <script type="text/javascript"  src="../script/public.js"></script>
+    <script type="text/html" id="scriptDiv">
+        <div  class="image">
+            <img src="<%=list%>" alt="">
+        </div>
+    </script>
+    <script>
+
+    var xingxing = null;
+    var waysspan = document.querySelectorAll('.waysspan');
+    var display = 0;
+    waysspan[0].onclick = function () {
+        display = 1;
+        // console.log(display)
+        waysspan[0].querySelector("i").style.background = "url('../icon/Shape.png')";
+        waysspan[0].querySelector("i").style.backgroundSize = "100%";
+        waysspan[1].querySelector("i").style.background = "url('../icon/Shape-1.png')";
+        waysspan[1].querySelector("i").style.backgroundSize = "100%";
+    };
+    waysspan[1].onclick = function () {
+        display = 0;
+        waysspan[1].querySelector("i").style.background = "url('../icon/Shape.png')";
+        waysspan[1].querySelector("i").style.backgroundSize = "100%";
+        waysspan[0].querySelector("i").style.background = "url('../icon/Shape-1.png')";
+        waysspan[0].querySelector("i").style.backgroundSize = "100%";
+    };
+
+    function openA(){
+        var typeJson = {};
+        typeJson.name = "finds";
+        typeJson.frameName = "finds_body"
+        openNewWindow('cityAddress','./cityAddress.html',typeJson)
+    };
+    function getInnerHTML(obj){
+        //alert(JSON.stringify(obj))
+        losearrdess.value = obj.address;
+        address = obj;
+    };
+    //点击下一步的时候判断页面内的input是否已经有值
+    //生成json
+    var goNext = function(){
+        var losething = document.getElementById('losething');
+        var losetime = document.getElementById('losetime');
+        var xing = document.getElementById('xing');
+        var losearrdess = document.getElementById('losearrdess');
+        var inputAll = document.querySelectorAll("input");
+        var namehtml = document.querySelectorAll(".namehtml");
+        var desc = document.getElementById("desc");
+        var camre = document.getElementById('camre');
+        var ways = document.querySelectorAll('.ways');
+        var contact = document.getElementById('contact')
+        var expiryDate = document.getElementById('cityResult3');
+        var score = {};
+        if(losething.value == "" ){
+            toast("请输入拾到的东西");
+            return;
+        }
+        else{
+            score.name = losething.value;
+            score.type = 2;
+        }
+        if(isBlack(xingxing) ){
+            toast("请选择拾到物品的类型");
+            return;
+        } else{
+            score.categoyId = xingxing;
+        }
+        if(isNotBlack(losetime.value)){
+            var time = Date.parse(new Date(losetime.value.replace(/-/g,'/'))); //得到毫秒数
+            score.time = time;
+        }else{
+            toast("你还没有填写时间");
+            return;
+        }
+        if(isNotBlack(losearrdess.value)){
+            score.address = losearrdess.value;
+        }
+        if(isNotBlack(desc.value)){
+            score.desc = desc.value;
+        }
+        score.showPhoneNum = display;
+        if(imgList.length>0){
+            score.pics = JSON.stringify(imgList);
+        }else{
+            toast("为了帮助您，更快的找到，请最少上传一张图片");
+            return;
+        }
+        //alert(JSON.stringify(score));
+        ajaxGetWithProgress(publishUrl,score,function(ret,err){
+            if(isNotBlack(ret)){
+            	api.execScript({
+	                name: rootWindowName,
+	                frameName:'home',
+	                script: 'reloadHtml()'
+		        });
+		        api.execScript({
+                    name: rootWindowName,
+                    frameName: 'user',
+                    script: 'reloadHtml()'
+                });
+                toast("发布成功");
+                var t = setTimeout("closeWin()",500);
+            }
+            else{
+                //alert(err);
+            }
+        });
+    };
+    //选择丢失时间的函数
+    (function($, doc) {
+        $.ready(function() {
+
+        });
+    })(mui, document);
+    var userInfo = null;
+    //类型里的数据是从后台请求的
+    apiready = function () {
+        userInfo = getUserInfo();
+        var ret = $api.getStorage("categoryData");
+        //请求ajax数据，传参url=请求路径，{}空对象，回调函数。
+            if(isNotBlack(ret)){
+                //new一个数组
+                var classifyList = new Array();
+                //遍历返回的json，把name和id以及返回值push到数组里。
+                for(var i = 0; i < ret.length; i++){
+                    var obj = {};
+                    obj.text = ret[i].name;
+                    obj.value = ret[i].id;
+                    classifyList.push(obj);
+                }
+                //点击弹出框
+                (function($, doc) {                                                    
+                    $.init();
+                    $.ready(function () {
+                        var sexPicker = new $.PopPicker();
+                        //传的参数是从后台拿过来的，里边是若干个
+                        sexPicker.setData(classifyList);
+                        sexPicker.setTitle("类型");
+                        var showSexPickerButton = doc.getElementById('father');
+                        var sexResult = doc.getElementById('xing');
+                        showSexPickerButton.addEventListener('tap', function (event) {
+                            sexPicker.show(function (items) {
+                                sexResult.value = items[0].text;
+                                //返回 false 可以阻止选择框的关闭
+                                //return false;
+                                xingxing  = items[0].value;
+                            });
+                        }, false);
+
+                        var time = (new Date().format("yyyy/MM/dd/hh")).split("/");
+                        var startYear = parseInt(time[0]);
+                        var startMonth = parseInt(time[1])-1;
+                        var endMonth = parseInt(time[1])-6;
+                        var endYear = parseInt(time[0]);
+                        var cityPicker3 = new $.DtPicker({
+                            type:'hour',
+                            endDate: new Date(parseInt(time[0]), startMonth, parseInt(time[2]),parseInt(time[3])),//设置开始日期
+                            beginDate: new Date(endYear,endMonth,parseInt(time[2]),parseInt(time[3]))//设置结束日期
+                        });
+                        var showCityPickerButton = doc.getElementById('showCityPicker3');
+                        var cityResult3 = doc.getElementById('losetime');
+                        showCityPickerButton.addEventListener('tap', function(event) {
+                            cityPicker3.show(function(items) {
+                                cityResult3.value = items.text+":00:00";
+                            });
+                        }, false);
+                    })
+                })(mui, document);
+            }
+    };
+     /**************************选择类型****************************/
+    
+    var selectType = 'video';
+    var duration = 5;
+    var interest=null;
+    var totalCost = null;
+    var dialogBox;
+    var imgIndex = 0;
+    var uploadFlag = true;
+    var uploadIndex = 0;
+    var margin = null;
+    var selectThumb = null;
+    function getMargin(c,m,src,p) {
+        m = m || 0;
+        var width = Math.round((api.frameWidth )*p);
+        var imgRealHeight = getWidthAndHeightByImageSrc(src, width).h;
+        if (imgRealHeight > (width * p)) {
+            return (0 - Math.round((imgRealHeight - width) / 2));
+        } else {
+            return 0;
+        }
+    }
+
+
+    function selectPublishType(self,type){
+        selectType = type;
+        var item = document.getElementById('nav').querySelectorAll('li');
+        var ss =  document.getElementById("nav").querySelectorAll("p");
+        for(var i=0;i<item.length;i++){
+            item[i].className = "";
+            ss[i].style.color="#000";
+            item[i].style.border="none"
+        }
+        document.getElementById(type).style.display = 'block';
+        if(type == "video"){
+            document.getElementById('imageText').style.display = 'none';
+            self.className = "nav1";
+            self.querySelector("p").style.color="#fff";
+            document.getElementById('bq1').style.borderBottom ="1px solid #eaeaea";
+        }else{
+            document.getElementById('video').style.display = 'none';
+            self.className = "nav1";
+            self.querySelector("p").style.color="#fff";
+            document.getElementById('bq2').style.borderBottom = '1px solid #eaeaea';
+        }
+
+
+    }
+    function openPublishSelectCondition(){
+        openNewWindow("publishSelectCondition","./publishSelectCondition.html")
+    }
+
+    function box1_Hide(){
+        document.getElementById("bg_1").style.display="none";
+        document.getElementById("show_1").style.display="none";
+        document.getElementById('input_title').value ="";
+    }
+
+
+    function size(par){
+        var max = 150;
+        if (par.value.length < max){
+            var str = max - par.value.length;
+            document.getElementById("span").innerHTML = str.toString();
+
+        }else {
+            toast('您不能再输入了哦');
+        }
+    }
+    var selectImgList = [];
+    function selectImgUpload(){
+        if(imgIndex >=12){
+            toast('已经超过12张了');
+            return;
+        }
+        openImage(12-imgIndex,true,function(ret){
+            if(isNotBlack(ret) && ret.status){
+                imgIndex = imgIndex + ret.data.length;
+                uploadIndex = 0;
+                selectImgList = ret.data;
+                selectThumb = ret.data;
+                uploadFlag = true;
+                //压缩图片
+                var imgList = [];
+                for(var i = 0;i < selectImgList.length;i++){
+                    var img = selectImgList[i];
+                    imgList.push(img.path);
+                }
+                compressImageList(imgList,function(ret){
+                    selectImgList = ret;
+                    uploadImg();
+                });
+            }
+        })
+    }
+
+
+    function uploadImg(){
+        //压缩图片
+        if(uploadIndex == selectImgList.length ){
+            return;
+        }
+
+        if(uploadIndex == selectImgList.length-1){
+            uploadFlag = false;
+        }
+        var data = selectImgList[uploadIndex];
+        _uploadImg(data,showImage,0);
+//        api.showProgress({title: '努力压缩...',text: '先喝杯茶...'});
+//        compressImage(data.size,0,data.path,function(ret,err){
+//            if(ret.status){
+//
+//            }
+//        });
+    }
+
+
+    function checkCount(){
+        var price = document.getElementById("price").innerHTML;
+
+        if(isBlack(price)|| !isNum(price)){
+            return;
+        }
+
+        if(isNotBlack(duration)){
+            price = parseInt(price);
+            var total = parseInt(duration)*price;
+            document.getElementById("totalPrice").innerHTML = total+"元";
+            totalCost = total;
+        }
+    }
+
+
+
+    function _uploadImg(path,callback,type) {
+        if(isNotBlack(type)&&type == 1){
+            api.showProgress({title: '正在上传视频....',text: '先喝杯茶...'});
+        }else{
+            api.showProgress({title: '上传第'+(uploadIndex+1)+"张",text: '先喝杯茶...'});
+        }
+
+        api.ajax({
+            url: uploadImageUrl,
+            method: 'post',
+            timeout: 120,
+            report: true,
+            dataType: 'json',
+            returnAll: false,
+            data: {
+                files: {file:path}
+            }
+        }, function (ret, err) {
+            if(isNotBlack(ret )&& ret.status == 1){
+                if(isFunction(callback)){
+                    callback(ret,path);
+                }
+            }else if(isNotBlack(ret) && ret.status == 2){
+                uploadIndex++ ;
+                uploadImg();
+                imgIndex--;
+                if(!uploadFlag){
+                    api.hideProgress();
+                }
+            }else if(isNotBlack(ret) && ret.status == 0){
+                api.showProgress({title: '已上传'+ret.progress+"%",text: '先喝杯茶...'});
+            }else if(isNotBlack(err)){
+                uploadIndex++ ;
+                uploadImg();
+                imgIndex--;
+                if(!uploadFlag){
+                    api.hideProgress();
+                }
+            }
+        });
+    }
+
+    var imgList = [];
+    function showImage(ret,path){
+        var srcList = ret.body.ok;
+        imgList.push(srcList);
+        margin = getMargin(1,0,srcList,0.22*0.9);//
+       // var data = {list:selectThumb[uploadIndex].thumbPath,margin:margin,height:api.frameWidth*0.22*0.9};
+        var data = {list:srcList,margin:margin,height:api.frameWidth*0.22*0.9};
+        var html1 = template('scriptDiv', data);
+        document.getElementById('addImg').innerHTML = document.getElementById('addImg').innerHTML + html1;
+        // document.getElementById("selectNum").innerHTML = imgIndex;
+        uploadIndex++ ;
+        uploadImg();
+        if(!uploadFlag){
+            api.hideProgress();
+        }
+    }
+
+</script>
+</body>
+</html>

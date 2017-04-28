@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>帮助下一步</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <link rel="stylesheet" href="../css/mui.picker.all.css" />
+    <link rel="stylesheet" href="../css/mui.poppicker.css" />
+    <style>
+        body{font-family:"黑体";}
+        html{height: auto;width: 100%;background: #f4f4f4;}
+        li{list-style: none;text-decoration: none;}
+        .r_icon_b{background: url("../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .border{width: 95%;margin-left: 5%;height: 55px; border-bottom: 1px solid #ebebeb;display: flex;
+                 align-items: center;justify-content: space-between;}
+        .mage{line-height:55px;text-align: left;display: block;width: 30%;height: 100%;}
+        .size{width: 43px;height: 43px;float: left;}
+        .border input {width:60%;margin-right: auto;height: 40px;}
+        .none{border-bottom:none; }
+        .tab_bj{width: 100%;height: 95px;float: left;background: #fff;}
+        .tab{width: 90%;height: 95px;margin:0 5%;}
+        .tab li:first-child{line-height: 3rem;color: #909090;font-size: 15px;}
+        .tab li{height: 40%;}
+
+        .choice{margin-top: 10px;}
+        .waysspan{font-size: 14px;}
+        .ways{display: block;width: 18px;height: 18px; float: left;margin-right: 5px;margin-top: -1px }
+        /*.ways-bg{background:url('../icon/Shape.png')no-repeat;}*/
+        .mui-pciker-rul{width:38%;}
+        .mui-dtpicker-title{width:100%;}
+        input{outline:none}
+        .mui-poppicker-bottom-right{background: #06c1ae;}
+
+    </style>
+</head>
+<body>
+        <!-- <div class="li_50 mp_10">
+            <div class="border">
+                <span class="mage" id="lianxi">联系方式：</span>
+                <input type="text" id="contact">
+            </div>
+        </div>
+ -->
+       <!--  <div class="li_50" id="showCityPicker3">
+            <div class="border">
+                <span class="mage">有效期：</span>
+                <input type="text" id="cityResult3">
+                <i class="r_icon_b"></i>
+            </div>
+        </div> -->
+        
+        <div class="tab_bj">
+            <div class="tab">
+                <li>防止打扰是否选择隐藏联系方式</li>
+                <li class="choice">
+                    <span class="waysspan">
+                        <i class="ways" style="background:url('../icon/Shape.png');background-size: 18px;" ></i>
+                        公开
+                    </span>
+                    <span class="waysspan">
+                        <i class="ways" style="background:url('../icon/Shape-1.png');background-size: 18px;"></i>
+                        隐藏
+                    </span>
+                </li>
+            </div>
+        </div>
+    <script type="text/javascript"  src="../script/mui.min.js"></script>
+    <script type="text/javascript"  src="../script/mui.picker.all.js"></script>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/apiCloud.js"></script>
+    <script type="text/javascript" src="../script/template-native.js"></script>
+    <script type="text/javascript" src="../script/kv.js"></script>
+    <script type="text/javascript" src="../script/user.js"></script>
+    <script type="text/javascript" src="../script/data.js"></script>
+    <script type="text/javascript" src="../script/util.js"></script>
+    <script type="text/javascript" src="../script/public.js"></script>
+    <script>
+        var waysspan = document.querySelectorAll('.waysspan');
+        var ways = document.querySelectorAll('.ways');
+        var contact = document.getElementById('contact');
+        var expiryDate = document.getElementById('cityResult3');
+        var display = true;
+       
+        waysspan[0].onclick = function () {
+            display = true;
+            console.log(display);
+            waysspan[0].querySelector("i").style.background = "url('../icon/Shape.png')";
+            waysspan[0].querySelector("i").style.backgroundSize = "100%";
+            waysspan[1].querySelector("i").style.background = "url('../icon/Shape-1.png')";
+            waysspan[1].querySelector("i").style.backgroundSize = "100%";
+        };
+        waysspan[1].onclick = function () {
+            display = false;
+            console.log(display);
+            waysspan[1].querySelector("i").style.background = "url('../icon/Shape.png')";
+            waysspan[1].querySelector("i").style.backgroundSize = "100%";
+            waysspan[0].querySelector("i").style.background = "url('../icon/Shape-1.png')";
+            waysspan[0].querySelector("i").style.backgroundSize = "100%";
+        };
+        var getJson = function (){
+            var score = api.pageParam;
+            score.showPhoneNum = display;
+            // alert(JSON.stringify(score)。)
+        };
+       
+       // /****************************选择有效期***********************/
+       //  (function($, doc) {
+       //      $.ready(function() {
+       //          var cityPicker3 = new $.DtPicker({
+       //              type:'date'
+       //          });
+       //          var showCityPickerButton = doc.getElementById('showCityPicker3');
+       //          var cityResult3 = doc.getElementById('cityResult3');
+       //          showCityPickerButton.addEventListener('tap', function(event) {
+       //              cityPicker3.show(function(items) {
+       //                  console.log(JSON.stringify(items));
+       //                  cityResult3.value = items.text;
+       //              });
+       //          }, false);
+       //      });
+       //  })(mui, document);
+       //  /**************************上面是选择年月日*********************/
+   
+    </script>
+</body>
+</html>

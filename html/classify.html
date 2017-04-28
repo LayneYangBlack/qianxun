@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <style>
+        body{font-family:"黑体";}
+        html{background: #fff;height: auto;}
+   
+        .conter{width: 100%;;height:250px;;float: left; }
+        .conter div{width: 33.25%;height: 49%;float: left;display: flex;justify-content: center;flex-direction: column;align-items: center; }
+        .conter div a{display: block;height: 1.5rem;font-size: 14px;font-weight: 300;padding-top: 5px;color: #333;}
+        .icon1{width: 40px;height: 40px;display: block;float: left; }
+        .rig_x{border-bottom: 2px solid #F8F8F8}
+    
+    </style>
+</head>
+<body id="body">
+    <!--<div class="seach">-->
+    <!--<div class="seach_eaer">-->
+        <!--<i></i>-->
+        <!--<input type="text" placeholder="请输入您要找的内容">-->
+    <!--</div>-->
+<!--</div>-->
+    <div style="height: 10px;background: #f4f4f4;width: 100%;float: left"></div>
+    <div class="conter" id="main1">
+        <!-- <div class="rig_x"><i class="icon1"></i><a>电子产品</a></div>
+        <div class="rig_x"><i class="icon2"></i><a>钥匙类</a></div>
+        <div class=""><i class="icon3"></i><a>公文包</a></div>
+        <div class="rig_x bom_x top_x"><i class="icon4"></i><a>钱包</a></div>
+        <div class="rig_x bom_x top_x"><i class="icon5"></i><a>身份证件</a></div>
+        <div class=" bom_x top_x"><i class="icon6"></i><a>文件资料</a></div> -->
+    </div>
+<script id="scriptDiv1" type="text/html">
+    <% for (var i = 0; i < list.length; i ++) { %>
+        <div class="rig_x" onclick="openTicketInfo('<%=list[i].id%>')">
+            <img class="icon1" src="<%=list[i].pic%>"></img>
+            <a><%=list[i].name%></a>
+        </div>
+    <% } %>
+</script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript">
+    var uid;
+    var allResult = {};
+    var userInfo = null;
+
+    function openTicketInfo(id){
+        var obj = {};
+        obj.url = pageByCidUrl;
+        var params = {cid:id};
+        obj.params = params;
+        openNewWindow('viewsee','./viewsee.html',obj,{reload:true});
+        
+    }
+    apiready = function () {
+        userInfo = getUserInfo();
+        api.setRefreshHeaderInfo({
+            visible: true,
+            bgColor: 'rgba(0,0,0,0)',
+            textColor: '#666',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function (ret, err) {
+            ajaxGet(classifyUrl, {}, function(ret,err){
+                if(isNotBlack(ret)){
+                    addDataToHtml(ret);
+                    document.getElementById('body').style.display = 'block'
+                }else{
+                    toast("暂无数据");
+                }
+                api.refreshHeaderLoadDone();
+            });
+        });
+        api.refreshHeaderLoading();
+    };
+    function addDataToHtml(results) {
+//        alert(JSON.stringify(results))
+        if (results && results.length > 0) {
+            for(var i=0;i<results.length;i++){
+                allResult[results[i].id]=results[i];
+            }
+            var data = {list: results};
+            var html = template('scriptDiv1', data);
+            document.getElementById('main1').innerHTML = html;
+            $api.setStorage("categoryList",allResult)
+        }
+    }
+    
+</script>
+</body>
+</html>

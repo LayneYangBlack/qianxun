@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>支付</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style type="text/css">
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            background: #ebebeb;
+            width: 100%; /*height: 100%;*/
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        .count{
+            background-color: #ffffff;
+            float: left;
+            width: 100%;;
+        }
+        .left_box{
+            width: 100%;
+            text-align: center;
+            float: left;
+            line-height: 10rem;
+            color: #ff9900;
+            font-size: 3rem;
+            color:#06C1AE;
+            border-top:1px solid #ebebeb;
+            border-bottom:1px solid #ebebeb;
+        }
+        .right_box{
+            width: 60%;
+            font-size: 16px;
+            height: 80px;
+            line-height: 20px;
+            float: right;
+        }
+        .right_box p{
+            line-height: 50px;
+            font-size: 30px;
+            color: #333;
+        }
+        .item{
+            height: 3.5rem;
+            line-height:3.5rem;
+            padding-left: 20px;
+            background-color: #fff;
+            border-bottom: 1px #eaeaea solid;
+            color: #333;
+        }
+        .item1{
+            height: 3.5rem;
+            line-height:3.5rem;
+            padding-left: 20px;
+            background-color: #fff;
+            border-bottom: 1px #eaeaea solid;
+            color: #333;
+        }
+        .item1 .font_color{color: #75ca77;}
+        .item1 .icon_right1{
+            background: url("../icon/selected.png");
+            width:1.5rem;
+            float:right;
+            margin-right: 2rem;
+            margin-top: 1rem;
+
+            background-size: 1.5rem 1.5rem;;
+        }
+
+
+
+
+        #question{
+            position: fixed;
+            height: 50px;
+            text-align: center;
+            background-color: #06C1AE;
+            margin: 10px 0 0 0 ;
+            line-height: 50px;
+            font-size: 18px;
+            width: 100%;
+            color: #ffffff;
+            bottom: 0;
+        }
+
+        .icon_right{
+            width:30px;;
+            float:right;
+            margin-right: 15px;
+            margin-top: 1rem;
+
+            height: 30px;;;
+        }
+        .icon_right1{
+            width:1.5rem;
+            float:right;
+            margin-right: 2rem;
+            margin-top: 1rem;
+            background-size: 1.5rem 1.5rem;;
+            height: 1.5rem;
+
+        }
+
+        .icon{
+            float:right;
+            width: 3rem;
+        }
+        #main{width: 100%;height: auto;
+            float: left;;
+        }
+
+
+
+    </style>
+</head>
+
+<body id="body" style="display: none;">
+
+<div id="main">
+    <div class="count">
+        <div class="left_box"><i  style="font-size:1rem;">￥</i><span id="budget">200</span>元</div>
+    </div>
+    <div  id="count" class="count" style="max-resolution: res;gin-top: 10px">
+        <!--<div class="item1"  onclick="selectCount(this,0)"><span >微信</span> <i ></i> </div>-->
+        <div class="item1" onclick = "clicked(this,0)"><span >支付宝</span><i  ></i></div>
+        <div class="item1" onclick = "clicked(this,1)"><span >微信</span><i  ></i></div>
+        <div class="item1" onclick = "clicked(this,2)"><span >钱包</span><i  ></i></div>
+        <!--<div class="item1"  id="999" onclick="selectCount(this,2)"><span>银联账号</span><i  ></i></div>-->
+        <!--<div class="item"><span>1684616876165768</span><img class="icon_right" src="../icon/icon_right_normal.png" ></div>-->
+    </div>
+    <div  id="question" tapmode="itemOn" onclick="selectPay()">
+        下一步
+    </div>   
+</div>
+
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/pay.js"></script>
+<!-- <script type="text/javascript" src="../script/pay.js"></script> -->
+<script type="text/javascript">
+        var money;
+        var eventId;
+        //进页面获取钱包里的余额
+        apiready = function(){
+        	dialogBox = api.require('dialogBox');
+            var payInformation = api.pageParam;
+            //alert(JSON.stringify(payInformation));
+            var budget = document.getElementById("budget");
+            //alert(JSON.stringify(payInformation));
+            //alert(payInformation.notice);
+            if(payInformation.notice == "first"){
+            	eventId = payInformation.event.id;
+            	budget.innerHTML = payInformation.event.payNum;
+            }else if(payInformation.notice == "again"){
+            	budget.innerHTML = payInformation.payNum;
+            	eventId = payInformation.id;
+            }else if(payInformation.notice == "pay"){
+            	budget.innerHTML = payInformation.payNum;
+            	eventId = payInformation.id;
+            }
+            document.getElementById("body").style.display = "block";
+            ajaxGetWithProgress(userinfoUrl,{},function(ret,err){
+                if(isNotBlack(ret)){
+                    money = ret.money;
+                }
+                else{
+                   //alert(err)
+                }
+            });
+        }
+        
+        function openCommitTip(){
+            openNewWindow("selectPosition","./selectPosition.html",{})
+        }
+        var params = null;
+        var orderId = null;
+        var type = 0;
+        var payParams = {};
+        var payparms = {};
+        var detailType = null;
+        var num = 0;
+        function selectPay(){
+            var payType = 'alipay';
+            if(num == 0){
+            	payType = "alipay";  
+            }else if(num == 2){
+                payparms.type  = num+1;
+           		payparms.eid = eventId;
+           		payparms.code = "wallet";
+               	wallet();
+               	return;
+            }else if(num == 1){
+                payType = 'weixin';
+            }
+           	payParams.type  = num+1;
+           	payParams.eid = eventId;
+            pay(payType,payParams,payEventOrderUrl,function(ret,err) {
+               if(ret){
+					showDialog_1();
+               }
+            })}
+        
+        
+      /***************钱包支付****************/
+       function wallet(){
+       	var ss = budget.innerHTML;
+       			if(ss > money){
+	                showDialog("","提示","钱包余额不足，是否要充值","取消","确定",function(){
+	             	 	openNewWindow("MyMoney","./MyMoney.html");   
+	                });
+	           }else{
+	            	openNewWindow("cashcode","./cashcode.html",payparms);
+	        
+	  	}		              
+    }
+            
+//     /**********************支付宝支付成功时候的提示信息*************/
+     function showDialog_1(){
+        dialogBox.alert ({
+            texts: {
+                title: '温馨提示',
+                content:'支付成功！',
+                rightBtnTitle: '确定'
+            },
+            styles:{
+                bg: '#fff',
+                w: 300,
+                title:{
+                    marginT : 20,
+                    titleSize : 18,
+                    corner: 1,
+                    titleColor : '#06C1AE'
+                },
+                content:{
+                    color: '#000',
+                    size: 16
+                },
+                right:{
+                    w: 300,
+                    h: 40,
+                    marginL: 0,
+                    marginB: 0,
+                    corner: 1,
+                    bg: '#06C1AE',
+                    size: 18,
+                    color:'#ffffff'
+                }
+            }
+        },function(ret){
+        	if (ret.eventType == 'right') {
+//              var dialogBox = api.require('dialogBox');
+                dialogBox.close ({
+                    dialogName: 'alert'
+                });
+                api.closeWin({
+                    name: "publishHelp"
+                });
+                setTimeout(function(){
+	                api.execScript({
+		                name: rootWindowName,
+		                frameName:'home',
+		                script: 'reloadHtml()'
+			        });
+                    closeWin();
+                },1000);
+
+            }
+        	
+        });
+    }
+
+    //选择支付方式
+    var item = document.querySelectorAll('.item1');
+
+    item[0].style.color = "#06C1AE";
+    item[0].querySelector('i').className = "icon_right1";
+    function clicked(self,type){
+        num = type;
+        for(var n = 0;n < item.length;n++){
+            item[n].style.color = "#333";
+            item[n].querySelector('i').className = "";
+        }
+        self.style.color = "#06C1AE";
+        self.querySelector('i').className = "icon_right1";
+    }
+    var question = document.getElementById("question")
+    var budget = document.getElementById("budget")
+    //当下一步被点击的时候 判断num的值是否为2
+    //如果是2，用户就是选择的钱包支付
+    </script>  
+</body>
+</html>
+

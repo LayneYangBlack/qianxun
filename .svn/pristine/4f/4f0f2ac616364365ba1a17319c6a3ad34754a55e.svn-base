@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统消息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <style>
+        html{font-size: 14px;}
+        li{list-style: none;text-decoration: none;}
+        .conter_1{width: 100%;height: auto;float: left;}
+         .conter{height:auto;width: 90%;margin: 0 8% 0 2%;float: left;}
+        .top_1{width: 100%;height: 20px;float: left;text-align: center;line-height: 20px;}
+        .top_1 span{background: #cbcbcb;border-radius: 5px;padding: 0 3px;color: #fff;}
+        .side{height: 220px;width: 100%;float:left;}
+        .item1{float: left;width:20%;height: 100%; }
+        .item1 img{width: 70%;margin: 0 15%;}
+        .item2{height: 100%;float: left;width: 80%}
+        .item2_top{width: 100%;height: 25px;float: left;}
+        .item2_top span{float: left;line-height: 25px;color: #9296a3}
+        .main{width: 100%;height: auto;float: left;background: #f4f4f4;border-radius: 8px;}
+        .main li {width: 90%;height: auto;padding:2% 5%;float: left;}
+        .main li:first-child{font-size: 16px;}
+        .main li:nth-child(2){color: #9296a3;padding: 0 5%; }
+        .show{overflow: hidden; text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;line-clamp: 4;}
+        .main li span{float: right;color: #06c1ae;display: block;padding-bottom: 5px;}
+        .moren{}
+    </style>
+</head>
+<body id="body">
+	<!--<div class="conter_1">-->
+	    <!--<div class="top_1"><span>12:00</span></div>-->
+	     <!--<div class="conter">-->
+	         <!--<div class="side">-->
+	             <!--<div class="item1"><img src="../icon/l_icon_b.png"></div>-->
+	             <!--<div class="item2">-->
+	                 <!--<div class="item2_top"><span>千寻</span></div>-->
+	                 <!--<div class="main">-->
+	                     <!--<li>系统消息</li>-->
+	                     <!--<li class="show" id="show">【环球网综合报道】据英国《每日邮报》9月17日报道，近日，在澳大利亚维多利亚州的田野里，有人拍到塔斯马尼亚虎飞奔的画面有人拍到塔斯马尼亚虎飞奔的画面</li>-->
+	                     <!--<li><span class="show1" onclick="more()">查看更多</span></li>-->
+	                 <!--</div>-->
+	             <!--</div>-->
+	         <!--</div>-->
+	     <!--</div>-->
+	<!--</div>-->
+</body>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i ++) { %>
+	<div class="conter_1">
+	    <div class="top_1"><span><%=list[i].time%></span></div>
+	     <div class="conter">
+	         <div class="side">
+	             <div class="item1"><img src="../icon/l_icon_b.png"></div>
+	             <div class="item2">
+	                 <!--<div class="item2_top"><span>千寻</span></div>-->
+	                 <div class="main">
+	                     <li><%=list[i].title%></li>
+	                     <li class="show" id="show"><%=list[i].content%></li>
+	                     <li><span class="show1" onclick="more()">查看更多</span></li>
+	                 </div>
+	             </div>
+	         </div>
+	     </div>
+	</div>
+    <% } %>
+</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script>
+	var allResult = {};
+	apiready = function () {
+//		ajaxGet(getMessagePageUrl, {}, function(ret,err){
+//			alert(JSON.stringify(ret))
+//			alert(JSON.stringify(err))
+//			results = ret;
+//		})
+//		addDataToHtml(results);
+        new datalistModel(addDataToHtml,getMessagePageUrl,10,5,100,true);
+   };
+   
+     function addDataToHtml(results) {
+        if (results && results.length > 0) {
+            for(var i = 0;i < results.length;i++){
+                allResult[results[i].id] = results[i];
+            }
+            var data = {list: results};
+            var html = template('scriptDiv1', data);
+            document.getElementById('body').innerHTML = html;
+        } }
+</script>
+<script type="text/javascript">
+    var  ss = 0;
+    	
+    function more(){
+        var  show =  document.getElementById("show");
+        var  show1 =  document.getElementsByClassName("show1")[0];
+        if(ss == 0){
+              ss = 1 ;
+            show.className = "";
+            show1.innerHTML = "点击收起"
+        }else {
+            ss = 0 ;
+            show.className = "show";
+            show1.innerHTML = "查看更多"
+        }
+    }
+
+</script>
+
+</html>

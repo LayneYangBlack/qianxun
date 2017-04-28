@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hello MUI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/mui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <style>
+        body{font-family:"黑体";}
+        html{background: #f4f4f4;height: auto;}
+        .seach{width: 100%;height: 54px;float: left;background: #fff;}
+        .seach_eaer{width: 90%;margin: 13px 5%;background: #f4f4f4;height:28px;border-radius:30px; }
+        .seach_eaer i{display:block;height: 28px;;width: 28px;float: left;background: url("../icon/seach.png")no-repeat center;
+            background-size: 15px 15px;  margin-left: 5px;}
+        .seach_eaer input{width: 180px;height: 100%;float: left;margin-left: 15px;font-size: 14px;border: none;background: #f4f4f4;line-height: normal;}
+        .mui-slider-item img{height:140px;}
+        .main_bj{width: 100%;height: auto;background: #fff;float: left;}
+        .main{width: 90%;float: left;height: 123px;background: #fff;margin: 0 5%;}
+        .main_left,.main_right{height: 95px;width: 48%;float: left;border-radius: 12px;margin-top: 15px;}
+        .main_left{background: url("../icon/bignav.png")no-repeat;background-size: 100% 95px;  }
+        .main_right{margin-left: 4%;background: url("../icon/bignav1.png")no-repeat;background-size: 100% 95px; }
+        .l_icon{background: url("../icon/map_1.png")no-repeat;background-size:cover;}
+        .r_icon{background: url("../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .mage{float: right;justify-content: center;font-size: 14px;}
+        .item_bj{width: 100%;background: #fff;height: 140px;display: flex;align-items: center;}
+        .mp_10{margin-top: 0;border:1px solid #f4f4f4  ;}
+        .item{width: 90%;margin:0 5%;height: 110px;display: block;}
+        .item div:first-child{height: 100%;width: 40%;float: left;
+            overflow: hidden;
+        }
+        .item div:last-child{max-height: 100%;width: 60%;float: right;}
+        /*.item img{height: 100%;width: 100%;;}*/
+        .mages span{width: 100%;height:auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 16px;line-height: 2rem;height:32px;overflow: hidden;}
+        .mages span:nth-child(2){font-size: 14px;color: #333;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;word-break: break-all;overflow: hidden;}
+        .mages span:nth-child(3){font-size: 14px;color: #9296a3;display: block;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;word-break: break-all;overflow: hidden;}
+        .footer{width: 100%;height: 56px;float: left;position: fixed;bottom: 0;left: 0;background: #fcfcfc;border-top: 2px solid #e9e9e9}
+        .footer div{width: 25%;float: left;height: 100%;display: flex;justify-content: center;flex-direction: column;align-items: center;}
+        .footer div a{display: block;height: 1.2rem;font-size: 14px;font-weight: 600;color: #999;}
+        .footer div a.active{color: red;}
+        #icon1.active .icon1{background: url("../icon/home.png")no-repeat;background-size:cover;}
+        .user{width:100%;height:60px;display: block;background: #fff;margin-top: 10px;}
+        .user-center{width:90%;height:100%;margin:0 auto;}
+        .userHeading{width:45px;height:45px;float:left;border-radius: 50%;margin-top:12px;overflow: hidden;}
+        .userName{width:58%;height:100%;float:left;font-size: 12px;margin-left: 2%}
+        .userName>p{margin-top:15px;}
+        .userMoney{width:23%;height:100%;float:right;color:red;font-size:18px;text-align: right;line-height: 63px}
+        #nameR{display:block;width: 60px;height: 18px;line-height: 18px;float:left;margin-left:5px;text-align: center;color: #fff;font-size: 12px;margin-top: 2px}
+        #nameN{float:left;display: block;font-size: 14px;color:#333; }
+        .userHeading>img{width:100%;height:100%;}
+        .utime{color:#8f8f94;display: block;font-size: 12px;float:left;}
+        .desc{margin-top: 5px;color:#8f8f94;font-size:14px;max-height: 40px;overflow: hidden; text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;line-clamp: 4;}
+    	.type1{width:25%;height:16px;color:#31abd1;border-radius: 8px;display:block;float:left;border:1px solid #31abd1;line-height: 16px;text-align: center;margin-left: 5%;margin-top: 2px;}
+        .type2{width:25%;height:16px;color:#f9623b;border-radius: 8px;display:block;float:left;border:1px solid #f9623b;line-height: 16px;text-align: center;margin-left: 5%;margin-top: 2px;}
+    </style>
+</head>
+<body>
+
+<div id="slider" class="mui-slider" >
+   
+</div>
+<div class="main_bj">
+    <div class="main">
+        <div class="main_left" id="publishhelp1"></div>
+        <div class="main_right" id="publishhelp2" ></div>
+    </div>
+</div>
+<div class="li_42 mp_10" onclick="localMeesage()">
+    <i class="l_icon"></i>
+    <span class="mage">查看附近消息</span>
+    <i class="r_icon"></i>
+</div>
+<!--  <div class="user">
+            <div class="user-center">
+                <div class="userHeading"><img src="<%=list[i].creater.icon %>" alt=""></div>
+                <div class="userName">
+                    <p>
+                        <span id="nameN">这是名字这是名字</span>
+                        <span id="nameR" style="background: url(../icon/yesname.png) no-repeat;background-size: 90%;"></span>
+                        <div style="clear:both"></div>
+                        <span class="utime">2018-05-05</span>
+                        <span class="type1">丢失</span>
+                    </p>
+                </div>
+                <div class="userMoney"><span>￥</span><span>2000</span></div>
+            </div>
+        </div>
+        <div class="item_bj mp_10" id="newDiv" onclick="clickList('<%=list[i].id%>')">
+            <div class="item">
+                <div><img src="<%=list[i].picList[0]%>" onerror="this.src='../icon/findthing.jpg '"></div>
+                <div class="mages">
+                    <span><%=list[i].name%></span>
+                    <span>地址：<%=list[i].address%></span>
+                    <span class="desc">物品描述：物品描述：物品描述：物品描述：物品描述：物品描述：物品描述：<%=list[i].desc%></span>
+                </div>
+            </div> 
+        </div> -->
+<div id="main1"></div>
+<script id="scriptDiv2" type="text/html">
+    <% for (var i = 0; i < list.length; i ++) { %>
+        <div style="clear:both"></div>
+        <div class="user">
+            <div class="user-center">
+                <div class="userHeading" onclick="chatMsg()"><img onerror="this.src='../icon/me.png'" src="<%=list[i].creater.icon %>" alt=""></div>
+                <div class="userName">
+                    <p>
+                        <span id="nameN"><%=list[i].creater.name%></span>
+                        <% if (list[i].creater.attestIDCard == 3) { %>
+                        <span id="nameR" style="background: url(../icon/yesname.png) no-repeat;background-size: 90%;"></span>
+                        <% } else { %>
+                         <span id="nameR" style="background: url(../icon/noname.png) no-repeat;background-size: 90%;"></span>    
+                        <% } %>
+                        <div style="clear:both"></div>
+                        <span class="utime"><%=list[i].timeFormat%></span>
+                        <% if (list[i].type == 1) { %>
+                        <span class="type1">丢失</span>
+                        <% } else { %>
+                        <span class="type2">招领</span>
+                        <% } %>
+                    </p>
+                </div>
+                <% if (list[i].payNum>0) { %>
+                <div class="userMoney"><span>￥</span><span><%=list[i].payNum%></span></div>
+                 <% } %>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="item_bj mp_10" id="newDiv" onclick="clickList('<%=list[i].id%>')">
+            <div class="item">
+                <div style="height: 100%">
+                    <img style="<%=list[i].style%>" src="../icon/listpng.png"  data-echo="<%=list[i].picList%>" >
+                </div>
+                <div class="mages">
+                    <span style="overflow:hidden"><%=list[i].name%></span>
+                    <span>地址：<%=list[i].address%></span>
+                    <span class="desc">物品描述：<%=list[i].desc%></span>
+                </div>
+            </div> 
+        </div>
+        
+     <% } %>
+</script>
+<script id="scriptDiv" type="text/html">
+    <div class="mui-slider-group mui-slider-loop">
+        <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="<%=list[list.length-1].address%>">
+                <img src="<%=list[list.length-1].pic%>">
+            </a>
+        </div>
+        <%for(var i = 0;i < list.length; i++){%>
+
+            <!-- 第一张 -->
+            <div class="mui-slider-item">
+                <a href="<%=list[i].address%>">
+
+                    <img src="<%=list[i].pic%>">
+                </a>
+            </div>
+        <%}%>
+        <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+        <div class="mui-slider-item mui-slider-item-duplicate">
+            <a href="<%=list[0].address%>">
+                <img src="<%=list[0].pic%>">
+            </a>
+        </div>
+    </div>
+    <div class="mui-slider-indicator">
+        <div class="mui-indicator mui-active"></div>
+        <%for(var i = 0;i < list.length-1; i++){%>
+        <div class="mui-indicator"></div>
+        <%}%>
+    </div>
+</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+    var uid;
+    var allResult = {};
+    var userInfo = null;
+    apiready = function () {
+        userInfo = getUserInfo();
+        var carouselList = $api.getStorage("carouselList");
+        addCarouselToHtml(carouselList);
+        new datalistModel(addDataToHtml,pageByOrderUrl,{},10,5,100,true);
+    };
+    function chatMsg(){
+        openNewWindow('chat','chat.html')
+    }
+    //附近消息
+    function localMeesage(){
+        var localPoint = $api.getStorage("localPoint");
+        var obj = {};
+        var params = {lat:localPoint.lat,lon:localPoint.lon};
+        obj.url = pageByLocationUrl;
+        obj.toptext = 1;
+        obj.type = 1;
+        obj.params = params;
+        openNewWindow('viewsee','./viewsee.html',obj,{reload:true});
+        //alert(JSON.stringify(localPoint))
+    }
+    
+    function reloadHtml(){
+        apiready();
+    }; 
+    
+    function addDataToHtml(results,append) {
+        //alert(JSON.stringify(results))
+        if (results && results.length > 0) {
+            for(var i=0;i<results.length;i++){
+                allResult[results[i].id]=results[i];
+                if(isBlack(results[i].creater.name)){
+                    results[i].creater.name = JSON.stringify(results[i].phone).substring(0,3)+"****" + JSON.stringify(results[i].phone).substring(8,11)
+                }
+                if(isNotBlack(results[i].picList)){
+                    var picList = results[i].picList;
+                    var picIcon =  picList[0];
+                    var width = api.winWidth*0.9*0.4;
+                    var height =width*0.618;
+                    var obj = getImgSizeBySize(picIcon,width,height);
+                    //alert(JSON.stringify(obj));
+                    results[i].style = obj.style;
+                    results[i].picList = picIcon;
+                }
+            }
+
+            var data = {list: results};
+            var html = template('scriptDiv2',data);
+             if (append) {
+                var div = document.createElement("div");
+                div.innerHTML = html;
+                document.getElementById('main1').appendChild(div);
+            } else {
+                document.getElementById('main1').innerHTML = html;
+            }
+
+        }
+        echoExt.init();
+        
+    }
+    //点击发布求助的时候判断用户是否已认证
+    //如没有认证就提示用户去认证
+    function awayFn (){
+        dialogBox = api.require('dialogBox');
+        dialogBox.alert ({
+            texts: {
+                title: "实名认证",
+                content:"检测到您还没有实名认证，是否现在去认证？",
+                leftBtnTitle: "继续发布",
+                rightBtnTitle:"去认证"
+            },
+            tapClose:true,
+            styles:{
+                bg: '#fff',
+                w: api.winWidth *0.8,
+                corner: 0,
+
+                title:{
+                    marginT : 20,
+                    titleSize : 18,
+                    titleColor : '#06C1AE'
+                },
+                content:{
+                    color: '#000',
+                    size: 14
+                },
+                left:{
+                    marginB: 0,
+                    marginL: 0,
+                    w: api.winWidth *0.8*0.5,
+                    h: 43,
+                    color:'#000000',
+                    corner: 0,
+                    bg: '#E8E8E8',
+                    size: 16
+                },
+                right:{
+                    marginB: 0,
+                    marginL: 0,
+                    w: api.winWidth *0.8*0.5,
+                    h: 43,
+                    corner: 0,
+                    bg: '#06C1AE',
+                    size: 16,
+                    color:'#ffffff'
+                }
+            }
+        },function(ret){
+            if (ret.eventType == 'left') {
+                dialogBox.close ({
+                    dialogName: 'alert'
+                });
+                openNewWindow("publishhelp","./publishhelp.html")
+
+            }else if(ret.eventType == 'right'){
+                dialogBox.close ({
+                    dialogName: 'alert'
+                });
+                openNewWindow("auth","./auth.html")
+            }
+        });
+    }
+    //用户点击发布求助单击时间
+    document.getElementById("publishhelp1").onclick=function(){
+        ajaxGet(userinfoUrl,{},function(ret,err) {
+            if(ret.attestIDCard != 2){
+                awayFn();
+            }else{
+                openNewWindow('publishhelp','publishhelp.html');
+            }
+        });
+    };
+    document.getElementById("publishhelp2").onclick=function(){
+        openNewWindow("finds","./finds.html");
+    };
+    function clickList(id){
+        if(allResult[id].type == 1){
+            openNewWindow('viewseeList','./viewseeList.html',allResult[id]);
+        }else{
+            openNewWindow('myinlist','./myinlist.html',allResult[id]);
+        }
+        
+    }
+
+    function addCarouselToHtml(results) {
+       // alert(JSON.stringify(results))
+        if (results && results.length > 0) {
+            var data = {list: results};
+            var html = template('scriptDiv', data);
+            document.getElementById('slider').innerHTML = html;
+            mui.init({
+                swipeBack:true //启用右滑关闭功能
+            });
+            var slider = mui("#slider");
+            slider.slider({
+                interval: 3000
+            });
+        }
+    }
+</script>
+</body>
+
+</html>

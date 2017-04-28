@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+
+
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <!--<link rel="stylesheet" href="../css/mui.min.css">-->
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <link rel="stylesheet" href="../css/mui.picker.all.css" />
+    <link rel="stylesheet" href="../css/mui.poppicker.css" />
+
+    <style>
+        body{font-family:"黑体";}
+        html{background: #f4f4f4;}
+        li{list-style: none;text-decoration: none;}
+        .head_bj{width: 100%;height: 80px;float: left;background: #fff;}
+        .head{height: 80px;width: 90%;float: left;padding: 10px 5% 10px 5%;background: #fff;}
+        .img{height: 50px;width: 50px;float: left;display: flex;align-items: center;}
+        .img img{width: 100%;height: 100%;border-radius: 50%;}
+        .list{width: 200px;height: 80px;float: left;;padding: 5px 0 15px 15px;}
+        .list li{width: 100%;height:50%;float: left;}
+        .list li a{display: block;width: 80px;height: 22px;line-height: 22px; border-radius: 10px;background: #ff7a4d;float: left;
+            margin-left:10px;text-align: center;color: #fff;}
+        .list li span{display: block;float: left;}
+        .border{width: 90%;margin-left: 5%; margin-right:5%;display: flex;align-items: center;justify-content: space-between;height: 100%}
+        .r_icon_u{background: url("../icon/r_arrow1.png")no-repeat;background-size: cover;margin-right: 0;}
+        .r_icon_0{width: 30px;height:30px;float: right;margin-right: 0;}
+        .mage{line-height:60px;margin-right: auto;text-align: left;}
+        .border_b{border-bottom: none;}
+        .li_60{border-bottom: 1px solid #f4f4f4;}
+        input{margin-left: auto;width: 40%;text-align: right;margin-right: 30px;outline:none;}
+    </style>
+</head>
+<body>
+
+<div id="main">
+
+<div class="li_60 mp_10 mb_10" id="publish"  onclick="getImgUrl('icon')">
+    <div class="border border_b">
+        <span class="mage">修改头像</span>
+        <div class="img"><img   id="icon" onerror="this.src='../icon/me.png '"   data-type="show-image"    src=""></div>
+        <i class="r_icon_u"></i>
+    </div>
+</div>
+<div class="li_60">
+    <div class="border border_b">
+        <span class="mage">账号</span>
+        <span id="phone"     data-type="show-inner"></span>
+        <i class="r_icon_0"></i>
+    </div>
+</div>
+
+<div class="li_60">
+    <div class="border border_b">
+        <span class="mage">昵称</span>
+        <input type="text" maxlength="8"   data-type="show-value" id="name">
+    </div>
+</div>
+
+<div class="li_60"  id="sex">
+    <div class="border border_b">
+
+        <span class="mage">性别</span>
+        <span  id="sex_value" data-type="show-inner"></span>
+        <i class="r_icon_u"></i>
+    </div>
+</div>
+<div class="li_60" id="city">
+    <div class="border border_b">
+        <span class="mage">所在地</span>
+        <span id="cityResult" data-type="show-inner"></span>
+        <i class="r_icon_u"></i>
+    </div>
+</div>
+
+<div class="li_60 mp_10"  id="auth">
+    <div class="border border_b">
+
+        <span class="mage">实名认证</span>
+        <span  id="status" >男</span>
+        <i class="r_icon_u"></i>
+    </div>
+</div>
+
+<div class="li_60 mp_10"  id="" onclick="loginOut()">
+    <div class="border border_b">
+        <span class="mage">退出账号</span>
+        <i class="r_icon_u"></i>
+    </div>
+</div>
+
+</div>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../script/city.data.js"></script>
+<script type="text/javascript">
+    var imgType = null;
+    var license = null;
+    var icona;
+    function loginOut(){
+        var user = getUserInfo();
+        var ajpush = api.require('ajpush');
+        ajpush.removeListener();
+        cleanDb(function(ret,err){
+            getVisitor(function(){
+                api.execScript({
+                    name: rootWindowName,
+                    script: 'openTab("home")'
+                });
+                api.execScript({
+                    frameName:"home",
+                    script: 'reloadHtml();'
+                });
+                closeWin();
+            });
+        })
+    }
+
+    document.getElementById("auth").onclick=function(){
+        openNewWindow("auth","./auth.html")
+    };
+    function reloadHtml(){
+        apiready();
+    };
+    
+    apiready = function () {
+        var face =  document.getElementById("icon");
+        var phone = document.getElementById("phone");
+        var name = document.getElementById("name");
+        var sex_value = document.getElementById("sex_value");
+        var cityResult = document.getElementById("cityResult");
+        var  status =  document.getElementById("status");
+        var auth = document.getElementById('auth')
+        ajaxGet(userinfoUrl,{},function(ret,err) {
+            //alert(JSON.stringify(ret))
+            if(isBlack(ret.name)){
+                ret.name = "未填"
+            }else {
+                name.innerHTML = ret.name
+            }
+            if(ret.sex == 0) {
+                sex_value.innerHTML = "男"
+            }else {
+                sex_value.innerHTML = "女"
+            }
+            if(ret.attestIDCard == 0){
+                status.innerHTML = "未提交"
+                
+            } if(ret.attestIDCard == 1){
+                status.innerHTML = "审核中";
+                auth.onclick = function(){
+                    toast('您已提交您的个人信息，正在审核，请耐心等待！')
+                };
+            }if(ret.attestIDCard == 2){
+                status.innerHTML = "审核失败"
+            }if(ret.attestIDCard == 3){
+                status.innerHTML = "审核成功"
+            }
+            name.value =  ret.name;
+            phone.innerHTML =  ret.phone;
+            if(isNotBlack(ret.city)){
+                cityResult.innerHTML =  ret.city;
+            }
+            if(isNotBlack(ret.icon)){
+                face.src = ret.icon
+            }
+        });
+    };
+
+    function getImgUrl(type) {
+        imgType = type;
+        updateImageClip(200,200,'./imgClip.html');
+    }
+
+    function setImgUrl(data){
+        document.getElementById(imgType).src = data;
+        icona=data;
+    }
+
+
+
+    function commit(){
+        var face =  document.getElementById("icon").src;
+        var name = document.getElementById("name").value;
+        var sex_value = document.getElementById("sex_value").innerHTML;
+        var cityResult = document.getElementById("cityResult").innerHTML;
+        var icon =icona;
+
+        var parms = {};
+        //校验数据
+
+        if(isBlack(face)){
+            toast("请选择头像");
+            return
+        } 
+        if(isBlack(name)){
+            toast("您的昵称不能为空");
+            return;
+        }
+        if(isBlack(sex)){
+            toast("请选择性别");
+            return;
+        }
+        if(sex_value == "男") {
+            sex_value = 0
+        }else {
+            sex_value = 1
+        }
+
+        parms.icon = face;
+        parms.name = name;
+        parms.sex = sex_value;
+        parms.city = cityResult;
+        ajaxGetWithProgress(updateUserUrl,parms,function(ret,err){
+            if(ret&&ret.success){
+                toast("提交成功！");
+                $api.setStorage("user", ret.user);
+                api.execScript({
+                    name:rootWindowName ,
+                    frameName: "user",
+                    script: 'reloadHtml()'
+                });
+                setTimeout(closeWin(),800);
+            }else{
+                toast("当前网络不稳定");
+            }
+        })
+    }
+
+    var sex_value = document.getElementById("sex_value");
+    (function($, doc) {
+        $.init();
+        $.ready(function () {
+            var sexData = [{value: '1', text: '男'},{value: '2', text: '女'}];
+            var sexPicker = new $.PopPicker();
+            sexPicker.setData(sexData);
+            sexPicker.setTitle("性别");
+            var showSexPickerButton = doc.getElementById('sex');
+            var sexResult = doc.getElementById('sex_value');
+            showSexPickerButton.addEventListener('tap', function (event) {
+                sexPicker.show(function (items) {
+                    sexResult.value = items[0].value;
+                    //返回 false 可以阻止选择框的关闭
+                    //return false;
+                    sex_value.innerHTML  = items[0].text;
+                });
+            }, false);
+          //三级选择
+            var cityPicker = new $.PopPicker({
+                layer: 2
+            });
+            cityPicker.setData(cityData);
+            cityPicker.setTitle("籍贯");
+            var showCityPickerButton = doc.getElementById('city');
+            var cityResult = doc.getElementById('cityResult');
+            showCityPickerButton.addEventListener('tap', function (event) {
+                cityPicker.show(function (items) {
+                    cityResult.innerHTML = items[0].text + " " + items[1].text;
+                    //返回 false 可以阻止选择框的关闭       
+                    //return false;
+
+                    cityId = items[1].value;
+                });
+            }, false);
+
+        })
+    })(mui, document);
+</script>
+</body>
+</html>

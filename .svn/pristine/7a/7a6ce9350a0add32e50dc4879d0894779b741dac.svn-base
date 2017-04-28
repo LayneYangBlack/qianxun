@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <style>
+        body{font-family:"黑体";}
+        *{list-style:none;}
+		.money-td{width:70%;height:20px;margin:0 auto;margin-top: 23px;}
+		.money-td-left,.money-td-right{height:1px;width:35%;border-bottom: 1px solid #EBEBEB;margin-top:17px;}
+		.money-td-left{float:left;}
+		.money-td-right{float:right;}
+		.money-td-text{width:30%;height:100%;float:left;text-align: center;line-height:36px;color:#999999;font-size: 13px;}
+		.td-list{width:100%;height:auto}
+		.td-list ul {width:100%;height:auto;margin:0 auto;overflow: hidden;}
+		.td-list ul li {width:100%;height:69px;border-bottom: 1px solid #EBEBEB;overflow: hidden;}
+		.td-list ul li>div{width:90%;height:39px;margin:15px auto 0 auto;}
+		.td-list-top{width:100%;height:50%;}
+		.td-list-top-l{float:left;font-size: 14px;}
+		.td-list-top-r{float:right;font-size: 14px;color:#06C1AE;}
+		.td-list-bottom{height:50%;width:100%;margin-top: 5px;}
+		.td-list-bottom-l,.td-list-bottom-c,.td-list-bottom-r{font-size:12px;color:#989898;}
+		.td-list-bottom-l{float:left;}
+		.td-list-bottom-c{margin-right:2%;float:right;}
+		.td-list-bottom-r{float:right;}
+    </style>
+</head>
+<body>
+	<div class="money-td">
+		<div class="money-td-left"></div>
+		<div class="money-td-text">交易明细</div>
+		<div class="money-td-right"></div>
+	</div>
+	<!-- <div class="td-list">
+		<ul>
+			<li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">企业红包收入</p>
+						<p class="td-list-top-r">0.30元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">企业红包收入</p>
+						<p class="td-list-top-r">0.30元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">转账收入</p>
+						<p class="td-list-top-r">2,000,000元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">企业红包收入</p>
+						<p class="td-list-top-r">0.30元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">企业红包收入</p>
+						<p class="td-list-top-r">0.30元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">企业红包收入</p>
+						<p class="td-list-top-r">0.30元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">企业红包收入</p>
+						<p class="td-list-top-r">0.30元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">转账收入</p>
+						<p class="td-list-top-r">2,000,000元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li> -->
+			<!-- <li>
+				<div>
+					<div class="td-list-top">
+						<p class="td-list-top-l">企业红包收入</p>
+						<p class="td-list-top-r">0.30元</p>
+					</div>
+					<div class="td-list-bottom">
+						<p class="td-list-bottom-l">交易成功</p>
+						<p class="td-list-bottom-r">10:52:17</p>
+						<p class="td-list-bottom-c">2016-08-17</p>
+					</div>
+				</div>
+			</li>
+			 -->
+		<!-- </ul> -->
+	<!-- </div> -->
+	<div id="mainOne" class="td-list">
+		<!-- <ul id="mainOne"></ul> -->
+	</div>
+</body>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script id="scriptDiv1" type="text/html">
+	<ul>
+    <% for (var i = 0; i < list.length; i ++) { %>
+    	<li>
+			<div>
+				<div class="td-list-top">
+					<p class="td-list-top-l"><%=list[i].log%></p>
+					<p class="td-list-top-r"><%=list[i].money%> 元</p>
+				</div>
+				<div class="td-list-bottom">
+					<p class="td-list-bottom-l">交易成功</p>
+					
+					<p class="td-list-bottom-c" id="time"><%=list[i].ctime%></p>
+				</div>
+			</div>
+		</li>
+    <% } %>
+    </ul>
+</script>
+<script>
+	var uid;
+	var allResult = [];
+	var userInfo = null;
+	// var url = 0defaultRandomEarnScoreUrl;
+	var messageList = null;
+	var openHtml = null;
+
+	apiready = function () {
+		var getMoneyJson = {};
+		new datalistModel(addDataToHtml,getMyWalletPagerUrl,getMoneyJson,10,5,100,true);
+	};
+	function addDataToHtml(results, append) {
+		var message = {};
+		for(var i=0;i<results.length;i++){
+			allResult[results[i].id]=results[i];
+			results[i].ctime = formatTimeToDate(results[i].ctime);
+		}
+		var data = {list: results};
+		var html = template('scriptDiv1', data);
+		if (append) {
+			var div = document.createElement("div");
+			div.innerHTML = html;
+			document.getElementById('mainOne').appendChild(div);
+		} else {
+			document.getElementById('mainOne').innerHTML = html;
+		} 
+	}
+
+</script>
+</html>

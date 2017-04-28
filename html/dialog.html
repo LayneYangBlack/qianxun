@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>title</title>
+    <style>
+
+	.bgBody{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,.1);
+	}
+    .bg{
+    	background: #787878;
+    	width: 50%;
+    	margin: 50% 0px 0px 23%;
+    	border-radius: 8px;
+    	text-align: center;
+    	padding: 2%;
+    }
+    .bgimg{
+    	height: 100px;
+    }
+    .bgtext{
+    	height: 30px;
+    	padding : 10px 0px 0px 0px;
+    	border-radius: 4px;
+    	/*background-color: #FF0000;*/
+    	color: #9E9E9E;
+		font-size: 16px;
+    }
+    </style>
+</head>
+<body>
+<div class="bgBody">
+	<div class="bg" id="bg">
+		<img src="../../icon/chat/dialogImg1.gif" class="bgimg" id="bgimg"/>
+		<div class="bgtext" id="bgtext">手指上滑，取消发送</div>
+	</div>
+	</div>
+</body>
+
+
+<script type="text/javascript">
+	apiready = function(){
+
+	};
+	
+	function moveOut(){
+		document.getElementById('bgimg').src = '../../icon/chat/return.png';
+		document.getElementById('bgtext').innerHTML = '松开手指，取消发送';
+		document.getElementById('bgtext').style.background = "#891313";
+	}
+	
+	function moveIn(){
+		document.getElementById('bgimg').src = '../../icon/chat/dialogImg1.gif';
+		document.getElementById('bgtext').innerHTML = '手指上滑，取消发送';
+		document.getElementById('bgtext').style.background = '#6a6a6a';
+	}
+	
+	function moveShort(){
+		document.getElementById('bgimg').src = '../../icon/chat/fail.png';
+		document.getElementById('bgtext').innerHTML = '录音时间太短';
+		document.getElementById('bgtext').style.background = "#6a6a6a";
+	}
+	
+	
+	
+	
+</script>
+</html>

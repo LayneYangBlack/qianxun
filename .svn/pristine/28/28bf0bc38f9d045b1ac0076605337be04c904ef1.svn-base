@@ -1,0 +1,25 @@
+
+.mp_10{margin-top: 10px;}
+.mb_10{margin-bottom: 10px;}
+.li_42{width: 100%;height: 42px;float: left;background: #fff;line-height: 42px;display: flex;align-items: center;justify-content: space-between;}
+.li_50{width: 100%;height: 56px;float: left;background: #fff;line-height: 55px;display: flex;align-items: center;justify-content: space-between;}
+.li_60{width: 100%;height: 61px;float: left;background: #fff;line-height: 60px;display: flex;align-items: center;justify-content: space-between;}
+
+
+
+.li_60 div span:first-child{color: #909090;}
+
+.l_icon{width: 30px;height: 30px;float: left;margin-left: 20px;}
+.r_icon{width: 30px;height: 30px;float: right;margin-right: 10px;}
+.l_icon_b{width: 43px;height: 43px;float: left;}
+.r_icon_b{width: 30px;height: 30px;float: right;}
+.l_icon_u{width: 24px;height: 24px;float: left;}
+.r_icon_u{width: 30px;height:30px;float: right;margin-right: 10px;}
+
+.clear{clear: both;}
+.border_b{border-bottom: none;}
+
+.top_x{border-top: 1px solid #f4f4f4;}
+.bom_x{border-bottom: 1px solid #f4f4f4;}
+.lft_x{border-left: 1px solid #f4f4f4;}
+.rig_x{border-right: 1px solid #f4f4f4;}

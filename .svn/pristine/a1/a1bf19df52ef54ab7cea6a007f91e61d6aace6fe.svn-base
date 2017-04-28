@@ -1,0 +1,185 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <title></title>
+    <link rel="stylesheet" href="../css/mui.css"/>
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: "黑体";
+            width: 100%;
+            height: 100%;
+        }
+        #header {
+            width: 100%;
+            height: 50px;
+            background-color: #F0F0F0;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            position: relative;
+        }
+        #city {
+            text-align: center;
+            display: block;
+            overflow: hidden;;
+            padding-left: 2%;
+            float: left;;
+            white-space: nowrap;
+            width: 80%;;
+        }
+        .address {
+            height: 20px;
+            margin-left: 3%;
+            width: 40%;
+            border: none;
+            display: inline-block;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cancel_select {
+            color: #FFBC5D;
+            border: none;
+            width: 10%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 1%;
+        }
+        #Ulist {
+            width: 100%;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+        }
+        .Ulistli {
+            border-bottom: 1px solid #f4f4f4;
+            width: 100%;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            width:90%;
+            text-align: left;
+            margin:0 auto;
+            padding: 5px 0px;
+            font-size: 16px;
+        }
+        .address_vice {
+            font-size: 12px;
+            color: #CCCCCC;
+            display: block;
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .address_principal {
+            width: 80%;
+        }
+        .address_icon {
+            width: 20px;
+            margin: 0 5%;
+        }
+        #keyword {  
+            font-size: 16px;
+            width: 95%;
+        }
+        .searchSpan{line-height: 34px;width:18%;text-align:center;float:right;display:block;background:#F8B109;color:#fff;border-radius: 8px;margin-right: 5%}
+    </style>
+</head>
+<body>
+
+<ul id="Ulist">
+    <!-- <li class="Ulistli" onclick="checkAddress('<%=list[i].id%>')">
+        <%= list[i].address%>
+    </li><li class="Ulistli" onclick="checkAddress('<%=list[i].id%>')">
+        <%= list[i].address%>
+    </li><li class="Ulistli" onclick="checkAddress('<%=list[i].id%>')">
+        <%= list[i].address%>
+    </li><li class="Ulistli" onclick="checkAddress('<%=list[i].id%>')">
+        <%= list[i].address%>
+    </li><li class="Ulistli" onclick="checkAddress('<%=list[i].id%>')">
+        <%= list[i].address%>
+    </li> -->
+</ul>
+</body>
+<script id="scriptLi" type="text/html">
+    <% for (var i=0;i < list.length;i++){%>
+    <li class="Ulistli" onclick="checkAddress('<%=list[i].id%>')">
+		<%= list[i].address%>
+    </li>
+    <%}%>
+</script>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript">
+	var allResult = [];
+    var type;
+	function setAddress(result){
+        //根据经纬度查找地址信息
+        var map = api.require('bMap');
+        map.getNameFromCoords({
+            lon: result.lon,
+            lat: result.lat
+        }, function (ret, err) {
+            if (ret.status){
+  				addDataToHtml(ret.poiList);
+            }
+        });
+    }
+    apiready = function (){
+        type = api.pageParam;
+        var bMap = api.require('bMap');
+        bMap.getLocation({
+            accuracy: '100m',
+            autoStop: true,
+            filter: 1
+        }, function(ret, err) {
+            if (ret.status) {
+                setAddress(ret);
+            } else {
+                //alert(err.code);
+            }
+        });
+    }
+    
+    allResult = [];
+    function addDataToHtml(results) {
+		var message = {};
+		for(var i=0;i<results.length;i++){
+            results[i].address =  results[i].address +  results[i].name;
+            results[i].id = i;
+			allResult[results[i].id]=results[i];
+			results[i].ctime = formatTimeToDate(results[i].ctime);
+		}
+		var data = {list: results};
+		var html = template('scriptLi', data);
+		document.getElementById('Ulist').innerHTML = html;
+	}
+    function checkAddress(id){
+        api.execScript({
+            name:type.name,
+            frameName:type.frameName,
+            script:'getInnerHTML('+ JSON.stringify(allResult[id]) +')'
+        });
+        closeWin();
+    }
+</script>
+
+</html>

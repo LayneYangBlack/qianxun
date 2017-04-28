@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <title></title>
+    <link rel="stylesheet" href="../css/mui.css"/>
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: "黑体";
+            width: 100%;
+            height: 100%;
+        }
+        #header {
+            width: 100%;
+            height: 50px;
+            background-color: #F0F0F0;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            position: relative;
+        }
+        #city {
+            text-align: center;
+            display: block;
+            overflow: hidden;
+            padding-left: 2%;
+            float: left;
+            white-space: nowrap;
+            width: 80%;
+        }
+        .address {
+            height: 20px;
+            margin-left: 3%;
+            width: 40%;
+            border: none;
+            display: inline-block;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cancel_select {
+            color: #FFBC5D;
+            border: none;
+            width: 10%;
+            height: 100%;
+            display:flex;
+            align-items: center;
+            position: absolute;
+            right:1%;
+        }
+        #Ulist {
+            width: 100%;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #Ulist li {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #F1F2F3;
+            width: 100%;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+        }
+        .address_vice {
+            font-size: 12px;
+            color: #CCCCCC;
+            display: block;
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .address_principal {
+            width: 80%;
+        }
+        .address_icon {
+            width: 20px;
+            margin: 0 5%;
+        }
+        #keyword {
+            font-size: 16px;
+            width: 95%;
+        }
+        .searchSpan{line-height: 34px;width:18%;text-align:center;float:right;display:block;background:#F8B109;color:#fff;border-radius: 8px;margin-right: 5%}
+    </style>
+</head>
+<body>
+
+<!-- <ul id="Ulist">
+  	<li >
+        <img class="address_icon" src="../icon/address@2x.png"/>
+        <span class="address_principal">
+            西二旗地铁站  西二旗地铁站  西二旗地铁站  西二旗地铁站  西二旗地铁站<br>
+        <span class="address_vice">地铁13号线</span>
+        </span>
+    </li>
+</ul> -->
+</body>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript">
+    var results = {};
+    var city = null;
+    // function setAddress(result){
+    //     //根据经纬度查找地址信息
+    //     apiMap.getNameFromCoords({
+    //         lon: result.lon,
+    //         lat: result.lat
+    //     }, function (ret, err) {
+    //         if (ret.status) {
+    //             alert(JSON.stringify(ret))
+    //             // cityData = ret;
+    //             // document.getElementById("city").innerHTML = cityData.city;
+    //             $api.setStorage("city",ret.city)
+    //         }
+    //     });
+    // }
+
+    apiready = function (){
+        //footer高度为css样式中声明的30px
+        var footerH = 89;
+        //frame的高度为当前window高度减去header和footer的高度
+        mainH = (api.winHeight - 48) / 2;
+
+        var map = api.require('bMap');
+        map.getLocation({
+            accuracy: '100m',
+            autoStop: true,
+            filter: 1
+        }, function(ret, err){
+            if(ret.status){
+                cityData = ret;
+                // ajaxGetWithProgress(coordinateUrl,ret,function(ret,err){
+                //     if(isNotBlack(err)){
+                //         toast("网络连接错误")
+                //     }
+                // })
+            }
+        });
+
+        apiMap = map;
+        //打开地图
+
+        city = api.pageParam.city;
+    }
+   
+
+    //APIREDAY 尾
+    function openCityList() {
+        //openNewWindow("cityList","./cityList.html",{})
+        var UICityList = api.require('UICityList');
+        UICityList.open({
+            rect: {
+                x: 0,
+                y: 0,
+                w: api.frameWidth,
+                h: api.frameHeight
+            },
+            resource: 'widget://res/cityList.json',
+            styles: {
+                searchBar: {
+                    bgColor: '#696969',
+                    cancelColor: '#E3E3E3'
+                },
+                location: {
+                    color: '#696969',
+                    size: 14
+                },
+                sectionTitle: {
+                    bgColor: '#eee',
+                    color: '#000',
+                    size: 14
+                },
+                item: {
+                    bgColor: '#fff',
+                    activeBgColor: '#696969',
+                    color: '#000',
+                    size: 16,
+                    height: 40
+                },
+                indicator: {
+                    bgColor: '#fff',
+                    color: '#696969'
+                }
+            },
+            currentCity: '北京',
+            locationWay: 'GPS',
+            hotTitle: '热门城市',
+            fixedOn: api.frameName,
+            placeholder: '输入城市名或首字母查询'
+        }, function(ret, err) {
+            if(isNotBlack(ret.cityInfo)) {
+                city = ret.cityInfo.city;
+                showCity(city);
+                UICityList.close();
+            }
+        });
+    }
+   
+    function listSelect(id) {
+        var select = results[id];
+        api.execScript({
+            name: "bmap",
+            frameName: 'bmap_body',
+            script: 'showNewAddress(' + JSON.stringify(select) + ')'
+        });
+        closeWin()
+    }
+
+
+</script>
+<script id="scriptLi" type="text/html">
+    <% for (var i=0;i < data_list.length;i++){%>
+    <li onclick="listSelect('<%=data_list[i].id%>')">
+        <img class="address_icon" src="../icon/address@2x.png"/>
+		<span class="address_principal">
+			<%= data_list[i].name%><br>
+		<span class="address_vice"><%= data_list[i].address%></span>
+		</span>
+    </li>
+    <%}%>
+</script>
+
+</html>

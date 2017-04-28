@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>设置</title>
+    <link rel="stylesheet" href="../css/commonWindow.css">
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+    	html,body  {
+    		background: #f2f2f2;
+    	}
+        .item{
+            height: 4rem;
+            background-color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+            padding: 0 1rem;
+            border-bottom: 1px #f1f2f3 solid;
+        }
+        .input{
+            text-align: right;
+            color: #9e9e9e;
+            width: 30%;
+            border: none;
+            /*position: absolute;
+            right: 12%;*/
+        }
+        .leftIcon{
+            width: 25px;
+            float: left;
+            margin-right: 0.5rem;
+        }
+        .nextIcon{width:20px;/*position: absolute;right: 4%;*/}
+        .leftMsg{    display: inline-block;
+            height: 3rem;
+			display: flex;
+			align-items: center;
+            color: #5b5b5b;
+            }
+        .exit_button{
+            width: 100%;
+            height: 50px;
+            background-color: #06C1AE;
+            color: #FFFFFF;
+            font-size:18px;
+            line-height: 50px;
+            position: absolute;
+            bottom: 0;
+            border: none;
+        }
+        .bottom{width: 90%;margin:1rem 5% 0 5%;background: #f8b109;border-radius: 8px;height: 2.5rem; float: left;line-height: 2.5rem;
+            text-align: center;}
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="item" onclick="">
+        <span class="leftMsg"><img class="leftIcon" src="../icon/versions.png" alt="">版本更新</span>
+         <img class="nextIcon"  src="../icon/icon_right_normal.png">
+    </div>
+    <div class="item" onclick="openAbout()">
+        <span class="leftMsg"><img class="leftIcon" src="../icon/aboutus.png" alt="">关于我们</span>
+        <img class="nextIcon"  src="../icon/icon_right_normal.png">
+    </div>
+    <button class="exit_button" onclick="loginOut()">退出登录</button>
+</div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript">
+
+	  function loginOut(){
+        var user = getUserInfo();
+        var ajpush = api.require('ajpush');
+        ajpush.removeListener();
+        cleanDb(function(ret,err){
+            getVisitor(function(){
+                api.execScript({
+                    name: rootWindowName,
+                    script: 'openTab("home")'
+                });
+                api.execScript({
+                    frameName:"home",
+                    script: 'reloadHtml();'
+                });
+                closeWin();
+            });
+        })
+    }
+		function openAbout(){
+			openNewWindow('about','./about.html');
+		}
+</script>
+</html>

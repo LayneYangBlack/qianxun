@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+    <style>
+        body{font-family:"黑体";}
+        html{background: #f4f4f4;}
+        li{list-style: none;text-decoration: none;}
+        .head_bj{width: 100%;height: 80px;float: left;background: #fff;}
+        .head{height: 80px;width: 90%;float: left;padding: 10px 5% 10px 5%;background: #fff;}
+        .img{height: 50px;width: 50px;float: left;margin-top: 5px;border-radius: 50%;overflow: hidden;}
+        .img img{width: 100%;height: 100%;}
+        .list{width: 80%;height: 80px;float: left;;padding: 5px 0 15px 15px;}
+        .list li{width: 100%;height:50%;float: left;}
+        #qualification{display: block;width: 60px;height: 18px;line-height: 22px; background:url(../icon/noname.png) no-repeat;background-size:90%;float: left;margin-left:10px;text-align: center;color: #fff;margin-top:2px}
+        .list li span{display: block;float: left;}
+        .border{width: 95%;margin-left: 5%;border-bottom: 1px solid #f4f4f4;display: flex;align-items:center;justify-content: space-between;}
+        .r_icon_u{background: url("../icon/r_arrow1.png")no-repeat;background-size: cover;}
+        .l_icon_1{background: url("../icon/release.png")no-repeat;background-size:cover;}
+        .l_icon_2{background: url("../icon/fairy.png")no-repeat;background-size:cover;}
+        .l_icon_3{background: url("../icon/wallet-1.png")no-repeat;background-size:cover;}
+        .l_icon_4{background: url("../icon/fairy copy.png")no-repeat;background-size:cover;}
+        .l_icon_5{background: url("../icon/help.png")no-repeat;background-size:cover;}
+        .mage{line-height:60px;margin-right: auto;text-align: left;margin-left: 5%;}
+        .xian{width: 15%;float: left;height: 1px;background: #fff;}
+        .size{width: 24px;height: 24px;float: left;margin-bottom: 3px;}
+        .border_b{border-bottom: none;}
+        #body{display: block;}
+        #phone{margin-top: 5px}
+    </style>
+</head>
+<body id="body">
+    <div class="head_bj mp_10" id="updeta">
+        <div class="head">
+            <div class="img"><img src="" id="imgUrl" onerror="this.src='../icon/me.png'"></div>
+            <div class="list">
+                <li><span id="name"></span>    <a id="qualification"></a></li>
+                <li id="phone"></li>
+            </div>
+        </div>
+    </div>
+    <div class="li_60 mp_10" id="publish">
+        <div class="border border_b">
+            <i class="l_icon_1 size"></i>
+            <span class="mage">我发布的</span>
+            <span id="lostCount"></span>
+            <i class="r_icon_u"></i>
+        </div>
+    </div>
+    <div class="xian"></div>
+    <div class="li_60" id="ifound">
+        <div class="border border_b" style="border-bottom: 1px solid #f4f4f4;">
+            <i class="l_icon_2 size"></i>
+            <span  class="mage">我拾到的</span>
+            <span id="fountCount"></span>
+            <i class="r_icon_u"></i>
+        </div>
+    </div>
+    <div class="li_60" id="ihelp">
+        <div class="border border_b">
+            <i class="l_icon_5 size"></i>
+            <span  class="mage">我参与的</span>
+            <span id="helpCounts"></span>
+            <i class="r_icon_u"></i>
+        </div>
+    </div>
+    <div class="li_60 mp_10">
+        <div class="border border_b" id="mymoney">
+            <i class="l_icon_3 size"></i>
+            <span  class="mage">我的钱包</span>
+            <i class="r_icon_u"></i>
+        </div>
+    </div>
+    <div class="li_60 mp_10" onclick="openset()">
+        <div class="border border_b" id="login">
+            <i class="l_icon_4 size"></i>
+            <span class="mage">设置</span>
+            <i class="r_icon_u"></i>
+        </div>
+    </div>
+    <script src="../script/mui.min.js"></script>
+    <script type="text/javascript" src="../script/api.js"></script>
+    <script type="text/javascript" src="../script/user.js"></script>
+    <script type="text/javascript" src="../script/util.js"></script>
+    <script type="text/javascript" src="../script/kv.js"></script>
+    <script type="text/javascript" src="../script/apiCloud.js"></script>
+    <script type="text/javascript" src="../script/public.js"></script>
+    <script type="text/javascript" src="../script/template-native.js"></script>
+    <script type="text/javascript" src="../script/data.js"></script>
+    <script type="text/javascript" src="../script/init.js"></script>
+<script>
+     apiready = function () {
+        var phone = document.getElementById("phone");
+        var name = document.getElementById("name");
+        var fountCount = document.getElementById("fountCount");
+        var lostCount = document.getElementById("lostCount");
+        var fountCounts = document.getElementById("fountCounts"); 
+        var helpCounts = document.getElementById("helpCounts");   
+        var money = document.getElementById("money");
+        var imgUrl = document.getElementById('imgUrl')
+        var body = document.getElementById('body')
+        var attest = document.getElementById('qualification')
+        ajaxGet(userinfoUrl,{},function(ret,err) {
+                //alert(JSON.stringify(ret))
+            if(isNotBlack(ret)&&isNotBlack(ret.id)){
+                if(isBlack(ret.name)){
+                    name.innerHTML = "未填"
+                }else {
+                    name.innerHTML = ret.name
+                }
+                phone.innerHTML =  ret.phone;
+                helpCounts.innerHTML = ret.helpCount;
+                fountCount.innerHTML = ret.fountCount;
+                lostCount.innerHTML = ret.lostCount;
+                imgUrl.src = ret.icon
+                body.style.display = "block";
+                if(ret.attestIDCard == 3){
+                    attest.style.background = "url(../icon/yesname.png) no-repeat";
+                    attest.style.backgroundSize = "90%"
+                }
+                $api.setStorage("user", ret);
+            }
+        });
+        
+    };
+    function reloadHtml(){
+        apiready();
+    };
+    function getPhone(){
+        var phoneNum = phone.innerHTML
+    }
+    
+    function reloadHtml(){
+        apiready();
+    };
+    
+    document.getElementById("publish").onclick=function(){
+        openNewWindow("myintroduced","./myintroduced.html")
+    };
+    
+    document.getElementById("updeta").onclick=function(){
+        openNewWindow("userinfo","./userinfo.html")
+    };
+    document.getElementById("mymoney").onclick=function(){
+        openNewWindow("MyMoney","./MyMoney.html")
+    };
+    document.getElementById("ifound").onclick=function(){
+        openNewWindow("myin","./myin.html")
+    };
+    document.getElementById("ihelp").onclick=function(){
+        openNewWindow("myhelp","./myhelp.html")
+    };
+    function openset(){
+        openNewWindow('set','./set.html')
+    }
+</script>
+</body>
+</html>

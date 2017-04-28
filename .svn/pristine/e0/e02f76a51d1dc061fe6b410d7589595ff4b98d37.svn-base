@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <title></title>
+    <link rel="stylesheet" href="../css/mui.css"/>
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: "黑体";
+            width: 100%;
+            height: 100%;
+        }
+        #header {
+            width: 100%;
+            height: 50px;
+            background-color: #F0F0F0;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            position: relative;
+        }
+        #city {
+            text-align: center;
+            display: block;
+            overflow: hidden;;
+            padding-left: 2%;
+            float: left;;
+            white-space: nowrap;
+            width: 80%;;
+        }
+        .address {
+            height: 20px;
+            margin-left: 3%;
+            width: 40%;
+            border: none;
+            display: inline-block;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cancel_select {
+            color: #FFBC5D;
+            border: none;
+            width: 10%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            right: 1%;
+        }
+        #Ulist {
+            width: 100%;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        #Ulist li {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #F1F2F3;
+            width: 100%;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+        }
+        .address_vice {
+            font-size: 12px;
+            color: #CCCCCC;
+            display: block;
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .address_principal {
+            width: 80%;
+        }
+        .address_icon {
+            width: 20px;
+            margin: 0 5%;
+        }
+        #keyword {
+            font-size: 16px;
+            width: 95%;
+
+        }
+        .searchSpan{line-height: 34px;width:18%;text-align:center;float:right;display:block;background:#F8B109;color:#fff;border-radius: 8px;margin-right: 5%}
+        .home{width: 100%;height: 54px;float: left;background: #fff;}
+        .home_eaer{width: 90%;margin: 13px 5%;background: #f4f4f4;height:28px;border-radius:30px; }
+        .home_eaer i{display:block;height: 28px;;width: 28px;float: left;background: url("icon/seach.png")no-repeat center;
+            background-size: 15px 15px;  margin-left: 5px;}
+        .home_eaer input{width: 180px;height: 100%;float: left;margin-left: 15px;font-size: 14px;border: none;background: #f4f4f4;line-height: normal;outline:none;}
+    </style>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript">
+    var results = {};
+    var city = null;
+    var apiMap;
+    //城市列表选择器回显
+    function showCity(res) {
+        document.getElementById('city').innerText = res;
+        var address = document.getElementById('keyword').value;
+        if(isNotBlack(address)){
+            searchAddress(address);
+        }
+    }
+    //搜索
+    function search() {
+        var address = document.getElementById('keyword').value;
+        if (isNotBlack(address)) {
+            searchAddress(address);
+        }
+    }
+  
+    function searchAddress(address) {
+        //	模糊搜索
+        var map = api.require('bMap');
+        map.searchInCity({
+            city: city,
+            keyword: address,
+            pageIndex: 0
+        }, function (ret, err) {
+            if (ret.status) {
+                results = {};
+                var vague_list = ret.results;
+                for (var i = 0; i < vague_list.length; i++) {
+                    vague_list[i].id = i;
+                    results[i] = vague_list[i];
+                }
+                var data = {data_list: vague_list};//必须为JSON数据格式
+                var html = template('scriptLi', data);
+                document.getElementById('Ulist').innerHTML = html;
+            } else {
+
+                if(err.code == 1){
+                    toast("检索词有岐义")
+                } else if(err.code == 2){
+                    toast("检索地址有岐义")
+                }else if(err.code == 3){
+                    toast("没有找到检索结果")
+                } else if(err.code == 4){
+                    toast("key错误")
+                }else if(err.code == 5){
+                    toast("网络连接错误")
+                }else if(err.code == 6){
+                    toast("网络连接超时")
+                }else if(err.code == 7){
+                    toast("还未完成鉴权，请在鉴权通过后重试")
+                }
+            }
+        });
+    }
+    apiready = function (){
+        var map = api.require('bMap');
+        apiMap = map;
+         var mainH = (api.winHeight - 48) / 2;
+        map.open({
+            rect: {//模块的位置及尺寸
+                x: 0,
+                y: 48,
+                w: api.winWidth,
+                h: mainH
+            },
+            traffic: true,
+//              center:{
+//                  lon: cityData.lon,
+//                  lat: cityData.lat
+//              },
+            zoomLevel: 15,//缩放等级  取值范围：3-18级
+            showUserLocation: true//是否显示用户的位置
+
+        }, function (ret, err) {
+            if(ret) {
+                map.show();
+                openMapIcon();
+                addMoveMap();
+                openAddressFreame();
+//                map.getCenter(function(ret) {
+//                    api.execScript({
+//                        frameName: 'addressframe',
+//                        script: 'setAddress("' + JSON.stringify(ret) + '")'
+//                    });
+//                });
+            }
+            if (err) {
+            }
+        });
+        city = api.pageParam.city;
+    };
+
+    function closeframe() {
+        api.closeFrame({
+            name: ''
+        });
+    }
+
+
+    function openAddressFreame(){
+        api.openFrame({
+            name: 'addressframe',
+            url: './addressframe.html',
+            rect: {
+                x: 0,
+                y: (api.winHeight-48) / 2+48,
+                w: api.winWidth,
+                h: (api.winHeight-48) / 2
+            },
+            pageParam:api.pageParam,
+            bgColor: 'rgba(255,255,255,0)'
+        });
+    }
+
+    //打开图标
+    function openMapIcon() {
+        //打开图标
+        var mainH = (api.winHeight - 48) / 2;
+        api.openFrame({
+            name: 'mapIcon',
+            url: './mapIcon.html',
+            rect: {
+                x: (api.winWidth) / 2 - 46,
+                y: (mainH-77) / 2 + 48 ,
+                w: 110,
+                h: 77
+            },
+            bgColor: 'rgba(255,255,255,0)'
+        });
+    }
+
+    //增加移动地图事件
+    function addMoveMap() {
+        apiMap.addEventListener({
+            name: 'viewChange'
+        }, function (ret) {
+            if (ret.status) {
+                //是否获取中心点位置、
+                api.execScript({
+                    frameName: 'addressframe',
+                    script: 'setAddress(' + JSON.stringify(ret) + ')'
+                });
+            }
+        });
+    }
+
+    function changeCenter(ret){
+        var map =  api.require('bMap');
+        map.setCenter({
+            coords: {
+                lon:ret.lon,
+                lat: ret.lat
+            },
+            animation: false
+        });
+
+        api.execScript({
+            frameName: 'addressframe',
+            script: 'setAddress(' + JSON.stringify(ret) + ')'
+        });
+    }
+</script>
+</html>

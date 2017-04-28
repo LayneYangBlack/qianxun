@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>特许营业许可证</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+	<style>
+		*{margin:0;padding:0;}
+		html{background: #EDEDED;}
+		body{background: #EDEDED;font-family:"黑体";}
+		.myin-top{width:100%;height:46px;border-bottom:1px solid #EDEDED;background: #fff;border-top:1px solid #EDEDED;}
+		.myin-top-center{width:90%;height:100%;margin:0 auto;}
+		.myin-top-left{color:#5B5B5B;font-size: 13px;float:left;line-height:46px;}
+		.myin-top-right{color:#FC4E50;font-size: 13px;float:right;line-height:46px;}
+		.losething{width:100%;height:125px;background: #fff;border-bottom:1px solid #ededed;overflow: hidden;}
+		.losething-center{width:90%;height:100%;margin:0 auto;overflow: hidden;}
+		.lose-img{width:29%;height:95px;float:left;background: url(../icon/images1.png);background-size: 100%;margin-top:15px;}
+		.lose-text{width:51%;float:right;overflow: hidden;margin-right:4%;}
+		.lose-text p {margin-bottom:0;}
+		.lose-text-1{width:100%;height:20px;margin-top:2px;font-size: 16px;color:#2B2B33;overflow: hidden;}
+		.lose-text-2{margin-top:10px;color:#909090;font-size: 14px;overflow: hidden;}
+		.lose-text-3{margin-top:5px;color:#F54343;font-size: 14px;overflow: hidden;}
+		.message{width:100%;background-color: #fff;}
+		.message-one{width:100%;height:45px;border-top:1px solid #EDEDED;}
+		.message-one-center{width:90%;height:100%;margin:0 auto;}
+		.message-one-center p {line-height:45px;margin:0;font-size: 12px;float: left;margin-left: 5px;}
+		.headingAll{width:100%;height:65px;overflow: hidden;}
+		.headingAll-center{width:90%;height:36px;margin:0 auto;margin-top:12px;}
+		.headingAll-center ul {width:100%;height:100%;}
+		.headingAll-center ul li {width:11%;height:36px;border-radius: 50%;overflow: hidden;float:left;margin-left:3%;}
+		.message-one-center img{height:30px;float: left;margin-top: 7px;margin-left: 2px;border-radius: 100%;}
+		.circles{display: block;float:left;height:3px;width:1%;background:#F88123;border-radius: 50%;margin-left:1%;margin-top: 17px;}
+		.list{width: 55%;height: 55px;float: left;font-size: 12px;margin:10px 0 0 5%;}
+		.list-div1{width: 100%;height:35%;float: left;}
+		.list-div2{width: 100%;height:65%;float: left;margin-top:3px;color:#909090;}
+		.list div a{display: block;width: 80px;height: 22px;line-height: 22px; border-radius: 10px;background: #ff7a4d;float: left;
+			margin-left:10px;text-align: center;color: #fff;}
+		.list div span{display: block;float: left;color:#696969;}
+		.r_icon{background: url(../icon/r_arrow1.png);background-size: 150%;height:20px;width:7%;}
+		.but-help{width:25%;height:30px;border-radius: 6px;background: #F88125;text-align: center;line-height: 30px;float:right;color:#fff;font-size: 12px;margin-top: 16px;}
+		.oked{color:#A8A8A8;}
+		.myin-top-margin{margin-top: 10px;}
+
+		.oked-div{width:100%;height:158px;background:#fff;overflow: hidden;position: relative;}
+		.oked-div-center{width:90%;height:124px;margin:14px  auto 0 auto;}
+		.oked-div-img{width:40%;height:110px;float:left;overflow: hidden;line-height: 72px;}
+		.oked-div-text{margin-top: 0;height:96px;}
+		.remove-introduced,.afas{width:20%;height:30px;position: absolute;bottom:10px;
+			text-align: center;line-height: 30px;border-radius:6px;font-size: 12px;margin:0;}
+		.remove-introduced{background: #ededed;right:30%;color:#909090;}
+		.afas{background: #FCBF28;right:5%;color:#fff;}
+	</style>
+</head>
+<body >
+<div id="mainOne">
+
+
+</div>
+<!-- <div class="oked-div">
+			<div class="oked-div-center">
+				<div class="oked-div-img" id="imgDiv" onclick = "openN('<%=list[i].id%>')">
+					<img id="img" src="<%=list[i].picList[0]%>" alt="">
+				</div>
+				<div class="lose-text oked-div-text" onclick = "openN('<%=list[i].id%>')">
+					<p class="lose-text-1">
+						<%=list[i].name%>
+					</p>
+					<p class="lose-text-2">
+						类型：<%=list.categoyName%>
+					</p>
+					<p class="lose-text-3">
+						<span>￥<%=list[i].payNum%></span><span>元/酬谢金</span>
+					</p>
+				</div>
+			</div>			
+			<p class="remove-introduced" style="z-index:10;" onclick="awayFn('<%=list[i].id%>')">取消发布</p>
+			<p class="afas"  style="z-index:11;" onclick="payment('<%=list[i].id%>')">去支付</p>
+			
+		</div> -->
+</body>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i ++) { %>
+	<div id="bigDiv">
+		<div class="myin-top myin-top-margin" >
+			<div class="myin-top-center">
+				<p class="myin-top-left"><%=list[i].creater.name%></p>
+				<%if (list[i].status == 0){%>
+					<p class="myin-top-right oked">待支付</p>
+				<%}else if (list[i].status == 1||list[i].status == 2){%>
+					<p class="myin-top-right oked">进行中</p>
+				<%}else if (list[i].status == 7){%>
+					<p class="myin-top-right oked">已取消</p>
+				<%}else if (list[i].status == 3||list[i].status == 4){%>
+					<p class="myin-top-right oked">已结束</p>
+				<%}else if (list[i].status == 8){%>
+					<p class="myin-top-right oked">退款中</p>
+				<%}else if (list[i].status == 5||list[i].status == 6){%>
+					<p class="myin-top-right oked">正在申诉</p>
+				<%}else if (list[i].status == 9){%>
+					<p class="myin-top-right oked">退款成功</p>
+				<%}else if (list[i].status == 10){%>
+					<p class="myin-top-right oked">退款失败</p>
+				<%}%>
+			</div>
+		</div>
+		<div class="oked-div">
+			<div class="oked-div-center">
+				<div class="oked-div-img" id="imgDiv" onclick = "openN('<%=list[i].id%>')">
+					<img style="<%=list[i].style%>" id="img" src="../icon/listpng.png"  data-echo="<%=list[i].picList%>" >
+				</div>
+				<div class="lose-text oked-div-text" onclick = "openN('<%=list[i].id%>')">
+					<p class="lose-text-1">
+						<%=list[i].name%>
+					</p>
+					<p class="lose-text-2">
+						类型：<%=list.categoyName%>
+					</p>
+					<p class="lose-text-3">
+						<span>￥<%=list[i].payNum%></span><span>元/酬谢金</span>
+					</p>
+				</div>
+			</div>			
+			<%if (list[i].status == 0){%>
+			<p class="remove-introduced" style="z-index:10;" onclick="awayFn('<%=list[i].id%>')">取消发布</p>
+			<p class="afas"  style="z-index:11;" onclick="payment('<%=list[i].id%>')">去支付</p>
+			<%}else if (list[i].status == 1){%>
+			<p class="afas"  style="z-index:11;" onclick="awayFn('<%=list[i].id%>')">取消发布</p>
+			<%}else if (list[i].status == 2){%>
+			<p class="afas"  style="z-index:11;" onclick="applications(<%=list[i].id%>)">申请售后</p>
+			<%}else if (list[i].status == 3||list[i].status == 4){%>
+			<p class="afas"  style="z-index:11;background: #ccc;">已结束</p>
+			<%}else if (list[i].status == 7){%>
+			<p class="afas"  style="z-index:11;background: #ccc;">已取消</p>
+			<%}else if (list[i].status == 5||list[i].status == 6){%>
+			<p class="afas"  style="z-index:11;background: #ccc;">正在申诉</p>
+			<%}else if (list[i].status == 8){%>
+			<p class="afas"  style="z-index:11;background: #ccc;">退款中</p>
+			<%}else if (list[i].status == 9){%>
+			<p class="afas"  style="z-index:11;background: #ccc;">退款成功</p>
+			<%}else if (list[i].status == 10){%>
+			<p class="afas"  style="z-index:11;background: #ccc;">退款失败</p>
+			<%}%>
+		</div>
+		<%if (list[i].status == 1 && list[i].helpUsers.length != 0){%>
+		<div class="message">
+			<div class="message-one" onclick="joinhelp(<%=list[i].id%>)">
+				<div class="message-one-center" id="joinhelped">
+					<% for (var j = 0; j < list[i].helpUsers.length; j ++) { %>
+						<%if (j > 4){%>
+							<%break%>
+						<%}%>
+					    <img src="<%=list[i].helpUsers[j].icon%>" alt="">
+					<% } %>
+					<%if (list[i].helpUsers.length > 5){%>
+						<p><%=list[i].helpUsers.length%>等人参与帮助</p>
+					<%}else{%>
+						<p><%=list[i].helpUsers.length%>人参与帮助</p>
+					<%}%>
+				</div>
+			</div>			
+		</div>
+		<%}%>		
+	</div>
+	<% } %>
+</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+
+<script>
+	var id;
+	var allResult = [];
+	var userInfo = null;
+	var messageList = null;
+	var openHtml = null;
+	apiready = function () {
+		api.execScript({
+			frameName: 'publishnext_body',
+			script: 'getJson()'
+		});
+		var score = {};
+		score.type = 1;
+		openHtml = api.pageParam.openHtml;
+		new datalistModel(addDataToHtml,pageByUserUrl,score,10,5,100,true);
+	};
+	
+	function reloadHtml(){
+        apiready();
+    };
+	
+	function right(){
+		document.getElementById("bigDiv").remove()
+	}
+	function joinhelp(id){
+		allResult[id].notice = "help";
+		openNewWindow("joinhelplist","./joinhelplist.html",allResult[id])
+	}
+	
+	//取消发布点击事件
+	function awayFn (id){
+		dialogBox = api.require('dialogBox');
+    	dialogBox.alert ({
+	        texts: {
+	            title: "温馨提示",
+	            content:"确定取消发布吗",
+	            leftBtnTitle: "返回",
+	            rightBtnTitle:"确定"
+	        },
+	        tapClose:true,
+	        styles:{
+	            bg: '#fff',
+	            w: api.winWidth *0.8,
+	            corner: 0,
+
+	            title:{
+	                marginT : 20,
+	                titleSize : 18,
+	                titleColor : '#06C1AE'
+	            },
+	            content:{
+	                color: '#000',
+	                size: 14
+	            },
+	            left:{
+	                marginB: 0,
+	                marginL: 0,
+	                w: api.winWidth *0.8*0.5,
+	                h: 43,
+	                color:'#000000',
+	                corner: 0,
+	                bg: '#E8E8E8',
+	                size: 16
+	            },
+	            right:{
+	                marginB: 0,
+	                marginL: 0,
+	                w: api.winWidth *0.8*0.5,
+	                h: 43,
+	                corner: 0,
+	                bg: '#06C1AE',
+	                size: 16,
+	                color:'#ffffff'
+	            }
+	        }
+	    },function(ret){
+	        if (ret.eventType == 'left') {
+	            dialogBox.close ({
+	                dialogName: 'alert'
+	            });
+	        }else if(ret.eventType == 'right'){
+				ajaxGetWithProgress(createRefundOrderUrl,{eid:id},function(ret,err){
+		            if(ret) {
+		               	setTimeout(function(){
+		               		reloadHtml();
+		               	},1000)		               	
+		            }else{
+		            	toast("取消失败,请检查网络。")
+		            }
+		        })
+	        	dialogBox.close ({
+	                dialogName: 'alert'
+	            });
+	        }
+	    });
+	}
+	
+	function addDataToHtml(results, append) {
+		var message = {};
+		//alert(JSON.stringify(results));
+		var idName = $api.getStorage("categoryList");
+
+		for(var i=0;i<results.length;i++){
+			allResult[results[i].id]=results[i];
+			allResult[results[i].id].notice = "pay";
+			results[i].ctime = formatTimeToDate(results[i].ctime);
+			results.categoyName = idName[results[i].categoyId].name;
+			if(isNotBlack(results[i].picList)){
+                var picList = results[i].picList;
+                var picIcon =  picList[0];
+                var width = api.winWidth*0.9*0.25;
+                var height =width*0.618;
+                var obj = getImgSizeBySize(picIcon,width,height);
+                results[i].style = obj.style;
+                results[i].picList = picIcon;
+            };
+			//遍历帮助人，给帮助人没头像的加上头像
+			results[i].helpUsers = setIcon(results[i].helpUsers);
+
+		}
+		//alert(JSON.stringify(results))
+		var data = {list: results};
+		var html = template('scriptDiv1', data);
+		 if (append) {
+                var div = document.createElement("div");
+                div.innerHTML = html;
+                document.getElementById('mainOne').appendChild(div);
+            } else {
+                document.getElementById('mainOne').innerHTML = html;
+            }
+
+        echoExt.init();
+	}
+
+	function setIcon(list){
+		if(isNotBlack(list) && list.length>0){
+			for(var i = 0;i<list.length;i++){
+				if(isBlack(list[i].icon)){
+					list[i].icon = "../icon/me.png";
+				}
+			}
+		}
+		return list;
+	}
+	function openN(id){
+	    openNewWindow('introduceddatail','./introduceddatail.html',allResult[id],{reload:true});
+	};
+	
+	function payment(id){
+        openNewWindow('payPages','./payPages.html',allResult[id])
+	};
+	
+	/**********失主点击申请售后**************/
+	function applications(id){
+		showDialog("","温馨提示","点击确认将要提交申诉申请，我们将在24小时内为您审核！","取消","确定",function(){
+     	 	ajaxGetWithProgress(confirmFailUrl,{id:id},function(ret,err){
+	            if(ret) {
+	            	reloadHtml();
+	            	document.getElementsByClassName("afas")[0].innerHTML = "正在申诉";
+	                //alert(JSON.stringify(ret));
+	                //alert(JSON.stringify(err));
+	            }else{
+	            	toast("取消失败,请检查网络。")
+	            }
+	        })
+        });
+	}
+</script>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>引导页</title>
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+</head>
+<style type="text/css">
+
+.img {
+	width: 100%;
+	height: 100%;
+	background-image: url(../../image/guide/guide_4.png);
+	background-size: 100% 100%;
+	position: absolute;
+}
+
+.start {
+	position: absolute;
+	top : 86%;
+	left: 5%;
+	background-color: rgb(246,129,46);
+	color: #FFFFFF;
+	width: 90%;
+	height: 50px;
+	text-align: center;
+	font-size: 18px;
+	line-height: 50px;
+	display: none;
+	border-radius: 5px;
+}
+
+</style>
+<body>
+	<div id="img" class="img">
+		<div id="start" class="start" onclick="go();">
+			立即体验
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/public.js"></script>
+<script type="text/javascript">
+	apiready = function(){
+		var isEnd = api.pageParam.isEnd;
+		if(isEnd){
+			document.getElementById('start').style.display = "block";
+		}
+		
+		var imageUrl = api.pageParam.imageUrl;
+		if(imageUrl){
+			document.getElementById('img').style.backgroundImage = "url(" + imageUrl + ")";
+		}
+	};
+	
+	
+	function go(){
+		api.execScript({
+			name: rootWindowName,
+    			script: 'runCallback();'
+		});
+		
+		api.closeFrame({
+			name : "guide"
+		});
+		
+		api.closeFrameGroup({
+    			name: 'temp'
+		});
+		
+    }
+</script>
+</html>

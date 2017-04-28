@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>HTML</title>
+    <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+
+    <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+    <style>
+        *{margin:0;padding:0;}
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #F2F2F2;
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+
+        .item {
+            background: #FFF;
+            position: relative;
+            border-top: 1px solid #F0F0F0;
+            padding: 15px 20px;
+        }
+        /*div :active{*/
+
+        /*background: #DADDE0;*/
+        /*}*/
+        /*.itemOn {*/
+        /*background: #DADDE0;*/
+        /*}*/
+
+        .icon {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            width: 36px;
+            height: 36px;
+        }
+
+        .num{
+            width: 15px;
+            height: 15px;
+            text-align: center;
+            line-height: 17px;
+            font-size: 10px;
+            background-color: orangered;
+            color:#fff;
+            border:1px solid orangered;
+            border-radius:50px;
+            position:absolute;
+            top: 11px;
+            left: 44px;
+
+        }
+
+
+        .name {
+            margin-left: 50px;
+            padding-right:85px ;
+            height: 20px;
+            font-weight:bold;
+            /**以下三行表示超出文本用省略号代替**/
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            position: relative;
+            font-size: 10px;
+            color: #666666;
+        }
+
+        .type{
+            background-color: #E6E9EE;
+            border-radius: 10px;
+            /*font-size: 11px;*/
+            height: 25px;
+            line-height: 25px;
+            padding: 0 5px ;
+            margin-right: 5px;
+        }
+
+        .info {
+            margin-left: 50px;
+            padding-right:30px ;
+            font-size: 14px;
+            color: #5B5B5B;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            position: relative;
+        }
+
+        .time{
+            width: 80px;
+            text-align: right;
+            position:absolute;
+            top: 17px;
+            right: 20px;
+            overflow: hidden;
+            font-size: 10px;
+            color: #909090;
+        }
+
+        .iconImg{
+            vertical-align:top;
+            width: 14px;
+            height: 14px;
+        }
+        #main{width:100%;}
+        
+    </style>
+</head>
+
+<body>
+
+<div id="main">
+
+    <!-- <div class="item" tapmode="itemOn">
+    <img class="icon" src="../../image/user-photo.png">
+    <div class="name">
+    大昊子
+    </div>
+    <div class="info">
+    我最牛逼，我最屌
+    </div>
+    <div class="time">上午10:22</div>
+    <div class="num">9</div>
+    </div>
+
+
+    <div class="item" tapmode="itemOn">
+    <img class="icon" src="../../image/user-photo.png">
+    <div class="name">
+    物流信息
+    </div>
+    <div class="info">
+    您购买的大号遥控车电动玩具，已经到货了，请查收
+    </div>
+    <div class="time">上午10:22</div>
+    <div class="num">99</div>
+    </div>
+
+    <div class="item" tapmode="itemOn">
+    <img class="icon" src="../../image/user-photo.png">
+    <div class="name">
+    活动
+    </div>
+    <div class="info">
+    北京地区正在组织一场免费的体验大自然活动，活动报名地点。报名电话10000000000
+    </div>
+    <div class="time">上午10:22</div>
+    <div class="num">99</div>
+    </div> -->
+
+</div>
+
+<!--<% if(list[i].typeName){%>-->
+<!--<span class="type"><%=list[i].typeName%></span>-->
+<!--<%}%>-->
+
+<script id="scriptDiv" type="text/html">
+    <% for (var i = 0; i < list.length; i ++) { %>
+    <div class="item" id="item_<%=list[i].type%>_<%=list[i].thirdId%>" tapmode="itemOn" data-id="<%=list[i].type%>_<%=list[i].thirdId%>" onclick="openChat(<%=list[i].type%>,'<%=list[i].type%>_<%=list[i].thirdId%>')">
+        <img class="icon"  src="<%=list[i].thirdIcon%>" onerror="this.src='../icon/user-photo@2x.png'">
+        <div class="name">
+            <%=list[i].thirdNick%>
+        </div>
+        <div class="info">
+            <%= getShowLastMsgInChatList(list[i].lastMsg)%>
+        </div>
+        <div class="time"><%= getShowTime(list[i].time)%></div>
+        <% if(list[i].unreadNum&&list[i].unreadNum>0){%>
+        <div class="num"><%= getShowNum(list[i].unreadNum)%></div>
+        <%}%>
+    </div>
+    <% } %>
+</script>
+
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/message.js"></script>
+<script type="text/javascript" src="../script/chatBoxHelp.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script>
+
+    var user=getUserInfo();
+
+    template.helper('getShowTime',function(time){
+        return getChatTime(new Date(time),new Date(),0);
+    });
+
+    template.helper('getShowNum',function(num){
+        if(num>99){
+            return "..."
+        }else{
+            return num;
+        }
+    });
+
+    template.helper('getShowLastMsgInChatList',function(lastMsg){
+        //alert(JSON.stringify(lastMsg));
+        var chatMsg=lastMsg.messageChat;
+        var userNick='';
+        if(lastMsg.authorId==user.id){
+            userNick='我:';
+        }else{
+            userNick=lastMsg.authorNick+":";
+        }
+        var result= userNick+showLastMsgInChatList(chatMsg);
+        return result;
+    });
+
+
+    var loaclValue={};
+
+    apiready = function () {
+        api.setRefreshHeaderInfo({
+            visible: true,
+            bgColor: 'rgba(0,0,0,0)',
+            textColor: '#666',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function (ret, err) {
+            api.refreshHeaderLoadDone();
+            getAllChatInfo(initChatList);
+        });
+
+        api.refreshHeaderLoading();
+
+    };
+
+    //	var params = [];
+
+    //chatInfo对象
+    //            type: thisChat.type,类型
+    //            thirdId: thisChat.thirdId,对应的类型消息中 ID（单聊是用户ID，群聊是群聊ID，系统消息是发送的用户ID）
+    //            lastMsg: thisChat.data[0],最新的一条消息
+    //            lastIndex: thisChat.data[0].index,最新的消息索引（用来排序用）
+    //            thirdNick: thisChat.thirdNick,对应类型消息的名字（单聊是用户名称，群聊是群聊的名称，系统消息是用户名称，该用户为系统用户）
+    //            time: thisChat.data[0].time,最后一条消息的时间
+    //            thirdIcon: thisChat.thirdIcon,对应的类型消息的头像
+    //            unreadNum: unreadNum 未读个数
+    function initChatList(chatInfoList){
+        if(chatInfoList&&chatInfoList.length>0){
+            for(var i=0;i<chatInfoList.length;i++){
+                var key=chatInfoList[i].type+"_"+chatInfoList[i].thirdId;
+                loaclValue[key]=chatInfoList[i];
+
+//              params.push({
+//              		type : chatInfoList[i].type,
+//              		thirdId : chatInfoList[i].thirdId
+//              });
+            }
+           // alert("chatInfoList"+JSON.stringify(chatInfoList))
+            //alert("chatInfoList"+JSON.stringify(chatInfoList))
+            var data = {list: chatInfoList};
+            var html1 = template('scriptDiv', data);
+//            if (append) {
+//                document.getElementById('main').innerHTML = document.getElementById('main').innerHTML + html1;
+//            } else {
+            document.getElementById('main').innerHTML = html1;
+            //}
+            //绑定所有的onclick事件
+//            var allItems=document.querySelectorAll(".item");
+//            for(var j=0;j<allItems.length;j++){
+//                bindBubbleMenu(allItems[j],["标记已读","删除"],
+//                        whenClickButton,allItems[j].getAttribute("data-id"));
+//                $(allItems[j]).on("tap",function(){
+//                    openChat($(this).attr("data-id"));
+//                });
+//            }
+
+//			loopTest([
+//				{
+//					timeout : 2000,
+//					callback : function(ret){
+//						var i = Math.floor(Math.random() * ret.length);
+//						var obj = ret[i];
+//						var type = obj.type;
+//						var type_thirdId = obj.type + '_' + obj.thirdId;
+//						openChat(type,type_thirdId);
+//					}
+//				},
+//				{
+//					timeout : 1000,
+//					callback : function(ret){
+//						api.closeWin({
+//          					name : 'sysMsg'
+//          				});
+//						
+//						api.closeWin({
+//          					name : 'chat'
+//          				});
+//					}
+//				}
+//			],params);
+        }else{
+            document.getElementById("main").innerHTML="";
+        }
+
+        //api.parseTapmode();
+        registEvent();
+    }
+
+
+    function showLastMsgInChatList(_chatMsg){
+        var chatMsg=(_chatMsg);
+        //alert(JSON.stringify(chatMsg));
+        if(chatMsg.type==0){
+            return formatContentWithImage(chatMsg.desc||chatMsg.word);
+        }else if(chatMsg.type==1){
+            return formatContentWithImage(chatMsg.word);
+        }else if(chatMsg.type==2){
+            if(isNotBlack(chatMsg.word)){
+                return chatMsg.word;
+            } else if(isNotBlack(chatMsg.picture)){
+                return "[图片]";
+            }else if(isNotBlack(chatMsg.voice)){
+                return "[语音]";
+            }
+        }else{
+            if(isNotBlack(chatMsg.word)){
+                return chatMsg.word;
+            } else if(isNotBlack(chatMsg.picture)){
+                return "[图片]";
+            }else if(isNotBlack(chatMsg.voice)){
+                return "[语音]";
+            }else{
+                return _chatMsg;
+            }
+        }
+    }
+
+
+    //当有新的消息到来的时候
+    function addNewMessage(){
+        //alert("ll")
+        getAllChatInfo(initChatList);
+    }
+
+    function registEvent(){
+        var items=document.getElementsByClassName("item");
+        for(var i=0;i<items.length;i++){
+            $(items[i]).off();
+
+            $(items[i]).on('tap',function(){
+
+            });
+            $(items[i]).on('longTap',function(){
+                var arrayPath=[{title:"删除"},{title:"标记为已读",length:100}];
+                var id=this.getAttribute("data-id");
+                var pos = this.getBoundingClientRect();
+                var centerY=(pos.top<30)?80:(pos.top+46);
+                var centerX=pos.left+(pos.width/2);
+                if(centerX>(api.frameWidth-150)){
+                    centerX=api.frameWidth-150;
+                }
+
+                var obj = api.require('bubbleMenu');
+                obj.open({
+                    centerX:centerX,
+                    centerY:centerY,
+                    //fixedOn:api.winName,
+                    btnArray:arrayPath
+                },function(ret,err){
+                    obj.close();
+                    if(ret.index==0){
+                        //删除
+                        api.confirm({
+                            //title: 'testtitle',
+                            msg: '确定删除',
+                            buttons:['确定', '取消']
+                        },function(ret,err){
+                            if(ret.buttonIndex == 1){
+                                deleteChatInfo(id);
+                            }
+                        });
+                    }
+                    if(ret.index==1){
+                        markRead(id);
+                    }
+                });
+            });
+        }
+    }
+
+
+
+    //标记为已读
+    function markRead(type_thirdId){
+        var type_thirdIdstr=type_thirdId.split("_");
+        var type=type_thirdIdstr[0];
+        var thirdId=type_thirdIdstr[1];
+        //删除本地的未读数
+        cleanChatUnreadNUm(type,thirdId);
+    }
+
+    //删除chatInfo
+    function deleteChatInfo(type_thirdId){
+        var div=document.getElementById("item_"+type_thirdId);
+        div.style.display='none';
+        var type_thirdIdstr=type_thirdId.split("_");
+        var type=type_thirdIdstr[0];
+        var thirdId=type_thirdIdstr[1];
+        deleteChatList(type,thirdId);
+        //删除页面的元素
+        //删除本地的数据
+        //删除对应的图片缓存|音频缓存,进度条控制
+        //FIXME 单独建立文件缓存，清除。
+        //删除服务器的数据
+    }
+
+
+    function openChat(type,type_thirdId) {
+        var chatInfo=loaclValue[type_thirdId];
+        if(type==2){
+            openNewWindow("sysMsg","./sysMsg.html",chatInfo);
+        }else{
+            openNewWindow("chat","./chat.html",chatInfo);
+        }
+    }
+
+</script>
+
+</html>

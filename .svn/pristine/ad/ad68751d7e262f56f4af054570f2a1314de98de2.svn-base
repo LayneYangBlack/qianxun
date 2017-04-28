@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>提现验证码</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+    <style type="text/css">
+        body{font-family:"黑体";}
+        .awards_num{
+            background-color: #020202;
+
+        }
+        .rightInfo{
+            height: 31px;
+
+            position: absolute;
+            top:6px;
+            right: 5px;
+            margin-right: 5px;
+            font-size: 12px;
+            line-height: 31px;
+            background-color: #020202;
+            color: #ffffff;
+            padding: 0 5px;
+        }
+
+    </style>
+
+<body>
+
+<div id="topbar" class="topbar_info">
+
+</div>
+
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/message.js"></script>
+
+<script type="text/javascript">
+
+
+    function closeChatWin () {
+        removeCurrentChatPage();
+        api.closeWin({
+           // name: 'chat'
+        });
+    }
+
+
+
+    apiready = function () {
+//  		alert(JSON.stringify(api.pageParam))
+        setCurrentChatPage(api.pageParam.type,api.pageParam.thirdId);
+        var bodyHeight = api.frameHeight  - winHeadHeight - winBottomHeight;
+        var pageParam = api.pageParam;
+        pageParam.titleHead = winHeadHeight;
+        pageParam.bodyHeight = bodyHeight;
+//
+        openFrameInWin('chat_body','./chat_body.html',pageParam);
+        //判断是否是IOS7以上，如果是那么标题的frame设置为负值
+        var titlePading = 0 - getTitlePadingHeight();
+        openFrameInWin('chat_head','./chat_head.html',pageParam,{
+        		rect:{
+	            x : 0,
+	            y : titlePading,
+	            w : api.frameWidth,
+	            h : winHeadHeight - titlePading
+	        }
+        });
+
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            closeChatWin();
+        });
+
+    };
+
+</script>
+</html>

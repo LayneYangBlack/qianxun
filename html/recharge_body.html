@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="utf-8">
+	<meta name="viewport"
+		  content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+	<title>充值</title>
+	<link rel="stylesheet" type="text/css" href="../css/api.css"/>
+	<style type="text/css">
+		html {
+			width: 100%;
+			height: 100%;
+		}
+		body {
+			background: #ebebeb;
+			width: 100%; /*height: 100%;*/
+			min-height: 100%;
+			padding: 0;
+			margin: 0;
+		}
+		.count{
+			background-color: #ffffff;
+			float: left;
+			width: 100%;
+		}
+		
+		.left_box{
+			width: 100%;
+			text-align: center;
+			float: left;
+			line-height: 10rem;
+			color: #ff9900;
+			font-size: 3rem;
+			color:#06C1AE;
+			border-top:1px solid #ebebeb;
+			border-bottom:1px solid #ebebeb;
+		}
+		.right_box{
+			width: 60%;
+			font-size: 16px;
+			height: 80px;
+			line-height: 20px;
+			float: right;
+		}
+		.right_box p{
+			line-height: 50px;
+			font-size: 30px;
+			color: #333;
+		}
+		.item{
+			height: 3.5rem;
+			line-height:3.5rem;
+			padding-left: 20px;
+			background-color: #fff;
+			border-bottom: 1px #eaeaea solid;
+			color: #333;
+		}
+		.item1{
+			height: 3.5rem;
+			line-height:3.5rem;
+			padding-left: 20px;
+			background-color: #fff;
+			border-bottom: 1px #eaeaea solid;
+			color: #333;
+		}
+		.item1 .font_color{color: #75ca77;}
+		.item1 .icon_right1{
+			background: url("../icon/selected.png");
+			width:1.5rem;
+			float:right;
+			margin-right: 2rem;
+			margin-top: 1rem;
+
+			background-size: 1.5rem 1.5rem;;
+		}
+
+
+
+
+		#question{
+			position: fixed;
+			height: 50px;
+			text-align: center;
+			background-color: #06C1AE;
+			margin: 10px 0 0 0 ;
+			line-height: 50px;
+			font-size: 18px;
+			width: 100%;
+			color: #ffffff;
+			bottom: 0;
+		}
+
+		.icon_right{
+			width:30px;;
+			float:right;
+			margin-right: 15px;
+			margin-top: 1rem;
+
+			height: 30px;;;
+		}
+		.icon_right1{
+			width:1.5rem;
+			float:right;
+			margin-right: 2rem;
+			margin-top: 1rem;
+			background-size: 1.5rem 1.5rem;;
+			height: 1.5rem;
+
+		}
+
+		.icon{
+			float:right;
+			width: 3rem;
+		}
+		#main{width: 100%;height: auto;
+			float: left;;
+			overflow: hidden;
+		}
+		.counttop{
+			background-color: #ffffff;
+			float: left;
+			width: 100%;
+			height:44px;
+			margin-top: 15px;
+			overflow: hidden;
+		}
+		/*#count{margin-top: 35px;overflow: hidden;}*/
+		.countcenter{width:90%;margin:0 auto;line-height:44px;height:44px;}
+		.countcenter input {height:44px;line-height: 44px;outline:none;}
+		.counttext{height:35px;width:100%;float:left;}
+		.counttext p {height:100%;width:90%;margin:0 auto;line-height: 35px;color:#666;}
+	</style>
+</head>
+
+<body id="body">
+
+<div id="main">
+	<div class="counttop">
+		<!-- div class="left_box"><i  style="font-size:1rem;">￥</i><span id="budget">200</span>元</div> -->
+		<div class="countcenter">
+			金额：<input id="pays" type="text" placeholder="请输入充值金额" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')"/>
+		</div>
+	</div>
+	<div class="counttext">
+		<p>选择付款方式</p>
+	</div>
+	<div  id="count" class="count" style="max-resolution: res;gin-top: 10px">
+		<!--<div class="item1"  onclick="selectCount(this,0)"><span >微信</span> <i ></i> </div>-->
+		<div class="item1" onclick = "clicked(this,0)"><span >支付宝</span><i  class="icon_right1"></i></div>
+		<div class="item1" onclick = "clicked(this,1)"><span >微信</span><i  ></i></div>
+		<!--<div class="item1"  id="999" onclick="selectCount(this,2)"><span>银联账号</span><i  ></i></div>-->
+		<!--<div class="item"><span>1684616876165768</span><img class="icon_right" src="../icon/icon_right_normal.png" ></div>-->
+	</div>
+	<div  id="question" tapmode="itemOn" >
+		充值
+	</div>   
+</div>
+
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/pay.js"></script>
+<!-- <script type="text/javascript" src="../script/pay.js"></script> -->
+<script type="text/javascript">
+		var money;
+		//进页面获取钱包里的余额
+		apiready = function(){
+			ajaxGetWithProgress(userinfoUrl,{},function(ret,err){
+				if(isNotBlack(ret)){
+					money = ret.money;
+				}
+				else{
+				   //alert(err)
+				}
+			});
+		}
+		function openCommitTip(){
+			openNewWindow("selectPosition","./selectPosition.html",{})
+		}
+		var params = null;
+		var orderId = null;
+		var type = 0;
+		var payParams = null;
+		var detailType = null;
+//		var num;
+		function selectPay(type){
+			var payType = 'alipay';
+			if(type == 0){
+				payType = 'weixin';
+			}else if(type == 2){
+				payType = "yinlian";
+			}else if(type ==1){
+				payType = "alipay";
+			}
+			var url = api.pageParam.payUrl;
+			var closeName =api.pageParam.closeName;
+			var pidUrl = api.pageParam.pidUrl;
+			//alert(JSON.stringify(payParams));
+			pay(payType,payParams,url,pidUrl,function(ret,err) {
+			   if(isNotBlack(ret)&&ret.success){
+				   api.closeWin({
+					   name: closeName
+				   });
+				api.execScript({
+					name:detailType,
+					frameName: detailType+'_body',
+					script: 'window.location.reload();'
+				});
+				api.execScript({
+					name: detailType,
+					frameName: detailType+'_body',
+					script: 'reloadHtml();'
+				});
+				closeWin();
+			   }
+
+			})}
+	
+	var item = document.querySelectorAll('.item1');
+	var num = 0;
+	function clicked(self,type){
+		num = type;
+		for(var n = 0;n < item.length;n++){
+			item[n].style.color = "#333";
+			item[n].querySelector('i').className = "";
+		}
+		self.style.color = "#06C1AE";
+		self.querySelector('i').className = "icon_right1";
+		
+	}   
+	var question = document.getElementById("question")
+	var budget = document.getElementById("budget")
+	var question = document.getElementById("question")
+//	question.onclick = function(){
+//		toast("打开支付宝或者微信进行充值")
+//	}
+		var payparms = {};
+		document.getElementById("question").onclick = function (){
+			var user = getUserInfo();
+    		payparms.token = user.token;
+			var payType = 'alipay';
+			if (num == 0) {
+				payType = 'alipay';
+			} else if(num == 1){
+				payType == 'weixin';
+			}	
+			
+			if(isBlack(document.getElementById("pays").value)){
+            	toast("请输入金额");
+            	return;
+       		}
+			payparms.addMoney = document.getElementById("pays").value;
+			
+			payparms.type = num +1;
+			ajaxGetWithProgress(rechargeWalletUrl,payparms,function(ret,err){
+				var parmsa = {};
+				parmsa.orderId = ret.orderId;
+				pay(payType,parmsa,orderPayParamUrl,function(re){	
+					api.execScript({
+	                    name:'MyMoney',
+	                    script: 'reloadHtml()'
+	             	 })	
+					closeWin();
+				})
+			})			
+		}
+		
+//		addMoney 充值金额，type 类型1支付宝，2微信   获取支付参数;orderId
+</script>
+</body>
+</html>
+

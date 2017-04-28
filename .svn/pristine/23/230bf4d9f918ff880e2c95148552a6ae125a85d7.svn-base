@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>HTML</title>
+    <!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <style>
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #F2F2F2;
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+        .item {
+            padding: 10px;
+
+        }
+
+        .ymd{
+            text-align: center;
+            font-size: 14px;
+            line-height: 30px;
+            padding-top: 2px;
+            color: #9E9E9E;
+        }
+
+        .itemOn {
+            background: #DADDE0;
+        }
+
+        .itemInfo{
+            margin-top:8px;
+            padding: 10px 15px;
+            background: #FFF;
+            overflow: hidden;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+
+        }
+
+        .title{
+            font-size: 16px;
+            color: #5B5B5B;
+            margin-top: 13px;
+            height: 27px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+        .cover{
+            width: 100%;
+        }
+
+
+
+
+        .content{
+            margin-top:7px ;
+            line-height: 18px;
+            font-size: 12px;
+            color: #9E9E9E;
+            padding-bottom:  5px ;
+        }
+
+
+
+        .detail{
+            border-top: 1px solid #F0F0F0;
+            background: #FFF;
+            height: 44px;
+            padding-left: 10px ;
+            line-height: 44px;
+            position: relative;
+            font-size: 16px;
+            color: #5B5B5B;
+
+        }
+
+        .detailNext{
+            width: 44px;
+            height: 44px;
+            position: absolute;
+            right: 0;
+            top: 0;
+
+        }
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+
+<div id="mainDiv">
+
+    <div id="main">
+
+
+        <!-- &lt;!&ndash;showType=0;淘宝活动样式&ndash;&gt;
+        <div class="item" tapmode="itemOn" onclick="systemForword('<%=list[i].url%>',2);">
+            <div class="ymd"><%= showTime(list[i].time)%></div>
+            <div class="itemInfo">
+                <div class="title">订单派送中</div>
+                // <img class="cover" src="../icon/default@1x.png" onerror="this.src='../icon/user-photo.png'"/>
+                <div class="content">
+                    dsfasdfja;dsjfl;asjfl;akjd;fkja;dj是的放假啊善良的减sfsdffwe肥啦
+                    到家舒服了sdfwefwedsjfldsjfldsjfldsjfldsjfldsjfl
+                    dsfasdfja;dsjfl;asjfl;akjd;fkja;dj是的放假啊善良的减肥啦到家舒服了
+                    dsfasdfja;dsjfl;asjfl;akjd;fkja;dj是的放假啊善良的减肥啦到家舒服了
+                    dsfasdfja;dsjfl;asjfl;akjd;fkja;dj是的放假啊善良的减肥啦到家舒服了
+                </div>
+            </div>
+            <div class="detail"> 查看详情 <img class="detailNext" src="../icon/next@2x.png" ></div>
+        </div>
+        <div class="item" tapmode="itemOn" onclick="systemForword('<%=list[i].url%>',2);">
+            <div class="ymd"><%= showTime(list[i].time)%></div>
+            <div class="itemInfo">
+                <div class="title">订单派送中</div>
+                <img class="cover" src="../icon/default@1x.png" onerror="this.src='../icon/user-photo.png'"/>
+                <div class="content">
+                    dsfasdfja;dsjfl;asjfl;akjd;fkja;dj是的放假啊善良的减sfsdffwe肥啦
+                    到家舒服了sdfwefwedsjfldsjfldsjfldsjfldsjfldsjfl
+                    dsfasdfja;dsjfl;asjfl;akjd;fkja;dj是的放假啊善良的减肥啦到家舒服了
+                    dsfasdfja;dsjfl;asjfl;akjd;fkja;dj是的放假啊善良的减肥啦到家舒服了
+                    dsfasdfja;dsjfl;asjfl;akjd;fkja;dj是的放假啊善良的减肥啦到家舒服了
+                </div>
+            </div>
+            <div class="detail"> 查看详情 <img class="detailNext" src="../icon/next@2x.png" ></div>
+        </div>
+
+ -->
+
+    </div>
+
+
+</div>
+
+
+
+</body>
+
+<!--type1 为快递之类的消息-->
+<script id="scriptDiv" type="text/html">
+    <% for (var i = 0; i < list.length; i ++) { %>
+
+        <%if(list[i].message.type==0){%>
+
+            <div class="item"  onclick="systemForword('<%=list[i].message.redirect%>',0);">
+                <div class="ymd"><%= showTime(list[i].time)%></div>
+                <div class="itemInfo">
+                    <div class="title"><%=list[i].message.title%></div>
+                    <img class="cover" src="<%=list[i].message.cover%>_<%= getW(2)%>_0" onerror="this.src='../icon/default@1x.png'"/>
+                    <div class="content">
+                        <%=list[i].message.desc%>
+                    </div>
+                </div>
+                <div class="detail"> 查看详情 <img class="detailNext" src="../icon/next@2x.png" ></div>
+            </div>
+        <%}%>
+
+        <%if(list[i].message.type==1){%>
+
+            <div class="ymd"><%= showTime(list[i].time)%></div>
+            <div class="item" tapmode="itemOn" onclick="systemForword('<%=list[i].message.redirect%>',0);">
+                <div class="title"><%= list[i].message.title%></div>
+                <div class="iconAndContent">
+                    <img class="showType1_icon" src="<%=list[i].message.icon%>_<%= getW(0.2)%>_0" onerror="this.src='../icon/user-photo@2x.png'">
+                    <div class="showType1_content"><%=list[i].message.content%></div>
+                </div>
+                <div class="detail">查看详情 ></div>
+            </div>
+        <%}%>
+
+    <% } %>
+</script>
+
+
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/message.js"></script>
+
+<script>
+
+    var allResult={};
+    var type;
+    var thirdId;
+    var cursor=0;
+
+    var user=getUserInfo();
+    var msgId=0;
+
+    var firstMsg={};
+    var lastMsg={};
+    var pageBody=document.getElementsByTagName('body')[0];
+
+
+
+    template.helper('showTime',function(time){
+        if(time){
+            return getChatTime(new Date(time),new Date(),1);
+        }else{
+            return '';
+        }
+    });
+
+
+    apiready = function () {
+
+        type=api.pageParam.type;
+        thirdId=api.pageParam.thirdId;
+
+        var markReadStr=type+"_"+thirdId;
+        //markRead
+        api.execScript({
+            name: "chatList",
+            frameName:"chatList_body",
+            script: 'markRead("'+markReadStr+'");'
+        });
+
+
+        api.setRefreshHeaderInfo({
+            visible: true,
+            bgColor: 'rgba(0,0,0,0)',
+            textColor: '#666',
+            textDown: '加载历史记录',
+            textUp: '加载历史记录',
+            textLoading:'加载中',
+            showTime:false
+        }, function (ret, err) {
+            getChatData(type,thirdId,cursor,function(result){
+                //更改游标
+                if(result.length>0){
+                    var lastMsg=result[result.length-1];
+                    if(lastMsg.index){
+                        cursor=lastMsg.index;
+                    }
+                }
+                //组装数据到页面
+                addOldMessages(result)
+            });
+        });
+
+
+        getChatData(type,thirdId,cursor,function(result){
+            //更改游标
+            if(result.length>0){
+                var lastMsg=result[result.length-1];
+                if(lastMsg.index){
+                    cursor=lastMsg.index;
+                }
+            }
+            //组装数据到页面
+            addDataToHtml(result,true);
+            goButtom();
+        });
+
+
+    };
+
+
+    function addDataToHtml(results, newMsg) {
+        //alert(JSON.stringify(results));
+        if (results && results.length > 0) {
+            for(var i=0;i<results.length;i++){
+                allResult[results[i].id]=results[i];
+            }
+            var data = {list: results};
+            var html1 = template('scriptDiv', data);
+            if (newMsg) {
+                document.getElementById('main').innerHTML = html1;
+            } else {
+                document.getElementById('main').innerHTML = html1+document.getElementById('main').innerHTML ;
+            }
+        }else if(results.length==0){
+            //document.getElementById('main').innerHTML = '';
+        }
+        api.parseTapmode();
+    }
+
+
+
+
+    function addOldMessages(result){
+        if(isIos()){
+            api.refreshHeaderLoadDone();
+            setTimeout(function(){
+                var newResult=[];
+                for(var i=result.length-1;i>=0;i--){
+                    newResult.push(result[i]);//插入以前的数据 颠倒一下
+                }
+                addDataToHtml(newResult,false);
+            },500);
+        }else{
+            var newResult=[];
+            for(var i=result.length-1;i>=0;i--){
+                newResult.push(result[i]);//插入以前的数据 颠倒一下
+            }
+            var  beforeHeight=getScrollHeight();
+            api.refreshHeaderLoadDone();
+            addDataToHtml(newResult,false);
+            scrollThisDiv(beforeHeight,result);
+        }
+
+    }
+
+    function scrollThisDiv(beforeHeight,result){
+        var endHeight=getScrollHeight()-beforeHeight;
+        if(result.length>0){
+
+            if(isIos()){
+                //document.body.scrollTop=document.body.scrollTop+endHeight-50;
+            }else{
+                document.body.scrollTop=document.body.scrollTop+endHeight;
+                var id=result[result.length-1].id;
+                var msg=document.getElementById("msg_"+id);
+                if(msg){
+                    var senderCont=msg.querySelector(".sender-cont");
+                    var receiverCont=msg.querySelector(".receiver-cont");
+                    var scrollTo=-1;
+                    if(senderCont){
+                        scrollTo=getScrollTop()-$api.offset(senderCont).h-20;
+                    }
+                    if(receiverCont){
+                        scrollTo=getScrollTop()-$api.offset(receiverCont).h-20;
+                    }
+                    if(scrollTo>=0){
+                        animationScroll(scrollTo,300);
+                    }
+                }
+            }
+
+        }
+    }
+
+    function goButtom() {
+        //animationScroll(pageBody.scrollHeight,100);
+        pageBody.scrollTop=pageBody.scrollHeight;
+    }
+
+
+</script>
+
+</html>

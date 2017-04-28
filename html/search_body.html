@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>分类List</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" href="../css/mui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/list.css"/>
+	<style>
+		body{font-family:"黑体";}
+		html{background: #f4f4f4;height: auto;}
+		.seach{width: 100%;height: 54px;float: left;background: #fff;}
+		.seach_eaer{width: 90%;margin: 13px 5%;background: #f4f4f4;height:28px;border-radius:30px; }
+		.seach_eaer i{display:block;height: 28px;;width: 28px;float: left;background: url("../icon/seach.png")no-repeat center;
+			background-size: 15px 15px;  margin-left: 5px;}
+		.seach_eaer input{width: 180px;height: 100%;float: left;margin-left: 15px;font-size: 14px;border: none;background: #f4f4f4;line-height: normal;}
+		.mui-slider-item img{height:140px;}
+		.main_bj{width: 100%;height: auto;background: #fff;float: left;}
+		.main{width: 90%;float: left;height: 123px;background: #fff;margin: 0 5%;}
+		.main_left,.main_right{height: 95px;width: 48%;float: left;border-radius: 12px;margin-top: 15px;}
+		.main_left{background: url("../icon/bignav.png")no-repeat;background-size: 100% 95px;  }
+		.main_right{margin-left: 4%;background: url("../icon/bignav1.png")no-repeat;background-size: 100% 95px; }
+		.l_icon{background: url("../icon/map_1.png")no-repeat;background-size:cover;}
+		.r_icon{background: url("../icon/r_arrow1.png")no-repeat;background-size: cover;}
+		.mage{float: right;justify-content: center;font-size: 14px;}
+		.item_bj{width: 100%;background: #fff;float: left;height: 140px;display: flex;align-items: center;}
+		.item{width: 90%;margin:0 5%;float: left;height: 110px;}
+		.item div:first-child{height: 100%;width: 40%;float: left;overflow: hidden;}
+		.item div:last-child{height: 100%;width: 55%;float: right;}
+		/*.item div img{height: 100%;width: 100%;}*/
+		.mages span{width: 100%;height:auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 16px;line-height: 2rem;height:32px;overflow: hidden;}
+        .mages span:nth-child(2){font-size: 14px;color: #333;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;word-break: break-all;overflow: hidden;}
+        .mages span:nth-child(3){font-size: 14px;color: #9296a3;display: block;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;word-break: break-all;overflow: hidden;}-
+		.name{font-size: 16px;line-height: 2rem;width:100%margin-top:7px;}
+		.miaoshu{font-size: 14px;color: #333;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;margin-top:10px;}
+		.address{font-size: 14px;color: #9296a3;}
+		.footer{width: 100%;height: 56px;float: left;position: fixed;bottom: 0;left: 0;background: #fcfcfc;border-top: 2px solid #e9e9e9}
+		.footer div{width: 25%;float: left;height: 100%;display: flex;justify-content: center;flex-direction: column;align-items: center;}
+		.footer div a{display: block;height: 1.2rem;font-size: 14px;font-weight: 600;color: #999;}
+		.footer div a.active{color: red;}
+		#icon1.active .icon1{background: url("../icon/home.png")no-repeat;background-size:cover;}
+		.user{width:100%;height:60px;display: block;background: #fff;border-bottom:1px solid #f4f4f4;margin-top:10px;}
+		.user-center{width:90%;height:100%;margin:0 auto;}
+		.userHeading{width:45px;height:45px;float:left;border-radius: 50%;margin-top:9px;overflow: hidden;}
+		.userName{width:58%;height:100%;float:left;font-size: 12px;margin-left: 2%}
+		.userName>p{margin-top:15px;}
+		.userMoney{width:23%;height:100%;float:right;color:red;font-size:18px;text-align: right;line-height: 63px}
+		#nameR{display:block;width: 60px;height: 18px;line-height: 18px;float:left;margin-left:5px;text-align: center;color: #fff;font-size: 12px;margin-top: 2px}
+		#nameN{float:left;display: block;font-size: 14px;color:#333;}
+		.userHeading>img{width:100%;height:100%;}
+		.utime{color:#8f8f94;display: block;font-size: 12px}
+		
+		.mp_10{margin-top: 0px;}
+	</style>
+</head>
+<body>
+<div id="main1">
+</div>
+<script id="scriptDiv1" type="text/html">
+	<% for (var i = 0; i < list.length; i ++) { %>
+	<div style="clear:both"></div>
+	<div class="user">
+		<div class="user-center">
+			<div class="userHeading"><img src="<%=list[i].creater.icon %>" onerror="this.src='http://store.quakoo.com/storage/youhuipai/24*24*e64a070fad87a8e171a2ecc4b2c49a33.png'" alt=""></div>
+			<div class="userName">
+				<p>
+				
+					<span id="nameN"><%=list[i].creater.name%></span>
+					<% if (list[i].creater.attestIDCard == 3) { %>
+					<span id="nameR" style="background: url(../icon/yesname.png) no-repeat;background-size: 90%;"></span>
+					<% } else { %>
+					<span id="nameR" style="background: url(../icon/noname.png) no-repeat;background-size: 90%;"></span>
+					<% } %>
+				<div style="clear:both"></div>
+				<span class="utime"><%=list[i].timeFormat%></span>
+				</p>
+			</div>
+			<% if (list[i].payNum>0) { %>
+			<div class="userMoney"><span>￥</span><span><%=list[i].payNum%></span></div>
+			<% } %>
+		</div>
+	</div>
+	<div style="clear:both"></div>
+	<div class="item_bj mp_10" id="newDiv" onclick="clickList('<%=list[i].id%>')">
+		<div class="item">
+			<div>
+				<img style="<%=list[i].style%>" src="../icon/listpng.png"  data-echo="<%=list[i].picList%>" >
+			</div>
+			<div class="mages">
+				<span><%=list[i].name%></span>
+				<span style="margin-top:5px;font-size:14px">地址：<%=list[i].address%></span>
+				<span class="desc">物品描述：<%=list[i].desc%></span>
+			</div>
+		</div>
+	</div>
+	<% } %>
+</script>
+</body>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/mui.picker.all.js"></script>
+<script type="text/javascript" src="../script/city.data.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+<script>
+	var allResult ={};
+	apiready = function(){
+		var keyValue = api.pageParam;
+		var key = {};
+		key.keyword = keyValue.key;
+		new datalistModel(addDataToHtml,pageBySearchUrl,key,10,5,100,true);
+	}
+	function addDataToHtml(results,append) {
+		if (results && results.length > 0) {
+			for(var i=0;i<results.length;i++){
+				allResult[results[i].id]=results[i];
+				if(isBlack(results[i].creater.name)){
+					results[i].creater.name = JSON.stringify(results[i].phone).substring(0,3)+"****" + JSON.stringify(results[i].phone).substring(8,11)
+				}
+				if(isNotBlack(results[i].picList)){
+                    var picList = results[i].picList;
+                    var picIcon =  picList[0];
+                    var width = api.winWidth*0.9*0.4;
+                    var height =width*0.618;
+                    var obj = getImgSizeBySize(picIcon,width,height);
+                    results[i].style = obj.style;
+                    results[i].picList = picIcon;
+                }
+			}
+			var data = {list: results};
+			var html = template('scriptDiv1',data);
+			 if (append) {
+                var div = document.createElement("div");
+                div.innerHTML = html;
+                document.getElementById('main1').appendChild(div);
+            } else {
+                document.getElementById('main1').innerHTML = html;
+            }
+
+		}
+        echoExt.init();
+	}
+	function clickList(id){
+		if(allResult[id].type == 1){
+			openNewWindow('viewseeList','./viewseeList.html',allResult[id],{reload:true});
+		}else{
+			openNewWindow('myinlist','./myinlist.html',allResult[id],{reload:true});
+		}
+	}
+</script>
+</html>

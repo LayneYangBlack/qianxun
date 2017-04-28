@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>搜索地址input</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/commonWindow.css" />
+    <style type="text/css">
+    .awards_num{
+            background-color: #020202;
+
+        }
+        .rightInfo{
+            height: 31px;
+
+            position: absolute;
+            top:6px;
+            right: 5px;
+            margin-right: 5px;
+            font-size: 12px;
+            line-height: 31px;
+            background-color: #020202;
+            color: #ffffff;
+            padding: 0 5px;
+        }
+
+        body{font-family:"黑体";}
+        .home{width: 100%;height: 54px;float: left;background: #fff;}
+        .home_eaer{width: 80%;margin: 10px auto;background: #f4f4f4;height:28px;border-radius:30px; }
+        .home_eaer i{display:block;height: 28px;;width: 28px;float: left;background: url("../icon/seach_2.png")no-repeat center;
+            background-size: 15px 15px;  margin-left: 5px;}
+        .home_eaer input{width: 180px;height: 100%;float: left;margin-left: 15px;font-size: 14px;border: none;background: #f4f4f4;line-height: normal;outline:none;}
+    </style>
+</head>
+<body>
+    <div class="home header active">
+        <div id="leftButton" onclick="closeWin()">
+            <img src="../icon/arrow_m.png" >
+        </div>
+        <div class="home_eaer">
+            <i></i>
+            <input id="search" type="text" placeholder="请输入您要找的内容" onclick="openSearchMap()">
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script>
+    apiready = function () {
+        
+        initFrameInWin(api.pageParam);
+    };
+        
+    function openSearchMap(){
+        openNewWindow('searchmap','searchmap.html')
+    }
+</script>
+</html>

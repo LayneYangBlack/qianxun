@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Hello MUI</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<link rel="stylesheet" href="../css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/app.css"/>
+	<link rel="stylesheet" type="text/css" href="../css/list.css"/>
+	<style>
+		body{font-family: "黑体"}
+		li{list-style: none;text-decoration: none;}
+		.page-num{position:absolute;right:20px;bottom:20px;width:55px;height:30px;background-color: rgba(0,0,0,.6);border-radius: 6px;}
+		.page-num p {text-align: center;}
+		.page-num-p{font-size: 16px;line-height: 30px;color:#FFFFFF;}
+		.datail-title{width:100%;height:auto;background-color: #fff;overflow: hidden;border-top:1px solid #ebebeb;}
+		.datail-title-c{width:90%;height:100%;margin:0 auto;overflow: hidden;}
+		.title-t{width:100%;height:auto;color:#000;margin-top:25px;}
+		.title-t span{display: block;}
+		.title-t-left{font-size: 16px;float:left;}
+		.title-t-right{font-size: 12px;float:left;width:60px;height:20px;border:1px solid #06C1AE;border-radius: 4px;text-align: center;margin: 0 0 0 10px;color:#06C1AE;line-height: 20px}
+		.title-paid{width:100%;height:31px;margin:0 auto;line-height: 31px;}
+		.title-paid-m{color:#F44343;font-size: 16px;font-weight: bold;}
+		.title-paid-f{color:#C2C2C2;font-size: 14px;}
+		.title-time{width:100%;height:33px;margin:0 auto;color:#c2c2c2;font-size: 12px}
+		.lose{width:100%;height:120px;background-color: #fff;margin-top:10px;}
+		.lose-center{width:90%;height:100%;margin:0 auto;font-size: 13px;}
+		.lose-time{width:100%;height:57px;border-bottom:1px solid #EBEBEB;line-height:57px;}
+		.lose-address{width:100%;height:62px;line-height: 62px;display: flex;
+    		align-items: center;}
+		.lose-text{color:#909090;display: block;float:left;font-size: 14px;}
+		.lose-text2{display: block;float:left;margin-left:8%;color:#2a2a31;font-size: 14px;max-height: 62px;line-height: 20px;max-width: 70%;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp:3;word-break: break-all;overflow: hidden;}
+		#lose-text3{line-height:55px}
+		.description{width:100%;height:auto;margin-top:10px;background-color: #fff;}
+		.description-center{width:90%;height:100%;margin:0 auto;}
+		.description-p {width:100%;height:40px;display: flex; align-items: flex-end;margin-bottom: 0;}
+		.description-icon{display: block;float:left;width:4px;height:20px;background-color: #06C1AE;}
+		.description-text{color:#969696;font-size: 14px;display: block;float:left;margin-left: 5%;}
+		.description-p2{width:100%;height:auto;font-size: 14px;color:#2A2A31;margin-top: 20px;font-weight: 500;}
+		.message{background-color: #fff}
+		.message-one{width:100%;height:40px;border-bottom:1px solid #EDEDED;border-top:1px solid #EDEDED;}
+		.message-one-center{width:90%;height:100%;margin:0 auto;display: flex;align-items: center;justify-content: space-between;}
+		.message-one-center p {height:100%;width:25%;line-height:40px;margin:0;font-size: 12px;}
+		.message-list{width:100%;height:65px;border-bottom:1px solid #EDEDED;}
+		.message-list>div{width:90%;height:100%;margin:0 auto;overflow: hidden;}
+		.message-head{width:15%;height:70%;background:url("../icon/head.png") no-repeat; background-size:100%;border-radius: 50%;overflow: hidden;margin-top:10px;float:left;}
+		.message-personal{width:65%;height:100%;float:left;margin-left:5%;font-size:12px;color:#666666;}
+		.message-name{width:100%;height:50%;}
+		.message-content{width:100%;height:50%;line-height: 50%}
+		.list{width: 55%;height: 55px;float: left;font-size: 12px;margin:10px 0 0 5%;}
+		.list-div1{width: 100%;height:35%;float: left;}
+		.list-div2{width: 100%;height:65%;float: left;}
+		.list div a{display: block;width: 80px;height: 22px;line-height: 22px; border-radius: 10px;background: #ff7a4d;float: left;margin-left:10px;text-align: center;color: #fff;}
+		.list div span{display: block;float: left;color:#696969;}
+		.message-time{width:25%;height:100%;float:left;text-align: right}
+		.message-time span{color:#909090;font-size: 12px;padding-top: 17px;}
+		.r_icon{background: url(../icon/r_arrow1.png);background-size: 150%;margin-right: 0}
+		.god{width:100%;height:48px;margin-top: 10px;background:#fff;overflow: hidden;border-bottom: 1px solid #f4f4f4}
+		.god-center{width:90%;height:65%;margin:10px auto 0 auto;}
+		.god-left{width:60%;height:100%;float:left;}
+		.god-head{width:31px;height:31px;float:left;overflow: hidden;border-radius: 50%;}
+		.god-head>img{height:100%;width:100%;}
+		.god-left p {height:100%;float:left;color:#909090;font-size: 12px;line-height: 30px;margin-left:5%;}
+		.god-right{width:40%;height:100%;float:right;border-left:1px solid #EBEBEB;}
+		.god-phone{width:30%;height:100%;float:left;background: url(../icon/phonea.png) no-repeat 14px 4px;background-size: 60%;}
+		.god-loster{width:55%;height:100%;line-height: 30px;float:left;font-size: 12px;color:#909090;text-align: center;}
+		.bottom-two{width:100%;height:60px;background: #fff;overflow: hidden;position: fixed;bottom:0;left:0;padding-bottom: 10px;}
+		.bottom-two-center{width:90%;height:100%;margin:0 auto;}
+		.joinhelp,.joinmessage{width:46%;height:40px;margin-top:10px;border-radius: 6px;text-align: center;line-height: 40px;}
+		.joinhelp{float:left;background: #FFC629;color:#74510B;}
+		.joinmessage{float:right;background: #F88125;color:#fff;}
+		.mui-slider-loop{height:134px;}
+		.desc-pic>img{width:100%;}
+		.heading{width:100%;height:60px;border-top:2px solid #ebebeb;line-height: 22px;}
+		.headingcenter{width:90%;height:100%;margin:0 auto;border-bottom: 1px solid #ebebeb;}
+		.headingcenter img{height:44px;display: block;float:left;border-radius:50%;overflow: hidden;margin-top: 8px;}
+		.headingcenter div{font-size: 14px;color:#999;padding-top: 5px;}
+		ul li:last-child{margin-bottom: 46px;}
+		.mid{float: left;padding-left: 6px;}
+		.sure{
+			float: right;
+			width: 100px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			font-size: 14px;margin-top: 13px;
+			border-radius: 5px;
+			background: #FFC629;color:#fff;
+		}
+		#pop-up_input{
+            display: block;
+            width: 80%;
+            height: 11rem;
+            background-color: #FFFFFF;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 10%;
+            text-align: center;
+        }
+        .title{
+            display: block;
+            height: 3rem;
+            line-height: 3.2rem;
+            color: #76CA78;
+            font-size: 1.2rem;
+            background-color: #FFFFFF;
+        }
+        .input_title{
+            font-size: 16px;;
+            /*font-weight: bolder;*/
+            border-bottom: 1px solid #eaeaea;
+            width: 80%;
+            text-align: center;
+            margin-top: 10px;;
+        }
+        .button_cancel{
+            width: 50%;
+            background-color: #f1f2f3;
+            display: block;
+            text-align: center;
+            border: none;
+            height: 43px;
+            font-size: 16px;
+            float: left;
+            position: absolute;
+            bottom: 0;
+        }
+        .button_firm{
+            width: 50%;
+            background-color: #80CD82;
+            display: block;
+            text-align: center;
+            border: none;
+            line-height: 43px;
+            height: 43px;
+            font-size: 16px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            color: #FFFFFF;
+        }		
+        #bg_1{
+            display: block;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.7;
+            opacity: .70;
+            filter: alpha(opacity=70);
+            display: none;
+        }
+		#show_1{
+            position: fixed;
+            top: 60px;
+            width: 100%;
+            height: 200px;
+            z-index: 1002;
+            overflow: auto;
+            display: none;
+        }
+	</style>
+</head>
+<body style="background-color:#EDEDED;margin-bottom:65px;" id="body">
+	<div id="main2">
+	</div>
+<!-- <div>
+	<div class="datail-title">
+				<div class="datail-title-c">
+					<div class="title-t">
+						<span class="title-t-left" style="max-width:70%">阿斯顿撒拾到阿三倒萨但是阿斯顿撒撒</span>
+						<span class="title-t-right" id="categoyId">文件</span>
+					</div>
+					<div style="clear:both"></div>
+	
+					<div class="title-paid">
+						<span class="title-paid-m">￥500 </span>
+						<span class="title-paid-f">元 / 酬谢金</span>
+					</div>
+					<div class="title-time">
+	
+						<span>发布：<%=list.ctime%></span>
+					</div>
+				</div>
+			</div>
+			<div class="lose">
+				<div class="lose-center">
+					<div class="lose-time">
+						<span class="lose-text">丢失时间</span>
+						<span class="lose-text2" id="lose-text3"><%=list.time%></span>
+					</div>
+					<div class="lose-address">
+						<span class="lose-text">丢失地址</span>
+						<span class="lose-text2"><%=list.address%><%=list.address%><%=list.address%><%=list.address%></span>
+					</div>
+				</div>
+			</div>
+			<div class="description">
+				<div class="description-center">
+					<p class="description-p">
+						<span class="description-icon"></span>
+						<span class="description-text">物品描述</span>
+					</p>
+	
+					<p class="description-p2">
+						<%=list.desc%>
+						<div class="desc-pic">
+							<%var picList = list.picList %>
+							<%for(var i=0;i < picList.length;i++){%>
+							<img src="<%=picList[i]%>" alt="">
+							<%}%>
+						</div>
+					</p>
+				</div>
+	
+			</div>
+			<div class="message">
+				<div class="message-one" onclick="words()">
+					<div class="message-one-center">
+						<p>留言</p>
+						<span class="r_icon"></span>
+					</div>
+				</div>
+				<div class="message-list">
+				    <div>
+				        <div class="message-head"></div>
+				        <div class="list">
+				            <div class="list-div1"><span>郝女士</span></div>
+				            <div class="list-div2">可惜了！</div>
+				        </div>
+				        <div class="message-time">
+				            <span>2016-06-02</span>
+				        </div>
+				    </div>
+				</div>
+				<div class="message-list">
+				    <div>
+				        <div class="message-head"></div>
+				        <div class="list">
+				            <div class="list-div1"><span>甜甜</span></div>
+				            <div class="list-div2">应该很快就能找到了！</div>
+				        </div>
+				        <div class="message-time">
+				            <span>2016-06-02</span>
+				        </div>
+				    </div>
+				</div>
+			</div>
+			<div class="god">
+				<div class="god-center">
+					<div class="god-left">
+						<div class="god-head">
+							<img src="../icon/images1.png" alt="">
+						</div>
+						<p>绘客大神</p>
+					</div>
+					<div class="god-right">
+						<div class="god-phone"></div>
+						<div class="god-loster" onclick="">
+							联系失主
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bottom-two">
+				<div class="bottom-two-center">
+					<div style="clear:both"></div>
+					<div class="joinhelp" onclick="showDialog()">参与帮助</div>
+					<div class="joinmessage" onclick="words()">留言</div>
+					<div style="clear:both"></div>
+				</div>
+	
+			</div>
+</div> -->
+<script id="scriptDiv2" type="text/html">
+	<div id="bg_1"></div>
+	<div id="show_1">
+		<div id="pop-up_input">
+			<span class="title" id="showTitle">联系失主</span><br/>
+			<!--<input type="text" name="" id="" value="" class="input_title" />-->
+			<span id="loserPhone"><%=list.creater.phone%></span>
+			<!--<small style="position: absolute;color:#eaeaeaeaeaea;right:.7rem;font-size: 0.1rem;"><span id="in_num">12</span>/12</small>-->
+			<button class="button_cancel" id="cancel_1" value="取消" onclick="quxiao()">取消</button>
+			<a class="button_firm" href="tel:<%=list.creater.phone%>">确定</a>
+		</div>
+	</div>
+		<div class="datail-title">
+			<div class="datail-title-c">
+				<div class="title-t">
+					<span class="title-t-left" style="max-width:70%"><%=list.name%></span>
+					<span class="title-t-right" id="categoyId"><%=list.categoyName%></span>
+				</div>
+				<div style="clear:both"></div>
+				<div class="title-paid">
+					<span class="title-paid-m">￥<%=list.payNum%> </span>
+					<span class="title-paid-f">元 / 酬谢金</span>
+				</div>
+				<div class="title-time">
+					<span>发布：<%=list.ctime%></span>
+				</div>
+			</div>
+		</div>
+		<div class="lose">
+			<div class="lose-center">
+				<div class="lose-time">
+					<span class="lose-text">丢失时间</span>
+					<span class="lose-text2" id="lose-text3"><%=list.time%></span>
+				</div>
+				<div class="lose-address">
+					<span class="lose-text">丢失地址</span>
+					<span class="lose-text2"><%=list.address%></span>
+				</div>
+			</div>
+		</div>
+		<div class="description">
+			<div class="description-center">
+				<p class="description-p">
+					<span class="description-icon"></span>
+					<span class="description-text">物品描述</span>
+				</p>
+				<p class="description-p2">
+					<%=list.desc%>
+					<div class="desc-pic">
+					<%var picList = list.picList %>
+					<%for(var i=0;i < picList.length;i++){%>
+					<img src="<%=picList[i]%>" alt="">
+					<%}%>
+					</div>
+				</p>
+			</div>
+		</div>
+		<div class="message" onclick="words()">
+			<div class="message-one" >
+				<div class="message-one-center" >
+					<p >留言</p>
+					<span class="r_icon"></span>
+				</div>
+			</div>
+		</div>
+		<div class="god" id="cotact">
+			<div class="god-center">
+				<div class="god-left" onclick="openChat(1,'<%=list.creater.id%>','<%=list.creater.name%>')">
+					<div class="god-head">
+						<img src="<%=list.creater.icon%>"  onerror="this.src='../icon/me.png'" alt="">
+					</div>
+					<p><%=list.creater.name%></p>
+				</div>
+				<div class="god-right"  onclick="tanchu()">
+					<div class="god-phone"></div>
+					<div class="god-loster" >
+						联系失主
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-two">
+			<div class="bottom-two-center">																			
+				<%if (list.status == 5||list.status == 6){%>
+					<div class="joinhelp" style="background: #ccc;">失主正在申诉</div>
+				<%}else if (list.status == 3||list.status == 4){%>
+					<div class="joinhelp">已结束</div>
+				<%}else if (list.isHelp == 0){%>
+					<div class="joinhelp" onclick="showDialog()">参与帮助</div>
+				<%}else if (list.isHelp == 1){%>
+					<div class="joinhelp" onclick="points()">已参与帮助</div>
+				<%}%>			
+				<div class="joinmessage" onclick="words()">去留言</div>
+			</div>
+		</div>
+		<%if(list.status == 3||list.status == 2){%>
+		<ul class="heading" style="background: #fff;">
+			<li class="headingcenter">
+				<img src="<%=list.helper.icon%>" onerror="this.src='../icon/me.png '" alt="">
+				<div class="mid">
+					<div><%=list.helper.name%></div>
+				    <span><%=list.helper.phone%></span>
+				</div>	
+				<%if(list.status == 3){%>
+				<span class="sure">已酬谢</span>
+				<%}else if (list.status == 2){%>
+				<span class="sure">尚未酬谢</span>
+				<%}%>
+			</li>
+		</ul>
+
+		<%}%>	
+	
+</script>
+
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" charset="utf-8">
+	var jobj;
+	var chatBox;
+	var eventInfo;
+	function tanchu(){
+		 document.getElementById("bg_1").style.display="block";
+        document.getElementById("show_1").style.display="block";
+	}
+	function quxiao(){
+		 document.getElementById("bg_1").style.display="none";
+        document.getElementById("show_1").style.display="none";
+	}
+	apiready = function(){
+		var cotact = document.getElementById('cotact');
+		dialogBox = api.require('dialogBox');
+		jobj = api.pageParam;
+		ajaxGetWithProgress(eventInfoUrl,{id:jobj.id}, function(ret,err){
+			if(isNotBlack(ret)){
+				//alert(JSON.stringify(ret));
+				eventInfo = ret;
+				addDataToHtml(ret);
+				document.getElementById('body').style.display = 'block'
+			}else{
+				toast("暂无数据");
+			}
+		});
+		
+	};
+	function reloadHtml(){
+        apiready();
+    };
+	/*******************点击参与帮助，弹出提示信息，确认帮助***********************/
+     function showDialog(){
+     	var user = getUserInfo();
+    	var ids = user.id;
+    	if(ids == jobj.creater.id){
+    		toast('亲，自己不能参与自己发布的求助活动哦！');
+    		return;
+    	}
+        dialogBox.alert ({
+            texts: {
+                title: '温馨提示',
+                content:'亲，点击确认按钮即可确认参与帮助额~',
+                rightBtnTitle: '确定'
+            },
+            styles:{
+                bg: '#fff',
+                w: 300,
+                title:{
+                    marginT : 20,
+                    titleSize : 18,
+                    corner: 1,
+                    titleColor : '#06C1AE'
+                },
+                content:{
+                    color: '#000',
+                    size: 16
+                },
+                right:{
+                    w: 300,
+                    h: 40,
+                    marginL: 0,
+                    marginB: 0,
+                    corner: 1,
+                    bg: '#06C1AE',
+                    size: 18,
+                    color:'#ffffff'
+                }
+            }
+        },function(ret){
+        	if (ret.eventType == 'right') {
+                var dialogBox = api.require('dialogBox');
+	                dialogBox.close ({
+	                    dialogName: 'alert'
+	                });
+	             	myHelp();
+            	}
+        	
+        	});
+   	 	}
+	
+	/****************确认参与帮助**********************/
+	function myHelp(){
+		ajaxGetWithProgress(helpUrl,{id:jobj.id},function(ret,err){
+            if(isNotBlack(ret)) {
+            	reloadHtml();
+            }else { 
+                toast("暂无数据")
+            }
+        })
+	};
+	
+	function points(){
+		toast("亲，您已经参与过帮助了额！")
+	}
+	
+	function addDataToHtml(results) {
+		// alert(JSON.stringify(results))
+		var idName = $api.getStorage("categoryList");
+		results.ctime = formatTimeToDay(results.ctime);
+		results.time = formatTimeToDay(results.time);
+		results.categoyName = idName[results.categoyId].name;
+		if(isNotBlack(results.pics)){
+			var picList = JSON.parse(results.pics);
+			results.picList = picList;
+		}
+		if(isBlack(results.creater.name)){
+            results.creater.name = JSON.stringify(results.phone).substring(0,3)+"****" + JSON.stringify(results.phone).substring(8,11)
+        };
+		var data = {list: results};
+		var html = template('scriptDiv2',data);
+		document.getElementById('main2').innerHTML = html;
+		document.getElementById('main2').innerHTML = html;
+		var user = getUserInfo();
+		var cotact = document.getElementById('cotact');
+		var ids = user.id;
+		if(ids == jobj.creater.id){
+			cotact.style.display = "none";
+			return;
+		}
+	};
+	
+	function words(){
+		openNewWindow("comentList","./comentList.html",eventInfo);
+	}
+	
+	
+</script>
+</body>
+
+</html>
+ 

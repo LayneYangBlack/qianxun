@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello MUI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" type="text/css" href="css/api.css" />
+    <!--<link rel="stylesheet" href="css/mui.min.css">-->
+    <link rel="stylesheet" type="text/css" href="css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="css/list.css"/>
+    <style>
+        html{background: #f4f4f4;height: auto;}
+        .home{width: 100%;height: 54px;float: left;background: #fff;}
+        .home_eaer{width: 90%;margin: 13px 5%;background: #f4f4f4;height:28px;border-radius:30px; }
+        .home_eaer i{display:block;height: 28px;;width: 28px;float: left;background: url("icon/seach.png")no-repeat center;
+            background-size: 15px 15px;  margin-left: 5px;}
+        .home_eaer input{width: 180px;height: 100%;float: left;margin-left: 15px;font-size: 14px;border: none;background: #f4f4f4;line-height: normal;outline:none;}
+        .mui-slider-item img{height:100%;}
+        .item div:first-child{height: 100%;width: 110px;float: left;}
+        .item div:last-child{height: 100%;width: 210px;float: right;}
+        .item img{height: 100%;width: 110px;;}
+        .mages span{width: 100%;height: auto;line-height: 1.2rem;float: left;padding: 0 0 0 10px;;}
+        .mages span:first-child{font-size: 16px;line-height: 2rem;}
+        .mages span:nth-child(2){font-size: 14px;color: #333;}
+        .mages span:nth-child(3){font-size: 14px;color: #9296a3;}
+        .footer{width: 100%;height: 56px;float: left;position: fixed;bottom: 0;left: 0;background: #fcfcfc;border-top: 2px solid #e9e9e9}
+        .footer div{width: 25%;float: left;height: 100%;display: flex;justify-content: center;flex-direction: column;align-items: center;}
+        .footer div a{display: block;height: 1.2rem;font-size: 14px;font-weight: 600;color: #999;line-height: 1.4rem;}
+        .icon1,.icon2,.icon3,.icon4{width: 25px;height: 25px;display: block;float: left; }
+        #icon1.active .icon1{background: url("icon/home.png")no-repeat;background-size:cover;}
+        #nav .moren .icon1{background: url("icon/home-1.png")no-repeat;background-size:cover;}
+        #nav .moren .icon2{background: url("icon/type-1.png")no-repeat;background-size:cover;}
+        #nav .moren .icon3{background: url("icon/news_1.png")no-repeat;background-size:cover;}
+        #nav .moren .icon4{background: url("icon/me_1.png")no-repeat;background-size:cover;}
+        #nav .moren{display: flex;}
+        .header {  display: none;  position: relative; line-height: 54px;text-align: center; }
+        .header span{display: block;margin-left: auto;margin-right: auto;}
+        #header .active {  display: flex; }
+        #header{width:100%;height: 54px;background: #fff;;text-align: center;border-bottom: 1px solid #f4f4f4;  }
+        #nav .active .home{background: url("icon/home.png")no-repeat;background-size:cover;}
+        #nav .active a{color:#06c1ae; }
+        #nav .active .action{background: url("icon/type.png")no-repeat;background-size:cover;}
+        #nav .active a{color:#06c1ae; }
+        #nav .active .news{background: url("icon/news1.png")no-repeat;background-size:cover;}
+        #nav .active a{color:#06c1ae; }
+        #nav .active .user{background: url("icon/me.png")no-repeat;background-size:cover;}
+        #nav .active a{color:#06c1ae; }
+        #icon3{position: relative;}
+        .circlepoint{width:8px;
+            display: none;height:8px;background-color: red;position: absolute;bottom:70%;left:70%;border-radius: 50%;}
+    </style>
+</head>
+
+<body>
+<div id="header">
+<div class="home header active">
+    <div class="home_eaer">
+        <i></i>
+        <input onclick="openSearch()" type="text" placeholder="请输入您要找的内容">
+    </div>
+</div>
+
+<div class="action header home">
+    <div class="home_eaer">
+        <i></i>
+        <input onclick="openSearch()" type="text" placeholder="请输入您要找的内容">
+    </div>
+</div>
+
+    <!--<div id="topbar" class="topbar_info news header">-->
+        <!--<span>信息</span>-->
+    <!--</div>-->
+
+    <div class="news header">
+        <span>信息</span>
+    </div>
+
+<div class="user header">
+    <span>我的</span>
+</div>
+
+    <div id="main">
+
+    </div>
+
+    <div class="footer" id="nav" style="display: flex;">
+        <div id="icon1"  onclick="openTab('home')"  class="moren" ><i class="icon1 home"></i><a   tapmode="active">首页</a></div>
+        <div id="icon2"  onclick="openTab('action')"  class="moren"><i class="icon2 action"></i><a  tapmode="active">分类</a></div>
+        <div id="icon3"  onclick="openTab('news')"  class="moren">
+            <i class="icon3 news"></i>
+            <a  tapmode="active">信息</a>
+            <span id="indexRed" class="circlepoint"></span>
+        </div>
+        <div id="icon4"  onclick="openTab('user')"  class="moren"><i class="icon4 user"></i><a  tapmode="active">我的</a></div>
+    </div>
+
+
+</div>
+
+
+
+
+
+<script src="script/mui.min.js"></script>
+<script type="text/javascript" src="./script/api.js"></script>
+<script type="text/javascript" src="./script/user.js"></script>
+<script type="text/javascript" src="./script/util.js"></script>
+<script type="text/javascript" src="./script/kv.js"></script>
+<script type="text/javascript" src="./script/apiCloud.js"></script>
+<script type="text/javascript" src="./script/public.js"></script>
+<script type="text/javascript" src="./script/template-native.js"></script>
+<script type="text/javascript" src="./script/data.js"></script>
+<script type="text/javascript" src="./script/init.js"></script>
+<script type="text/javascript" src="./script/message.js"></script>
+<script type="text/javascript" charset="utf-8">
+    function openSearch(){
+        openNewWindow('search','./html/search.html');
+    }
+    var user;
+    var tabs;
+    var window_width;
+    apiready = function () {
+        if(api.systemType == 'ios') {
+            api.setStatusBarStyle({
+                style: 'light'
+                //style : 'dark'
+            });
+        }
+        api.addEventListener({
+            name: 'keyback'
+        }, function (ret, err) {
+            closeOnKeyBack();
+        });
+        systemInit();
+        window_width = api.winWidth;
+        //配置tab选项卡 各个页面
+        tabs= {
+            home: {
+                isGroup: false,
+                frame: {
+                    name: 'home',
+                    url: './html/home.html',
+                    pageParam: {},
+                    rect: {
+                        x: 0,
+                        y: headHeight,
+                        w: 'auto',
+                        h: api.winHeight - headHeight - bottomHeight
+                    },
+                    bounces: false,
+                    opaque: false,
+                    //bgColor:'#EDEDED',
+                    bgColor: '#fff',
+                    allowEdit: true,
+                    vScrollBarEnabled: true,
+                    showProgress: false,
+                    hScrollBarEnabled: false,
+                    reload: false
+                }
+            },
+            action: {
+                isGroup: false,
+                frame: {
+                    name: 'action',
+                    url: './html/classify.html',
+                    pageParam: {},
+                    rect: {
+                        x: 0,
+                        y: headHeight,
+                        w: 'auto',
+                        h: api.winHeight - headHeight - bottomHeight
+                    },
+                    bounces: false,
+                    opaque: false,
+                    //bgColor:'#EDEDED',
+                    bgColor: '#fff',
+                    allowEdit: true,
+                    vScrollBarEnabled: true,
+                    showProgress: false,
+                    hScrollBarEnabled: false,
+                    reload: false
+                }
+            },
+            news: {
+                isGroup: false,
+                frame: {
+                    name: 'news',
+                    url: './html/news.html',
+                    pageParam: {},
+                    rect: {
+                        x: 0,
+                        y: headHeight,
+                        w: 'auto',
+                        h: api.winHeight - headHeight - bottomHeight
+                    },
+                    bounces: false,
+                    opaque: false,
+                    //bgColor:'#EDEDED',
+                    bgColor: '#fff',
+                    allowEdit: true,
+                    vScrollBarEnabled: true,
+                    showProgress: false,
+                    hScrollBarEnabled: false,
+                    reload: false
+                }
+            },
+            user: {
+                isGroup: false,
+                frame: {
+                    name: 'user',
+                    url: './html/user.html',
+                    pageParam: {},
+                    rect:{
+                        x: 0,
+                        y: headHeight,
+                        w: 'auto',
+                        h: api.winHeight - headHeight - bottomHeight
+                    },
+                    bounces: false,
+                    opaque: false,
+                    bgColor: '#fff',
+                    allowEdit: true,
+                    vScrollBarEnabled: true,
+                    showProgress: false,
+                    hScrollBarEnabled: false,
+                    reload: true
+                }
+            }
+
+        };
+
+        if(getUserInfo() && getUserInfo().id>0){
+            initMessages();
+            setJpushListener();
+        }
+    }
+
+
+    var backButtonPress = 0;
+    function closeOnKeyBack() {
+        backButtonPress++;
+        if (backButtonPress > 1) {
+            closeApp();
+        } else {
+            api.toast({msg: '再按一次退出应用'});
+        }
+        setTimeout(function () {
+            backButtonPress = 0;
+        }, 1000);
+    }
+
+
+    //初始化长连接消息
+    function initMessages(){
+//      ajax(message_testUrl,{},doNothing,doNothing);
+//      ajax(message_chatUrl,{clientId:getNewClientMsgId(),type:1,thirdId:11,content:'大家好，我来了。'},doNothing,doNothing);
+//        for(var i=0;i<1000;i++){
+//            (function (i) {
+//                setTimeout(function(){
+//                    ajax(message_chatUrl,{clientId:getNewClientMsgId(),type:1,thirdId:11,content:i},doNothing,doNothing);
+//                },i*100);
+//            })(i);
+//        }
+        user = getUserInfo();
+        //初始化未读个数
+        //var num=getTotalUnreadNum();
+        initTotalUnreadNum(function(totalNum){
+            setPageMessageNum(totalNum);
+            var message=new Message({});
+            message.connect();
+        });
+
+    }
+
+    function setPageMessageNum(num){
+        $api.setStorage(Storage_chat_num,num);
+        var messageNumSpans=document.querySelectorAll(".messageNum");
+        for(var i=0;i<messageNumSpans.length;i++){
+            if(num<=0){
+                messageNumSpans[i].style.display='none';
+            }else{
+                messageNumSpans[i].style.display='block';
+            }
+        }
+
+//        api.execScript({
+//            frameName : 'user',
+//            script: 'setPageMessageNum(' + num + ');'
+//        });
+    }
+
+
+
+    function setRedPoint(){
+        document.getElementById("indexRed").style.display = "block";
+        $api.setStorage("userMessage",1);
+        api.execScript({
+            name:rootWindowName,
+            frameName: 'news',
+            script: "addUserMessageRed()"
+        });
+
+    }
+
+    function removeRedPoint(){
+        document.getElementById("indexRed").style.display = "none";
+    }
+
+
+    //设置极光推送
+    function setJpushListener(){
+        var ajpush = api.require('ajpush');
+        //恢复推送；
+        ajpush.resumePush(function(ret) {
+            if(ret && ret.status){
+                //success
+            }
+        });
+        ajpush.setListener(
+                function(ret) {
+                    var title  = ret.title || " ";
+                    api.notification({
+                        notify: {
+                            title:'千寻'+title ,              //标题，默认值为应用名称，只Android有效
+                            content:ret.content,             //内容，默认值为'有新消息'
+                            extra:'',                //传递给通知的数据，在通知被点击后，该数据将通过监听函数回调给网页
+                            updateCurrent: false    //是否覆盖更新已有的通知，取值范围true|false。只Android有效
+                        }
+                    }, function(ret, err) {
+
+                    });
+                    //加
+                    document.getElementById("indexRed").style.display = "block";
+                    $api.setStorage("systemMessage",1);
+                    api.execScript({
+                        name:rootWindowName,
+                        frameName: 'news',
+                        script: "addSystemMessageRed()"
+                    });
+                }
+        );
+
+    }
+</script>
+</body>
+
+</html>

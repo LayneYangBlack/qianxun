@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="stylesheet" type="text/css" href="../css/api.css" />
+    <!-- <link rel="stylesheet" href="../css/mui.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="../css/app.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/list.css"/>
+	<style>
+		body{background: #f4f4f4;}
+		html{background: #f4f4f4;}
+        body{font-family:"黑体";}
+		
+		.lose-text{width:51%;float:right;overflow: hidden;margin-right:4%;}
+		.lose-text p {margin-bottom:0;}
+		.lose-text-1{width:100%;height:20px;margin-top:2px;font-size: 16px;color:#2B2B33;overflow: hidden;}
+		.lose-text-2{margin-top:5px;color:#333;font-size: 14px;overflow: hidden;}
+		.lose-text-3{margin-top:5px;color:#9296a3;font-size: 14px;color: #9296a3;display: block;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;word-break: break-all;overflow: hidden;}
+		.myin-top{width:100%;height:46px;border-bottom:1px solid #EDEDED;background: #fff;}
+		.myin-top-center{width:90%;height:100%;margin:0 auto;}
+		.myin-top-left{color:#5B5B5B;font-size: 13px;float:left;line-height:46px;}
+		.myin-top-right{color:#FC4E50;font-size: 13px;float:right;line-height:46px;}
+		.myin-top-margin{margin-top: 10px;}
+		.oked{color:#999999;}
+		.oked-div{width:100%;height:158px;background:#fff;overflow: hidden;position: relative;}
+		.oked-div-center{width:90%;height:124px;margin:14px  auto 0 auto;}
+		.oked-div-img{width:40%;height:110px;float:left;overflow: hidden;line-height: 72px;}
+		/*.oked-div-img img{width:100%;height:96px;}*/
+		.oked-div-img2{background:url(../icon/textbook.png) no-repeat;background-size:100%;}
+		.oked-div-text{margin-top: 0;height:96px;}
+		.remove-introduced,.afas{width:20%;height:30px;position: absolute;bottom:10px;text-align: center;line-height: 30px;border-radius:6px;font-size: 12px;margin:0;color:#fff;}
+		.remove-introduced{background: #ededed;right:30%;color:#909090;}
+		.afas{background: #F88125;right:5%;color:#fff;}
+		.getmoney{background: #FCBF28}
+		
+		.message{width:100%;background-color: #fff;}
+		.message-one{width:100%;height:45px;border-top:1px solid #EDEDED;}
+		.message-one-center{width:90%;height:100%;margin:0 auto;}
+		.message-one-center p {line-height:45px;margin:0;font-size: 12px;float: left;margin-left: 5px;}
+		.headingAll{width:100%;height:65px;overflow: hidden;}
+		.message-one-center img{height:30px;float: left;margin-top: 7px;margin-left: 2px;border-radius: 100%;}		
+	</style>
+</head>
+<body>
+	
+	<div id="mainOne">
+
+
+
+	</div>
+	<!-- <div class="myin-top myin-top-margin">
+			<div class="myin-top-center">
+				<p class="myin-top-left">绘客大神</p>
+				<p class="myin-top-right">进行中</p>
+			</div>
+		</div>
+		<div class="oked-div"  onclick="clickList('<%=list[i].id%>')">
+			<div class="oked-div-center">
+				<div class="oked-div-img">
+					<img src="<%=list[i].picList[0]%>" alt="">
+				</div>
+				<div class="lose-text oked-div-text">
+					<p class="lose-text-1">
+						<%=list[i].name%>
+					</p>
+					<p class="lose-text-2">
+						类型：<%=list[i].categoyName%>
+					</p>
+					<p class="lose-text-3" style="max-height:36px;">
+						详细描述：<%=list[i].desc%>
+					</p>
+				</div>
+			</div>
+			<p class="remove-introduced">取消发布</p>
+			<p class="afas">失主认领</p>
+		</div> -->
+</body>
+<script id="scriptDiv1" type="text/html">
+    <% for (var i = 0; i < list.length; i ++) { %>
+        <div class="myin-top myin-top-margin">
+			<div class="myin-top-center">
+				<p class="myin-top-left"><%=list[i].creater.name%></p>				
+				<%if (list[i].status == 0){%>
+					<p class="myin-top-right">待支付</p>
+				<%}else if (list[i].status == 1||list[i].status == 2){%>
+					<p class="myin-top-right">进行中</p>
+				<%}else if (list[i].status == 7){%>
+					<p class="myin-top-right oked">已过期</p>
+				<%}else if (list[i].status == 3||list[i].status == 4){%>
+					<p class="myin-top-right oked">已结束</p>
+				<%}else if (list[i].status == 8){%>
+					<p class="myin-top-right oked">退款中</p>
+				<%}else if (list[i].status == 5||list[i].status == 6){%>
+					<p class="myin-top-right oked">正在申诉</p>
+				<%}else if (list[i].status == 9){%>
+					<p class="myin-top-right oked">退款成功</p>
+				<%}else if (list[i].status == 10){%>
+					<p class="myin-top-right oked">退款失败</p>
+				<%}%>
+			</div>
+		</div>
+		<div class="oked-div">
+			<div class="oked-div-center" onclick="clickList('<%=list[i].id%>')">
+				<div class="oked-div-img">
+					<img style="<%=list[i].style%>" src="../icon/listpng.png"  data-echo="<%=list[i].picList%>" >
+				</div>
+				<div class="lose-text oked-div-text">
+					<p class="lose-text-1">
+						<%=list[i].name%>
+					</p>
+					<p class="lose-text-2">
+						类型：<%=list[i].categoyName%>
+					</p>
+					<p class="lose-text-3" style="max-height:38px;">
+						详细描述：<%=list[i].desc%>
+					</p>
+				</div>
+			</div>
+			<%if (list[i].status == 0||list[i].status == 1){%>
+			<p class="afas" onclick="joinhelp(<%=list[i].id%>)">失主认领</p>
+			<%}else if (list[i].status == 2){%>
+			<p class="afas" >失主认领</p>
+			<%}else if (list[i].status == 3||list[i].status == 4){%>
+			<p class="afas"  style="z-index:11;">已结束</p>
+			<%}else if (list[i].status == 7){%>
+			<p class="afas"  style="z-index:11;background: #ccc;">已过期</p>
+			<%}else if (list[i].status == 5||list[i].status == 6){%>
+			<p class="afas"  style="z-index:11;">正在申诉</p>
+			<%}else if (list[i].status == 8){%>
+			<p class="afas"  style="z-index:11;">退款中</p>
+			<%}else if (list[i].status == 9){%>
+			<p class="afas"  style="z-index:11;">退款成功</p>
+			<%}else if (list[i].status == 10){%>
+			<p class="afas"  style="z-index:11;">退款失败</p>
+			<%}%>
+			
+		</div>
+		<%if (list[i].status == 1 && list[i].helpUsers.length != 0){%>
+		<div class="message">
+			<div class="message-one" onclick="joinhelp(<%=list[i].id%>)">
+				<div class="message-one-center" id="joinhelped">
+					<% for (var j = 0; j < list[i].helpUsers.length; j ++) { %>
+						<%if (j > 4){%>
+							<%break%>
+						<%}%>
+					    <img src="<%=list[i].helpUsers[j].icon%>" alt="">
+					<% } %>
+					<%if (list[i].helpUsers.length > 5){%>
+						<p><%=list[i].helpUsers.length%>等人确认为失主</p>
+					<%}else{%>
+						<p><%=list[i].helpUsers.length%>人确认为失主</p>
+					<%}%>
+				</div>
+			</div>			
+		</div>
+		<%}%>
+    <% } %>
+</script>
+<script src="../script/mui.min.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/user.js"></script>
+<script type="text/javascript" src="../script/util.js"></script>
+<script type="text/javascript" src="../script/kv.js"></script>
+<script type="text/javascript" src="../script/apiCloud.js"></script>
+<script type="text/javascript" src="../script/public.js"></script>
+<script type="text/javascript" src="../script/template-native.js"></script>
+<script type="text/javascript" src="../script/data.js"></script>
+<script type="text/javascript" src="../script/init.js"></script>
+<script type="text/javascript" src="../script/echo.min.js"></script>
+
+<script>
+    var uid;
+    var allResult = [];
+    var userInfo = null;
+    
+    var messageList = null;
+    var openHtml = null;
+    apiready = function () {
+        var score = {};
+        score.type = 2;
+        openHtml = api.pageParam.openHtml;
+        new datalistModel(addDataToHtml,pageByUserUrl,score,10,5,100,true);
+    };
+    
+     function reloadHtml(){
+        apiready();
+    };
+    
+    function clickList(id){
+        openNewWindow('myinlist','./myinlist.html',allResult[id],{reload:true});
+    };
+    
+    function joinhelp(id){
+    	allResult[id].notice = "loser";
+		openNewWindow("joinhelplist","./joinhelplist.html",allResult[id])
+	};
+	
+    function addDataToHtml(results, append) {
+      	//alert(JSON.stringify(results))
+		var idName = $api.getStorage("categoryList")
+        var message = {};
+        for(var i=0;i<results.length;i++){
+            allResult[results[i].id]=results[i];
+            results[i].ctime = formatTimeToDate(results[i].ctime);
+			results[i].categoyName = idName[results[i].categoyId].name
+			if(isNotBlack(results[i].picList)){
+                var picList = results[i].picList;
+                var picIcon =  picList[0];
+                var width = api.winWidth*0.9*0.25;
+                var height =width*0.618;
+                var obj = getImgSizeBySize(picIcon,width,height);
+                results[i].style = obj.style;
+                results[i].picList = picIcon;
+            };
+        }
+        //alert(JSON.stringify(results))
+        var data = {list: results};
+        var html = template('scriptDiv1', data);
+        if (append) {
+            var div = document.createElement("div");
+            div.innerHTML = html;
+            document.getElementById('mainOne').appendChild(div);
+        } else {
+            document.getElementById('mainOne').innerHTML = html;
+        }
+        echoExt.init()
+    }
+</script>
+</html>
